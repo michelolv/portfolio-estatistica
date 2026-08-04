@@ -4,8 +4,7 @@
 library("pacman")
 p_load(
   shiny, bslib, shinyWidgets, shinyjs, fontawesome,
-  ggplot2, plotly, dplyr,
-  pdftools, magick, DT, htmltools
+  ggplot2, plotly, dplyr, pdftools, magick, DT, htmltools
 )
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -15,7 +14,7 @@ tema_app <- bs_theme(
   version      = 5,
   bg           = "#0b0f19",
   fg           = "#c9d1d9",
-  primary      = "#00f5d4",
+  primary      = "skyblue",
   secondary    = "#7b2ff7",
   success      = "#00e676",
   warning      = "#ffb020",
@@ -151,7 +150,7 @@ css_custom <- "
 
 ## Marca da Navbar (independente do resto do site)----
 # Alterar este nome NAO afeta a capa, perfil ou rodape (que usam perfil$nome)
-brand_navbar <- "Michel Lima"
+brand_navbar <- "Portfólio"
 
 ## Perfil----
 perfil <- list(
