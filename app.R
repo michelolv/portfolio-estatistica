@@ -29,6 +29,32 @@ tema_app <- bs_theme(
 css_custom <- "
   body { padding-top: 70px; }
 
+  /* Navbar: marca fixa a direita, menu centralizado ---- */
+  .navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .navbar-brand {
+    order: 2;
+    margin-left: auto !important;
+    white-space: nowrap;
+  }
+  .navbar-toggler {
+    order: 3;
+  }
+  .navbar-collapse {
+    order: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  @media (max-width: 991.98px) {
+    .navbar-collapse { position: static; transform: none; }
+    .navbar-brand { order: 1; margin-left: 0 !important; }
+    .navbar-toggler { order: 2; }
+  }
+
   .navbar {
     background-color: #0b0f19 !important;
     border-bottom: 1px solid rgba(255,255,255,.08);
@@ -38,6 +64,7 @@ css_custom <- "
   .dropdown-menu { background-color: #141a29 !important; border: 1px solid rgba(255,255,255,.08); }
   .dropdown-item { color: #c9d1d9 !important; }
   .dropdown-item:hover { background-color: rgba(0,245,212,.12) !important; color: #00f5d4 !important; }
+  .dropdown-divider { border-color: rgba(255,255,255,.08); }
 
   .accent-text {
     background: linear-gradient(90deg, #00f5d4, #7b2ff7);
@@ -121,6 +148,10 @@ css_custom <- "
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 # Base de Conteúdo (PREENCHER AOS POUCOS)----
+
+## Marca da Navbar (independente do resto do site)----
+# Alterar este nome NAO afeta a capa, perfil ou rodape (que usam perfil$nome)
+brand_navbar <- "Michel Lima"
 
 ## Perfil----
 perfil <- list(
@@ -264,11 +295,21 @@ converter_certificados_png <- function(lista_certificados) {
 }
 converter_certificados_png(certificados)
 
+## Card de listagem (hub) - usado nas paginas "Ver todos"----
+gerar_card_hub <- function(id_item, titulo, subtitulo = NULL) {
+  div(
+    class = "content-card",
+    h4(titulo, class = "accent-text"),
+    if (!is.null(subtitulo)) p(subtitulo),
+    actionButton(paste0("goto_", id_item), "Ver detalhes \u2192", class = "btn-cta")
+  )
+}
+
 ## Página de Experiência (sub-aba)----
 gerar_pagina_experiencia <- function(exp) {
   tabPanel(
     title = exp$empresa,
-    value = exp$id,                                   # <- URL única (?aba=exp1, exp2, ...)
+    value = exp$id,
     fluidRow(
       column(
         width = 7,
@@ -299,7 +340,7 @@ gerar_pagina_experiencia <- function(exp) {
 gerar_pagina_projeto <- function(proj) {
   tabPanel(
     title = proj$titulo,
-    value = proj$id,                                   # <- URL única (?aba=proj1, proj2, ...)
+    value = proj$id,
     fluidRow(
       column(
         width = 7,
@@ -336,7 +377,7 @@ gerar_pagina_certificado <- function(cert) {
   png_path <- file.path("certificados/png", paste0(cert$id, ".png"))
   tabPanel(
     title = cert$titulo,
-    value = cert$id,                                   # <- URL única (?aba=cert1, cert2, ...)
+    value = cert$id,
     fluidRow(
       column(
         width = 5,
@@ -360,6 +401,55 @@ gerar_pagina_certificado <- function(cert) {
             p("Pré-visualização indisponível. Adicione o PDF em www/", cert$pdf)
         )
       )
+    )
+  )
+}
+
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+# Páginas "Hub" (visão geral / listagem)----
+
+## Hub de Experiências----
+pagina_experiencias_home <- function() {
+  div(
+    style = "padding: 30px;",
+    h2("Experiência Profissional", class = "accent-text"),
+    p("Um resumo de toda a minha trajetória. Clique em um item para ver os detalhes completos."),
+    tags$hr(),
+    fluidRow(
+      lapply(experiencias, function(exp) {
+        column(width = 4, gerar_card_hub(exp$id, exp$empresa, paste0(exp$cargo, " • ", exp$periodo)))
+      })
+    )
+  )
+}
+
+## Hub de Projetos----
+pagina_projetos_home <- function() {
+  div(
+    style = "padding: 30px;",
+    h2("Meus Projetos", class = "accent-text"),
+    p("Uma seleção dos projetos que desenvolvi. Clique em um item para ver os detalhes completos."),
+    tags$hr(),
+    fluidRow(
+      lapply(projetos, function(proj) {
+        column(width = 4, gerar_card_hub(proj$id, proj$titulo, proj$subtitulo))
+      })
+    )
+  )
+}
+
+## Hub de Certificados----
+pagina_certificados_home <- function() {
+  div(
+    style = "padding: 30px;",
+    h2("Certificados", class = "accent-text"),
+    p("Cursos e certificações concluídos. Clique em um item para ver os detalhes completos."),
+    tags$hr(),
+    fluidRow(
+      lapply(certificados, function(cert) {
+        column(width = 4, gerar_card_hub(cert$id, cert$titulo, paste0(cert$instituicao, " • ", cert$ano)))
+      })
     )
   )
 }
@@ -467,7 +557,7 @@ pagina_contato <- function() {
 
 # UI----
 ui <- navbarPage(
-  title       = div(icon("chart-line"), " ", perfil$nome),
+  title       = div(icon("chart-line"), " ", brand_navbar),
   id          = "navbar_principal",
   theme       = tema_app,
   collapsible = TRUE,
@@ -477,14 +567,26 @@ ui <- navbarPage(
   tabPanel("Início", value = "inicio", icon = icon("house"), pagina_inicio()),
   tabPanel("Perfil", value = "perfil", icon = icon("user"), pagina_perfil()),
   
-  do.call(navbarMenu, c(list(title = "Experiência", icon = icon("briefcase")),
-                        lapply(experiencias, gerar_pagina_experiencia))),
+  do.call(navbarMenu, c(
+    list(title = "Experiência", icon = icon("briefcase")),
+    list(tabPanel("Todas as Experiências", value = "experiencias_home", icon = icon("list"), pagina_experiencias_home())),
+    list("----"),
+    lapply(experiencias, gerar_pagina_experiencia)
+  )),
   
-  do.call(navbarMenu, c(list(title = "Projetos", icon = icon("diagram-project")),
-                        lapply(projetos, gerar_pagina_projeto))),
+  do.call(navbarMenu, c(
+    list(title = "Projetos", icon = icon("diagram-project")),
+    list(tabPanel("Todos os Projetos", value = "projetos_home", icon = icon("list"), pagina_projetos_home())),
+    list("----"),
+    lapply(projetos, gerar_pagina_projeto)
+  )),
   
-  do.call(navbarMenu, c(list(title = "Certificados", icon = icon("certificate")),
-                        lapply(certificados, gerar_pagina_certificado))),
+  do.call(navbarMenu, c(
+    list(title = "Certificados", icon = icon("certificate")),
+    list(tabPanel("Todos os Certificados", value = "certificados_home", icon = icon("list"), pagina_certificados_home())),
+    list("----"),
+    lapply(certificados, gerar_pagina_certificado)
+  )),
   
   tabPanel("Habilidades", value = "habilidades", icon = icon("chart-simple"), pagina_habilidades()),
   tabPanel("Contato", value = "contato", icon = icon("envelope"), pagina_contato()),
@@ -501,8 +603,6 @@ ui <- navbarPage(
 server <- function(input, output, session) {
   
   ## Deep-linking: sincroniza aba ativa com a URL (?aba=id)----
-  
-  # Ao abrir o app (ou receber um link direto), navega ate a aba indicada na URL
   observe({
     query <- parseQueryString(session$clientData$url_search)
     if (!is.null(query$aba)) {
@@ -510,13 +610,22 @@ server <- function(input, output, session) {
     }
   })
   
-  # Sempre que o usuario troca de aba (clique no menu, botao, etc.), atualiza a URL
   observeEvent(input$navbar_principal, {
     updateQueryString(
       paste0("?aba=", input$navbar_principal),
       mode = "push"
     )
   }, ignoreInit = TRUE)
+  
+  ## Navegação a partir dos cards das páginas "Ver todos"----
+  lapply(c(experiencias, projetos, certificados), function(item) {
+    local({
+      item_id <- item$id
+      observeEvent(input[[paste0("goto_", item_id)]], {
+        updateNavbarPage(session, "navbar_principal", selected = item_id)
+      }, ignoreInit = TRUE)
+    })
+  })
   
   ## Gráficos de Experiências----
   lapply(experiencias, function(exp) {
@@ -575,13 +684,13 @@ server <- function(input, output, session) {
   
   ## Navegação via botões da capa----
   observeEvent(input$btn_ver_projetos, {
-    if (length(projetos) > 0) updateNavbarPage(session, "navbar_principal", selected = projetos[[1]]$id)
+    updateNavbarPage(session, "navbar_principal", selected = "projetos_home")
   })
   observeEvent(input$btn_ir_contato, {
     updateNavbarPage(session, "navbar_principal", selected = "contato")
   })
   
-  ## Formulário de contato (placeholder - integrar com envio de e-mail depois)----
+  ## Formulário de contato (placeholder - integrar com envio de e-mail futuramente)----
   observeEvent(input$btn_enviar_contato, {
     showNotification("Mensagem registrada! (integrar envio real de e-mail futuramente)", type = "message")
   })
