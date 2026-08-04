@@ -1,38 +1,14 @@
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 # Pacotes----
-#renv::install("pacman")
 library("pacman")
 p_load(
   shiny, bslib, shinyWidgets, shinyjs, fontawesome,
-  ggplot2, plotly, dplyr, rsconnect,
+  ggplot2, plotly, dplyr,
   pdftools, magick, DT, htmltools
 )
 
-# Fonte externa
-font_add_google("Montserrat", "montserrat")
-showtext_auto()
-
-#Atualizar lockfile com os pacotes instalados
-#renv::snapshot()
-
-
-
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-# Autenticar via navegador (abre o login da Connect Cloud)----
-rsconnect::connectCloudUser()
-
-# Publicar o app----
-rsconnect::deployApp(
-  appDir  = "caminho/para/seu_projeto",
-  appName = "portfolio-estatistica"
-)
-
-
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-
 
 # Tema Visual (Dark / Tech)----
 tema_app <- bs_theme(
@@ -154,7 +130,7 @@ perfil <- list(
   bio         = "Escreva aqui um parágrafo sobre sua trajetória, formação e
                  interesses em Estatística e Ciência de Dados.",
   foto        = "img/perfil.jpg",
-  email       = "michelescreva@gmail.com",
+  email       = "seuemail@exemplo.com",
   linkedin    = "https://linkedin.com/in/seu-usuario",
   github      = "https://github.com/seu-usuario",
   lattes      = "http://lattes.cnpq.br/0000000000000000",
