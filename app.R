@@ -124,15 +124,23 @@ css_custom <- "
 
 ## Perfil----
 perfil <- list(
-  nome        = "Michel Lima de Oliveira",
-  cargo       = "Estatístico | Cientista de Dados em Formação",
+  nome        = "Michel Lima",
+  cargo       = "Estatístico e Cientista de Dados em Formação",
   tagline     = "Transformando dados em decisões",
-  bio         = "Escreva aqui um parágrafo sobre sua trajetória, formação e
-                 interesses em Estatística e Ciência de Dados.",
+  bio         = "Bacharelando em Estatística e Ciência de Dados pela Universidade
+  Federal de Ouro Preto (UFOP), com <em>background</em> em Ciências Econômicas e 
+  experiência aplicada em consultoria estatística, iniciação científica e diagnóstico
+  territorial. Atuo como Consultor Técnico em Estatística em projeto de doutoramento 
+  internacional, analisando bases de dados multidimensionais para subsidiar decisões de
+  pesquisa. Desenvolvo projeções populacionais para pequenas áreas e diagnósticos 
+  sociodemográficos a partir de dados públicos (DATASUS, IBGE, CAGED), traduzindo 
+  indicadores demográficos, epidemiológicos e socioeconômicos em insights acionáveis 
+  para o planejamento público. Domínio de R, com aplicações em SQL e Shiny, além de 
+  conhecimentos em Python e Power BI.",
   foto        = "img/perfil.jpg",
-  email       = "seuemail@exemplo.com",
-  linkedin    = "https://linkedin.com/in/seu-usuario",
-  github      = "https://github.com/seu-usuario",
+  email       = "michelescreva@gmail.com",
+  linkedin    = "https://www.linkedin.com/in/micheldeoliveira/",
+  github      = "https://github.com/michelolv",
   lattes      = "http://lattes.cnpq.br/0000000000000000",
   localizacao = "Ouro Preto, MG - Brasil",
   cv_path     = "www/cv/curriculo.pdf"
@@ -260,6 +268,7 @@ converter_certificados_png(certificados)
 gerar_pagina_experiencia <- function(exp) {
   tabPanel(
     title = exp$empresa,
+    value = exp$id,                                   # <- URL única (?aba=exp1, exp2, ...)
     fluidRow(
       column(
         width = 7,
@@ -290,6 +299,7 @@ gerar_pagina_experiencia <- function(exp) {
 gerar_pagina_projeto <- function(proj) {
   tabPanel(
     title = proj$titulo,
+    value = proj$id,                                   # <- URL única (?aba=proj1, proj2, ...)
     fluidRow(
       column(
         width = 7,
@@ -326,6 +336,7 @@ gerar_pagina_certificado <- function(cert) {
   png_path <- file.path("certificados/png", paste0(cert$id, ".png"))
   tabPanel(
     title = cert$titulo,
+    value = cert$id,                                   # <- URL única (?aba=cert1, cert2, ...)
     fluidRow(
       column(
         width = 5,
@@ -397,11 +408,11 @@ pagina_perfil <- function() {
     ),
     column(
       width = 8,
-      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(perfil$bio)),
+      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
       div(class = "content-card", h3("Formação Acadêmica", class = "accent-text"),
-          p("Preencher: curso, instituição, período.")),
+          p("Bacharelado: Estatística e Ciência de Dados, Universidade Federal de Ouro Preto (UFOP), 8º período.")),
       div(class = "content-card", h3("Idiomas", class = "accent-text"),
-          p("Preencher: idiomas e nível."))
+          p("Inglês: Intermediário - Leitura técnica e escrita."))
     )
   )
 }
@@ -463,8 +474,8 @@ ui <- navbarPage(
   position    = "fixed-top",
   header      = tags$head(tags$style(HTML(css_custom))),
   
-  tabPanel("Início", icon = icon("house"), pagina_inicio()),
-  tabPanel("Perfil", icon = icon("user"), pagina_perfil()),
+  tabPanel("Início", value = "inicio", icon = icon("house"), pagina_inicio()),
+  tabPanel("Perfil", value = "perfil", icon = icon("user"), pagina_perfil()),
   
   do.call(navbarMenu, c(list(title = "Experiência", icon = icon("briefcase")),
                         lapply(experiencias, gerar_pagina_experiencia))),
@@ -475,8 +486,8 @@ ui <- navbarPage(
   do.call(navbarMenu, c(list(title = "Certificados", icon = icon("certificate")),
                         lapply(certificados, gerar_pagina_certificado))),
   
-  tabPanel("Habilidades", icon = icon("chart-simple"), pagina_habilidades()),
-  tabPanel("Contato", icon = icon("envelope"), pagina_contato()),
+  tabPanel("Habilidades", value = "habilidades", icon = icon("chart-simple"), pagina_habilidades()),
+  tabPanel("Contato", value = "contato", icon = icon("envelope"), pagina_contato()),
   
   footer = tags$footer(
     class = "app-footer",
@@ -488,6 +499,24 @@ ui <- navbarPage(
 
 # Server----
 server <- function(input, output, session) {
+  
+  ## Deep-linking: sincroniza aba ativa com a URL (?aba=id)----
+  
+  # Ao abrir o app (ou receber um link direto), navega ate a aba indicada na URL
+  observe({
+    query <- parseQueryString(session$clientData$url_search)
+    if (!is.null(query$aba)) {
+      updateNavbarPage(session, "navbar_principal", selected = query$aba)
+    }
+  })
+  
+  # Sempre que o usuario troca de aba (clique no menu, botao, etc.), atualiza a URL
+  observeEvent(input$navbar_principal, {
+    updateQueryString(
+      paste0("?aba=", input$navbar_principal),
+      mode = "push"
+    )
+  }, ignoreInit = TRUE)
   
   ## Gráficos de Experiências----
   lapply(experiencias, function(exp) {
@@ -546,10 +575,10 @@ server <- function(input, output, session) {
   
   ## Navegação via botões da capa----
   observeEvent(input$btn_ver_projetos, {
-    if (length(projetos) > 0) updateNavbarPage(session, "navbar_principal", selected = projetos[[1]]$titulo)
+    if (length(projetos) > 0) updateNavbarPage(session, "navbar_principal", selected = projetos[[1]]$id)
   })
   observeEvent(input$btn_ir_contato, {
-    updateNavbarPage(session, "navbar_principal", selected = "Contato")
+    updateNavbarPage(session, "navbar_principal", selected = "contato")
   })
   
   ## Formulário de contato (placeholder - integrar com envio de e-mail depois)----
