@@ -27,13 +27,16 @@ tema_app <- bs_theme(
 
 # CSS customizado----
 css_custom <- "
+  :root { --nav-accent: #2563eb; --underline-color: #9ca3af; }
+  body.dark-mode { --nav-accent: #60a5fa; --underline-color: #9ca3af; }
+
   /* ===== Tipografia: 3 fontes por contexto ===== */
   h1, h2, h3, .hero h1, .accent-text {
     font-family: 'Lora', Georgia, serif;
   }
   .navbar .nav-link, .navbar .dropdown-toggle, .dropdown-item,
   .stat-box .lab, .periodo-tag, .tech-badge, .navbar-brand {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
   }
   body, p, li, .content-card, input, textarea, select, .btn {
     font-family: 'Inter', sans-serif;
@@ -67,9 +70,11 @@ css_custom <- "
     height: 70px !important;
     max-width: 1400px;
     background: transparent !important;
-    border: none !important;
+    border: 1px solid rgba(255,255,255,.4) !important;
+    border-radius: 50px !important;
     box-shadow: none !important;
     z-index: 1030;
+    transition: background-color .25s ease, box-shadow .25s ease, border-color .25s ease;
   }
   nav.navbar.navbar-fixed-top:hover,
   nav.navbar.navbar-fixed-top.bg-light:hover,
@@ -77,6 +82,7 @@ css_custom <- "
   nav.navbar.navbar-fixed-top.bg-white:hover,
   nav.navbar.navbar-fixed-top[class*='bg-']:hover {
     background-color: #ffffff !important;
+    border-color: rgba(0,0,0,.08) !important;
     box-shadow: 0 10px 30px rgba(0,0,0,.12);
   }
   .navbar-collapse,
@@ -84,7 +90,6 @@ css_custom <- "
   .navbar .container-fluid {
     background: transparent !important;
   }
-  /* Fallback para navegadores/engines sem suporte a backdrop-filter (ex: Viewer do RStudio) ---- */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     nav.navbar.navbar-fixed-top { background-color: rgba(255,255,255,.55) !important; }
   }
@@ -123,18 +128,35 @@ css_custom <- "
     border-top: none !important;
   }
 
-  /* Cor das abas + sublinhado animado no hover/ativo ---- */
+  /* ===== Cor e tamanho das abas ===== */
   .navbar .nav-link,
-  .navbar .dropdown-toggle {
-    color: #111111 !important;
+  .navbar-nav .dropdown-toggle {
+    color: #ffffff !important;
     font-weight: 600;
-    text-shadow: 0 1px 4px rgba(255,255,255,.7);
+    font-size: 1.05rem;
+    text-shadow: 0 1px 5px rgba(0,0,0,.55);
     transition: color .2s ease;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    outline: none !important;
   }
+
+  /* Modo claro: quando o painel fica branco (hover geral), o texto vira escuro ---- */
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link,
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-toggle {
+    color: #111111 !important;
+    text-shadow: none;
+  }
+
+  /* Hover individual do link: sempre cor de destaque, tem prioridade sobre a regra acima ---- */
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link:hover,
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-toggle:hover,
   .navbar .nav-link:hover,
-  .navbar .dropdown-toggle:hover {
-    color: #2563eb !important;
+  .navbar-nav .dropdown-toggle:hover {
+    color: var(--nav-accent) !important;
+    text-shadow: none;
   }
+
   .navbar .nav-link:not(.dropdown-toggle) {
     position: relative;
   }
@@ -143,7 +165,7 @@ css_custom <- "
     position: absolute;
     left: 50%; bottom: -2px;
     width: 0%; height: 2px;
-    background: #2563eb;
+    background: var(--underline-color);
     transition: width .25s ease, left .25s ease;
   }
   .navbar .nav-link:not(.dropdown-toggle):hover::after,
@@ -153,8 +175,15 @@ css_custom <- "
   .navbar .nav-link.active,
   .navbar .show > .nav-link,
   .navbar .dropdown-toggle.active {
-    font-weight: 600 !important;
-    color: #111111 !important;
+    font-weight: 700 !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+  .navbar-nav .nav-item .nav-link.active,
+  .navbar-nav .nav-item.dropdown.show .nav-link {
+    border-bottom-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
   }
 
   .dropdown-menu {
@@ -163,7 +192,10 @@ css_custom <- "
     border-radius: 10px;
     box-shadow: 0 6px 20px rgba(0,0,0,.10);
   }
-  .dropdown-item { color: #111111 !important; }
+  .dropdown-item {
+    color: #111111 !important;
+    font-family: 'Poppins', sans-serif !important;
+  }
   .dropdown-item:hover {
     background-color: rgba(37,99,235,.08) !important;
     color: #2563eb !important;
@@ -177,66 +209,95 @@ css_custom <- "
     gap: 8px;
     position: relative;
     z-index: 5;
-  
     height: 40px;
   }
-  
   .navbar-utils > *{
     margin-top:0 !important;
     margin-bottom:0 !important;
   }
-  
   .navbar-utils .bootstrap-select{
     display:flex !important;
     align-items:center !important;
   }
-  
   .navbar-utils .bootstrap-select .dropdown-toggle{
     height:38px !important;
     display:flex !important;
     align-items:center !important;
   }
-
   .navbar-utils, .navbar-utils * { pointer-events: auto !important; opacity: 1 !important; }
+
+  /* Remove o invólucro branco/com borda que o bootstrap-select adiciona por padrao ---- */
+  .navbar-utils .bootstrap-select.form-control,
+  .navbar-utils .bootstrap-select .dropdown-toggle.form-control {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Botoes de icone (lupa / modo escuro): transparentes por padrao, brancos no hover do painel ---- */
   .btn-icon-nav {
-    background: #ffffff !important;
-    border: 1px solid rgba(0,0,0,.15) !important;
-    color: #111111 !important;
+    background: transparent !important;
+    border: 1px solid rgba(255,255,255,.4) !important;
+    color: #ffffff !important;
     border-radius: 50% !important;
     width: 38px; height: 38px;
     padding: 0 !important;
     display: flex; align-items: center; justify-content: center;
     font-size: 16px;
+    transition: background-color .25s ease, border-color .2s ease;
   }
-  .btn-icon-nav:hover { border-color: #2563eb !important; color: #2563eb !important; }
-  .navbar-utils .dropdown-toggle.btn-light {
+  nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
     background: #ffffff !important;
-    border: 1px solid rgba(0,0,0,.15) !important;
+  }
+  .btn-icon-nav:hover {
+    border-color: #2563eb !important;
+  }
+  .btn-icon-nav:hover #icon_moon,
+  .btn-icon-nav:hover #icon_sun {
+    color: #2563eb !important;
+  }
+
+  /* Botao de idioma: transparente por padrao, branco no hover do painel, azul no hover proprio ---- */
+  .navbar-utils .dropdown-toggle.btn-light {
+    background: transparent !important;
+    border: 1px solid rgba(255,255,255,.4) !important;
+    color: #ffffff !important;
     border-radius: 20px !important;
-  
     width: 140px !important;
     height: 38px !important;
-  
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    transition: background-color .25s ease, border-color .2s ease, color .2s ease;
   }
-  
+  nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
+    background: #ffffff !important;
+  }
+  .navbar-utils .dropdown-toggle.btn-light:hover {
+    border-color: #2563eb !important;
+    color: #2563eb !important;
+  }
+  .navbar-utils .dropdown-toggle.btn-light:focus,
+  .navbar-utils .dropdown-toggle.btn-light:active,
+  .navbar-utils .dropdown-toggle.btn-light.show {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: rgba(255,255,255,.4) !important;
+  }
+  .navbar-utils .filter-option-inner-inner { color: inherit !important; }
+
   .bootstrap-select .filter-option{
     display:flex !important;
     align-items:center !important;
   }
-
   .bootstrap-select .filter-option-inner{
     display:flex !important;
     align-items:center !important;
   }
-
   .bootstrap-select .filter-option-inner-inner{
     display:flex !important;
     align-items:center !important;
     line-height:1 !important;
   }
-
   .bootstrap-select .filter-option-inner-inner img{
     display:block !important;
     width:24px;
@@ -279,8 +340,9 @@ css_custom <- "
   .hero img {
     width: 190px; height: 190px; object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #2563eb;
-    box-shadow: 0 0 35px rgba(37,99,235,.35);
+    border: 4px solid #9ca3af;
+    box-shadow: 0 0 35px rgba(156,163,175,.35);
+    margin-top: -30px;
   }
   .hero h1 { font-size: 2.6rem; margin-top: 22px; color: #111111; }
   .hero p.subtitle { color: #374151; font-size: 1.2rem; font-family: 'Poppins', sans-serif; }
@@ -332,19 +394,33 @@ css_custom <- "
   }
   body.dark-mode nav.navbar.navbar-fixed-top:hover,
   body.dark-mode nav.navbar.navbar-fixed-top[class*='bg-']:hover { background-color: #14161c !important; }
+
+  /* Todas as abas (nao apenas dropdown/ativo) ficam claras no modo escuro ---- */
   body.dark-mode .navbar .nav-link,
-  body.dark-mode .navbar .dropdown-toggle {
+  body.dark-mode .navbar-nav .dropdown-toggle {
+    color: #e5e7eb !important;
     text-shadow: 0 1px 4px rgba(0,0,0,.7);
   }
-  body.dark-mode .navbar .dropdown-toggle,
-  body.dark-mode .navbar .nav-link.active { color: #e5e7eb !important; }
-  body.dark-mode .navbar .nav-link:hover { color: #60a5fa !important; }
+  body.dark-mode .navbar .nav-link:hover,
+  body.dark-mode .navbar-nav .dropdown-toggle:hover {
+    color: var(--nav-accent) !important;
+  }
+
   body.dark-mode .dropdown-menu { background-color: #14161c !important; border-color: rgba(255,255,255,.08); }
   body.dark-mode .dropdown-item { color: #e5e7eb !important; }
+
   body.dark-mode .btn-icon-nav,
   body.dark-mode .navbar-utils .dropdown-toggle.btn-light {
-    background: #14161c !important; color: #e5e7eb !important; border-color: rgba(255,255,255,.15) !important;
+    color: #e5e7eb !important; border-color: rgba(255,255,255,.15) !important;
   }
+  body.dark-mode nav.navbar.navbar-fixed-top:hover .btn-icon-nav,
+  body.dark-mode nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
+    background: #14161c !important;
+  }
+  body.dark-mode .navbar-utils .filter-option-inner-inner {
+    color: #e5e7eb !important;
+  }
+
   body.dark-mode .content-card,
   body.dark-mode .stat-box { background-color: #171922; border-color: rgba(255,255,255,.06); }
   body.dark-mode .hero h1 { color: #f3f4f6; }
@@ -352,15 +428,14 @@ css_custom <- "
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
   
   #icon_moon, #icon_sun {
-    color: #444 !important;
+    color: #ffffff !important;
     font-size: 18px;
+    transition: color .2s ease;
   }
   body.dark-mode #icon_moon,
   body.dark-mode #icon_sun {
     color: #f5f5f5 !important;
   }
-
-
 "
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
