@@ -127,6 +127,30 @@ css_custom <- "
   .bslib-page-dashboard > .navbar + div {
     border-top: none !important;
   }
+  .navbar-nav .nav-item.dropdown {
+    position: relative !important;
+  }
+  .navbar-nav .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    margin-top: 18px !important;
+    min-width: 220px !important;
+    width: max-content !important;
+    max-width: 320px !important;
+  }
+  .navbar-utils .dropdown-menu {
+    margin-top: 19px !important;
+  }
+
+  /* ===== Icones das abas: garantir preenchimento pela cor do texto ===== */
+  .navbar .nav-link svg,
+  .navbar .nav-link svg path,
+  .navbar-nav .dropdown-toggle svg,
+  .navbar-nav .dropdown-toggle svg path {
+    fill: currentColor !important;
+  }
+  
 
   /* ===== Cor e tamanho das abas ===== */
   .navbar .nav-link,
@@ -172,6 +196,23 @@ css_custom <- "
   .navbar .nav-link:not(.dropdown-toggle).active::after {
     width: 70%; left: 15%;
   }
+  
+  .navbar-nav .dropdown-toggle {
+    position: relative;
+  }
+  .navbar-nav .dropdown-toggle::before {
+    content: '';
+    position: absolute;
+    left: 50%; bottom: -2px;
+    width: 0%; height: 2px;
+    background: var(--underline-color);
+    transition: width .25s ease, left .25s ease;
+  }
+  .navbar-nav .dropdown-toggle:hover::before,
+  .navbar-nav .nav-item.dropdown.show .dropdown-toggle::before {
+    width: 70%; left: 15%;
+  }
+  
   .navbar .nav-link.active,
   .navbar .show > .nav-link,
   .navbar .dropdown-toggle.active {
@@ -186,15 +227,48 @@ css_custom <- "
     box-shadow: none !important;
   }
 
+  /* ===== Sub-abas (dropdown): mesma fonte das categorias, tamanho controlado ===== */
   .dropdown-menu {
-    background-color: #ffffff !important;
-    border: 1px solid rgba(0,0,0,.08);
     border-radius: 10px;
     box-shadow: 0 6px 20px rgba(0,0,0,.10);
+  }
+  
+  .navbar-nav .dropdown-menu,
+  .navbar-utils .dropdown-menu {
+    background-color: rgba(255,255,255,.55) !important;
+    border: 1px solid rgba(255,255,255,.4) !important;
+    transition: background-color .25s ease, border-color .25s ease;
+  }
+  .navbar-utils .bs-searchbox,
+  .navbar-utils .bs-actionsbox,
+  .navbar-utils .bs-donebutton,
+  .navbar-utils .no-results {
+    display: none !important;
+  }
+  
+  /* Impede dupla camada de transparencia: o bootstrap-select usa 2 elementos
+     com classe dropdown-menu (o envolucro externo e a lista .inner interna).
+     Apenas o externo deve ter fundo/borda; o interno fica neutro. ---- */
+  .navbar-utils .dropdown-menu.inner {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 4px 0 !important;
+  }
+  
+  nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-menu,
+  nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-menu,
+  .navbar-nav .dropdown-menu:hover,
+  .navbar-utils .dropdown-menu:hover {
+    background-color: #ffffff !important;
+    border-color: rgba(0,0,0,.08) !important;
   }
   .dropdown-item {
     color: #111111 !important;
     font-family: 'Poppins', sans-serif !important;
+    font-size: .92rem !important;
+    font-weight: 500 !important;
   }
   .dropdown-item:hover {
     background-color: rgba(37,99,235,.08) !important;
@@ -234,7 +308,7 @@ css_custom <- "
     box-shadow: none !important;
   }
 
-  /* Botoes de icone (lupa / modo escuro): transparentes por padrao, brancos no hover do painel ---- */
+  /* Botoes de icone (lupa / modo escuro): brancos por padrao ---- */
   .btn-icon-nav {
     background: transparent !important;
     border: 1px solid rgba(255,255,255,.4) !important;
@@ -244,20 +318,34 @@ css_custom <- "
     padding: 0 !important;
     display: flex; align-items: center; justify-content: center;
     font-size: 16px;
-    transition: background-color .25s ease, border-color .2s ease;
+    transition: background-color .25s ease, border-color .2s ease, color .2s ease;
   }
   nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
     background: #ffffff !important;
   }
-  .btn-icon-nav:hover {
-    border-color: #2563eb !important;
+  /* Quando o painel fica branco (modo claro), os icones escurecem para continuar visiveis ---- */
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
+    color: #111111 !important;
+    border-color: rgba(0,0,0,.15) !important;
   }
+  .btn-icon-nav:hover {
+    border-color: var(--nav-accent) !important;
+  }
+  
+  /* Hover no botao (qualquer icone interno, com ou sem id) vira azul ---- */
+  .btn-icon-nav:hover,
+  .btn-icon-nav:hover i,
+  .btn-icon-nav:hover svg,
+  .btn-icon-nav:hover span,
   .btn-icon-nav:hover #icon_moon,
   .btn-icon-nav:hover #icon_sun {
-    color: #2563eb !important;
+    color: var(--nav-accent) !important;
+  }
+  .btn-icon-nav:hover svg path {
+    fill: var(--nav-accent) !important;
   }
 
-  /* Botao de idioma: transparente por padrao, branco no hover do painel, azul no hover proprio ---- */
+  /* Botao de idioma: branco por padrao, escurece com o painel, azul no hover proprio ---- */
   .navbar-utils .dropdown-toggle.btn-light {
     background: transparent !important;
     border: 1px solid rgba(255,255,255,.4) !important;
@@ -272,9 +360,27 @@ css_custom <- "
   nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
     background: #ffffff !important;
   }
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
+    color: #111111 !important;
+    border-color: rgba(0,0,0,.15) !important;
+  }
   .navbar-utils .dropdown-toggle.btn-light:hover {
-    border-color: #2563eb !important;
+    border-color: var(--nav-accent) !important;
+    color: var(--nav-accent) !important;
+  }
+  .navbar-utils .dropdown-toggle.btn-light::after {
+    border-top-color: currentColor !important;
+  }
+  .navbar-utils .dropdown-toggle.btn-light:hover::after {
+    border-top-color: var(--nav-accent) !important;
+  }
+  .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner,
+  .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner * {
     color: #2563eb !important;
+  }
+  body.dark-mode .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner,
+  body.dark-mode .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner * {
+    color: var(--nav-accent) !important;
   }
   .navbar-utils .dropdown-toggle.btn-light:focus,
   .navbar-utils .dropdown-toggle.btn-light:active,
@@ -347,19 +453,32 @@ css_custom <- "
   .hero h1 { font-size: 2.6rem; margin-top: 22px; color: #111111; }
   .hero p.subtitle { color: #374151; font-size: 1.2rem; font-family: 'Poppins', sans-serif; }
 
+  /* ===== Cards de estatistica (Inicio): transparentes, brancos no hover ===== */
   .stat-box {
-    background-color: #ffffff;
+    background-color: transparent;
     border-radius: 14px;
     padding: 22px;
     text-align: center;
-    border: 1px solid rgba(0,0,0,.06);
+    border: 1px solid rgba(255,255,255,.4);
+    box-shadow: none;
+    transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .stat-box:hover {
+    background-color: #ffffff;
+    border-color: rgba(0,0,0,.06);
     box-shadow: 0 4px 14px rgba(0,0,0,.05);
   }
-  .stat-box .num { font-size: 2rem; font-weight: 700; color: #2563eb; font-family: 'Lora', serif; }
-  .stat-box .lab { color: #6b7280; font-size: .9rem; }
+  .stat-box .num {
+    font-size: 2rem; font-weight: 700; color: #ffffff;
+    font-family: 'Lora', serif; transition: color .25s ease;
+  }
+  .stat-box .lab { color: #ffffff; font-size: .9rem; transition: color .25s ease; }
+  .stat-box:hover .num,
+  .stat-box:hover .lab { color: #111111 !important; }
 
+  /* ===== Botoes de acao (CTA): gradiente cinza ===== */
   .btn-cta {
-    background: linear-gradient(90deg, #2563eb, #1e3a8a);
+    background: linear-gradient(90deg, #9ca3af, #4b5563);
     border: none; color: #ffffff; font-weight: 600;
     padding: 10px 26px; border-radius: 30px; margin: 6px;
     font-family: 'Poppins', sans-serif;
@@ -395,7 +514,7 @@ css_custom <- "
   body.dark-mode nav.navbar.navbar-fixed-top:hover,
   body.dark-mode nav.navbar.navbar-fixed-top[class*='bg-']:hover { background-color: #14161c !important; }
 
-  /* Todas as abas (nao apenas dropdown/ativo) ficam claras no modo escuro ---- */
+  /* Todas as abas ficam claras no modo escuro, inclusive no hover do painel ---- */
   body.dark-mode .navbar .nav-link,
   body.dark-mode .navbar-nav .dropdown-toggle {
     color: #e5e7eb !important;
@@ -406,7 +525,19 @@ css_custom <- "
     color: var(--nav-accent) !important;
   }
 
-  body.dark-mode .dropdown-menu { background-color: #14161c !important; border-color: rgba(255,255,255,.08); }
+  body.dark-mode .navbar-nav .dropdown-menu,
+  body.dark-mode .navbar-utils .dropdown-menu {
+    background-color: rgba(20,22,28,.65) !important;
+    border-color: rgba(255,255,255,.15) !important;
+  }
+  
+  body.dark-mode nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-menu,
+  body.dark-mode nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-menu,
+  body.dark-mode .navbar-nav .dropdown-menu:hover,
+  body.dark-mode .navbar-utils .dropdown-menu:hover {
+    background-color: #14161c !important;
+    border-color: rgba(255,255,255,.12) !important;
+  }
   body.dark-mode .dropdown-item { color: #e5e7eb !important; }
 
   body.dark-mode .btn-icon-nav,
@@ -416,6 +547,8 @@ css_custom <- "
   body.dark-mode nav.navbar.navbar-fixed-top:hover .btn-icon-nav,
   body.dark-mode nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
     background: #14161c !important;
+    color: #e5e7eb !important;
+    border-color: rgba(255,255,255,.15) !important;
   }
   body.dark-mode .navbar-utils .filter-option-inner-inner {
     color: #e5e7eb !important;
@@ -426,16 +559,11 @@ css_custom <- "
   body.dark-mode .hero h1 { color: #f3f4f6; }
   body.dark-mode .hero p.subtitle { color: #9ca3af; }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
+  body.dark-mode .stat-box:hover {
+    background-color: #ffffff !important;
+    border-color: rgba(0,0,0,.06) !important;
+  }
   
-  #icon_moon, #icon_sun {
-    color: #ffffff !important;
-    font-size: 18px;
-    transition: color .2s ease;
-  }
-  body.dark-mode #icon_moon,
-  body.dark-mode #icon_sun {
-    color: #f5f5f5 !important;
-  }
 "
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -906,7 +1034,12 @@ ui <- navbarPage(
     tags$head(
       tags$link(rel = "stylesheet",
                 href = "https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&display=swap"),
-      tags$style(HTML(css_custom))
+      tags$style(HTML(css_custom)),
+      tags$script(HTML("
+        $(document).on('shiny:connected', function() {
+          $('.navbar-nav i.far').removeClass('far').addClass('fas');
+        });
+      "))
     )
   ),
   
