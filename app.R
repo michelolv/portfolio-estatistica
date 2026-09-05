@@ -30,13 +30,15 @@ css_custom <- "
   :root { --nav-accent: #2563eb; --underline-color: #9ca3af; }
   body.dark-mode { --nav-accent: #60a5fa; --underline-color: #9ca3af; }
 
-  /* ===== Tipografia: Sora (titulos/menu) + Inter (corpo) ===== */
+  /* ===== Tipografia ===== */
   h1, h2, h3, .hero h1, .accent-text {
     font-family: 'Sora', 'Inter', sans-serif;
     font-weight: 700;
   }
-  .navbar .nav-link, .navbar .dropdown-toggle, .dropdown-item,
-  .stat-box .lab, .periodo-tag, .tech-badge, .navbar-brand {
+  .navbar .nav-link, .navbar-brand {
+    font-family: 'Space Grotesk', 'Sora', sans-serif !important;
+  }
+  .dropdown-item, .stat-box .lab, .periodo-tag, .tech-badge {
     font-family: 'Sora', 'Inter', sans-serif !important;
   }
   body, p, li, .content-card, input, textarea, select, .btn {
@@ -45,33 +47,21 @@ css_custom <- "
 
   body {
     padding-top: 200px;
-    background-color: #f4f5f7;
-    color: #1a1a1a;
-  }
-
-  /* ===== Capa (Inicio): fundo em gradiente escuro, sem imagem ===== */
-  body.pagina-inicio {
     background: radial-gradient(ellipse at top right, #16213e 0%, #0b0f1a 55%, #060810 100%);
-  }
-  body.dark-mode.pagina-inicio {
-    background: radial-gradient(ellipse at top right, #10131c 0%, #06070b 55%, #030405 100%);
+    color: #e5e7eb;
   }
 
-  /* Canvas de particulas: fixo atras de tudo, so aparece na pagina Inicio ---- */
+  /* Canvas de particulas: fixo atras de tudo, visivel em todas as paginas ---- */
   #particles-canvas {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     z-index: -1;
-    opacity: 0;
-    transition: opacity .5s ease;
+    opacity: 1;
     pointer-events: none;
   }
-  body.pagina-inicio #particles-canvas {
-    opacity: 1;
-  }
 
-  /* ===== Navbar flutuante, sem painel de fundo ===== */
+  /* ===== Navbar flutuante ===== */
   nav.navbar.navbar-fixed-top,
   nav.navbar.navbar-fixed-top[class*='bg-'] {
     top: 20px !important;
@@ -93,9 +83,9 @@ css_custom <- "
   nav.navbar.navbar-fixed-top.bg-body:hover,
   nav.navbar.navbar-fixed-top.bg-white:hover,
   nav.navbar.navbar-fixed-top[class*='bg-']:hover {
-    background-color: #ffffff !important;
-    border-color: rgba(0,0,0,.08) !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    background-color: #1e293b !important;
+    border-color: rgba(255,255,255,.15) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
   }
   .navbar-collapse,
   .navbar-nav,
@@ -103,7 +93,7 @@ css_custom <- "
     background: transparent !important;
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    nav.navbar.navbar-fixed-top { background-color: rgba(255,255,255,.55) !important; }
+    nav.navbar.navbar-fixed-top { background-color: rgba(30,41,59,.75) !important; }
   }
 
   .navbar .container-fluid {
@@ -140,36 +130,15 @@ css_custom <- "
     border-top: none !important;
   }
 
-  .navbar-nav .nav-item.dropdown {
-    position: relative !important;
+  /* ===== Cor, tamanho e espacamento das abas ===== */
+  .navbar-nav {
+    gap: 34px !important;
   }
-  .navbar-nav .dropdown-menu {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    margin-top: 28px !important;
-    min-width: 220px !important;
-    width: max-content !important;
-    max-width: 320px !important;
-  }
-  .navbar-utils .dropdown-menu {
-    margin-top: 28px !important;
-  }
-
-  /* ===== Icones das abas: garantir preenchimento pela cor do texto ===== */
-  .navbar .nav-link svg,
-  .navbar .nav-link svg path,
-  .navbar-nav .dropdown-toggle svg,
-  .navbar-nav .dropdown-toggle svg path {
-    fill: currentColor !important;
-  }
-
-  /* ===== Cor e tamanho das abas ===== */
-  .navbar .nav-link,
-  .navbar-nav .dropdown-toggle {
+  .navbar .nav-link {
     color: #ffffff !important;
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: 1.12rem;
+    letter-spacing: .02em;
     text-shadow: 0 1px 5px rgba(0,0,0,.55);
     transition: color .2s ease;
     border-bottom: none !important;
@@ -177,24 +146,19 @@ css_custom <- "
     outline: none !important;
   }
 
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link,
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-toggle {
-    color: #111111 !important;
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link {
+    color: #ffffff !important;
     text-shadow: none;
   }
-
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link:hover,
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-toggle:hover,
-  .navbar .nav-link:hover,
-  .navbar-nav .dropdown-toggle:hover {
+  .navbar .nav-link:hover {
     color: var(--nav-accent) !important;
     text-shadow: none;
   }
 
-  .navbar .nav-link:not(.dropdown-toggle) {
+  .navbar .nav-link {
     position: relative;
   }
-  .navbar .nav-link:not(.dropdown-toggle)::after {
+  .navbar .nav-link::after {
     content: '';
     position: absolute;
     left: 50%; bottom: -2px;
@@ -202,81 +166,15 @@ css_custom <- "
     background: var(--underline-color);
     transition: width .25s ease, left .25s ease;
   }
-  .navbar .nav-link:not(.dropdown-toggle):hover::after,
-  .navbar .nav-link:not(.dropdown-toggle).active::after {
+  .navbar .nav-link:hover::after,
+  .navbar .nav-link.active::after {
     width: 70%; left: 15%;
   }
-  .navbar-nav .dropdown-toggle {
-    position: relative;
-  }
-  .navbar-nav .dropdown-toggle::before {
-    content: '';
-    position: absolute;
-    left: 50%; bottom: -2px;
-    width: 0%; height: 2px;
-    background: var(--underline-color);
-    transition: width .25s ease, left .25s ease;
-  }
-  .navbar-nav .dropdown-toggle:hover::before,
-  .navbar-nav .nav-item.dropdown.show .dropdown-toggle::before {
-    width: 70%; left: 15%;
-  }
-  .navbar .nav-link.active,
-  .navbar .show > .nav-link,
-  .navbar .dropdown-toggle.active {
+  .navbar .nav-link.active {
     font-weight: 700 !important;
     border-bottom: none !important;
     box-shadow: none !important;
   }
-  .navbar-nav .nav-item .nav-link.active,
-  .navbar-nav .nav-item.dropdown.show .nav-link {
-    border-bottom-color: transparent !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-  }
-
-  /* ===== Sub-abas (dropdown): transparentes por padrao ===== */
-  .dropdown-menu {
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.10);
-  }
-  .navbar-nav .dropdown-menu,
-  .navbar-utils .dropdown-menu {
-    background-color: rgba(255,255,255,.55) !important;
-    border: 1px solid rgba(255,255,255,.4) !important;
-    transition: background-color .25s ease, border-color .25s ease;
-  }
-  .navbar-utils .bs-searchbox,
-  .navbar-utils .bs-actionsbox,
-  .navbar-utils .bs-donebutton,
-  .navbar-utils .no-results {
-    display: none !important;
-  }
-  .navbar-utils .dropdown-menu.inner {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-    padding: 4px 0 !important;
-  }
-  nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-menu,
-  nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-menu,
-  .navbar-nav .dropdown-menu:hover,
-  .navbar-utils .dropdown-menu:hover {
-    background-color: #ffffff !important;
-    border-color: rgba(0,0,0,.08) !important;
-  }
-  .dropdown-item {
-    color: #111111 !important;
-    font-family: 'Sora', sans-serif !important;
-    font-size: .92rem !important;
-    font-weight: 500 !important;
-  }
-  .dropdown-item:hover {
-    background-color: rgba(37,99,235,.08) !important;
-    color: #2563eb !important;
-  }
-  .dropdown-divider { border-color: rgba(0,0,0,.08); }
 
   /* Barra de utilidades (modo escuro / idioma / busca) ---- */
   .navbar-utils {
@@ -322,11 +220,11 @@ css_custom <- "
   }
   .btn-icon-nav i, .btn-icon-nav span { font-size: 18px; }
   nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
-    background: #ffffff !important;
+    background: #1e293b !important;
   }
   body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
-    color: #111111 !important;
-    border-color: rgba(0,0,0,.15) !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,.2) !important;
   }
   .btn-icon-nav:hover {
     border-color: var(--nav-accent) !important;
@@ -355,11 +253,11 @@ css_custom <- "
     transition: background-color .25s ease, border-color .2s ease, color .2s ease;
   }
   nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
-    background: #ffffff !important;
+    background: #1e293b !important;
   }
   body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
-    color: #111111 !important;
-    border-color: rgba(0,0,0,.15) !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,.2) !important;
   }
   .navbar-utils .dropdown-toggle.btn-light:hover {
     border-color: var(--nav-accent) !important;
@@ -404,14 +302,57 @@ css_custom <- "
     margin-right:6px;
   }
 
+  .navbar-utils .dropdown-menu {
+    margin-top: 28px !important;
+  }
+  .dropdown-menu {
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.10);
+  }
+  .navbar-utils .dropdown-menu {
+    background-color: rgba(30,41,59,.55) !important;
+    border: 1px solid rgba(255,255,255,.4) !important;
+    transition: background-color .25s ease, border-color .25s ease;
+  }
+  .navbar-utils .bs-searchbox,
+  .navbar-utils .bs-actionsbox,
+  .navbar-utils .bs-donebutton,
+  .navbar-utils .no-results {
+    display: none !important;
+  }
+  .navbar-utils .dropdown-menu.inner {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 4px 0 !important;
+  }
+  nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-menu,
+  .navbar-utils .dropdown-menu:hover {
+    background-color: #1e293b !important;
+    border-color: rgba(255,255,255,.15) !important;
+  }
+  .dropdown-item {
+    color: #e5e7eb !important;
+    font-size: .92rem !important;
+    font-weight: 500 !important;
+  }
+  .dropdown-item:hover {
+    background-color: rgba(37,99,235,.15) !important;
+    color: #ffffff !important;
+  }
+  .dropdown-divider { border-color: rgba(255,255,255,.1); }
+
   .content-card {
     background-color: #ffffff;
+    color: #1a1a1a;
     border-radius: 16px;
     padding: 28px;
     margin-bottom: 22px;
     border: 1px solid rgba(0,0,0,.06);
     box-shadow: 0 4px 18px rgba(0,0,0,.06);
     transition: background-color .25s ease, border-color .25s ease;
+    scroll-margin-top: 130px;
   }
 
   .tech-badge {
@@ -453,7 +394,6 @@ css_custom <- "
   .hero p.subtitle { color: #dbeafe; font-size: 1.2rem; font-weight: 600; font-family: 'Sora', sans-serif; }
   .hero p:not(.subtitle) { color: #94a3b8; }
 
-  /* Cards de estatistica (Inicio): transparentes, brancos no hover ---- */
   .stat-box {
     position: relative; z-index: 1;
     background-color: transparent;
@@ -465,9 +405,9 @@ css_custom <- "
     transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
   }
   .stat-box:hover {
-    background-color: #ffffff;
-    border-color: rgba(0,0,0,.06);
-    box-shadow: 0 4px 14px rgba(0,0,0,.05);
+    background-color: #1e293b;
+    border-color: rgba(255,255,255,.15);
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
   }
   .stat-box .num {
     font-size: 2rem; font-weight: 700; color: #ffffff;
@@ -475,9 +415,8 @@ css_custom <- "
   }
   .stat-box .lab { color: #cbd5e1; font-size: .9rem; transition: color .25s ease; }
   .stat-box:hover .num,
-  .stat-box:hover .lab { color: #111111 !important; }
+  .stat-box:hover .lab { color: #ffffff !important; }
 
-  /* Botoes de acao (CTA): gradiente cinza ---- */
   .btn-cta {
     background: linear-gradient(90deg, #9ca3af, #4b5563);
     border: none; color: #ffffff; font-weight: 600;
@@ -488,21 +427,34 @@ css_custom <- "
   .btn-cta:hover { opacity: .88; color: #ffffff; }
 
   footer.app-footer {
-    text-align: center; padding: 30px; color: #6b7280;
-    border-top: 1px solid rgba(0,0,0,.06); margin-top: 40px;
+    text-align: center; padding: 30px; color: #94a3b8;
+    border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px;
   }
 
   .cert-img { max-width: 100%; border-radius: 10px; border: 1px solid rgba(0,0,0,.08); }
 
   .search-result-item {
     padding: 10px 14px; border-radius: 8px; cursor: pointer;
-    border: 1px solid rgba(0,0,0,.06); margin-bottom: 6px;
+    border: 1px solid rgba(255,255,255,.1); margin-bottom: 6px;
+    color: #e5e7eb;
   }
-  .search-result-item:hover { background-color: rgba(37,99,235,.08); }
-  .search-result-item .cat-tag { font-size: .75rem; color: #6b7280; }
+  .search-result-item:hover { background-color: rgba(37,99,235,.15); }
+  .search-result-item .cat-tag { font-size: .75rem; color: #94a3b8; }
+
+  /* Paginas de categoria: titulo/paragrafo legiveis sobre o fundo escuro global ---- */
+  .hub-page p { color: #cbd5e1; }
+  .hub-page hr { border-color: rgba(255,255,255,.15); }
+  .hub-page .accent-text {
+    background: linear-gradient(90deg, #60a5fa, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
   /* ===== MODO ESCURO ===== */
-  body.dark-mode { background-color: #0f1115; color: #e5e7eb; }
+  body.dark-mode {
+    background: radial-gradient(ellipse at top right, #10131c 0%, #06070b 55%, #030405 100%);
+    color: #e5e7eb;
+  }
 
   body.dark-mode nav.navbar.navbar-fixed-top,
   body.dark-mode nav.navbar.navbar-fixed-top[class*='bg-'] {
@@ -512,29 +464,23 @@ css_custom <- "
   body.dark-mode nav.navbar.navbar-fixed-top:hover,
   body.dark-mode nav.navbar.navbar-fixed-top[class*='bg-']:hover { background-color: #14161c !important; }
 
-  body.dark-mode .navbar .nav-link,
-  body.dark-mode .navbar-nav .dropdown-toggle {
+  body.dark-mode .navbar .nav-link {
     color: #e5e7eb !important;
     text-shadow: 0 1px 4px rgba(0,0,0,.7);
   }
-  body.dark-mode .navbar .nav-link:hover,
-  body.dark-mode .navbar-nav .dropdown-toggle:hover {
+  body.dark-mode .navbar .nav-link:hover {
     color: var(--nav-accent) !important;
   }
 
-  body.dark-mode .navbar-nav .dropdown-menu,
   body.dark-mode .navbar-utils .dropdown-menu {
     background-color: rgba(20,22,28,.65) !important;
     border-color: rgba(255,255,255,.15) !important;
   }
-  body.dark-mode nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-menu,
   body.dark-mode nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-menu,
-  body.dark-mode .navbar-nav .dropdown-menu:hover,
   body.dark-mode .navbar-utils .dropdown-menu:hover {
     background-color: #14161c !important;
     border-color: rgba(255,255,255,.12) !important;
   }
-  body.dark-mode .dropdown-item { color: #e5e7eb !important; }
 
   body.dark-mode .btn-icon-nav,
   body.dark-mode .navbar-utils .dropdown-toggle.btn-light {
@@ -551,10 +497,10 @@ css_custom <- "
   }
 
   body.dark-mode .content-card,
-  body.dark-mode .stat-box { background-color: #171922; border-color: rgba(255,255,255,.06); }
+  body.dark-mode .stat-box { background-color: #171922; color: #e5e7eb; border-color: rgba(255,255,255,.06); }
   body.dark-mode .stat-box:hover {
-    background-color: #ffffff !important;
-    border-color: rgba(0,0,0,.06) !important;
+    background-color: #1e293b !important;
+    border-color: rgba(255,255,255,.15) !important;
   }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
 "
@@ -648,6 +594,21 @@ js_particles <- "
 })();
 "
 
+# JavaScript: rolar ate um item especifico apos trocar de aba (usado pela busca)----
+js_scroll_to <- "
+Shiny.addCustomMessageHandler('scrollToItem', function(id) {
+  setTimeout(function() {
+    var el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.style.transition = 'box-shadow .3s ease';
+      el.style.boxShadow = '0 0 0 3px rgba(37,99,235,.6)';
+      setTimeout(function(){ el.style.boxShadow = ''; }, 1500);
+    }
+  }, 400);
+});
+"
+
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 # Traduções (infraestrutura pronta - conteudo livre ainda so em PT)----
@@ -697,7 +658,7 @@ perfil <- list(
   cv_path     = "www/cv/curriculo.pdf"
 )
 
-## Experiências de trabalho (cada item = uma sub-aba)----
+## Experiências de trabalho----
 experiencias <- list(
   list(
     id          = "exp1",
@@ -719,7 +680,7 @@ experiencias <- list(
   # , list(id = "exp2", empresa = "...", ...)
 )
 
-## Projetos diversos (cada item = uma sub-aba)----
+## Projetos diversos----
 projetos <- list(
   list(
     id          = "proj1",
@@ -741,7 +702,7 @@ projetos <- list(
   # , list(id = "proj2", titulo = "...", ...)
 )
 
-## Certificados (cada item = uma sub-aba, com PDF anexado)----
+## Certificados----
 certificados <- list(
   list(
     id            = "cert1",
@@ -755,11 +716,11 @@ certificados <- list(
   # , list(id = "cert2", titulo = "...", ...)
 )
 
-## Índice combinado para a busca----
+## Índice combinado para a busca (id -> categoria/aba de destino)----
 indice_busca <- c(
-  lapply(experiencias, function(x) list(id = x$id, titulo = x$empresa, categoria = "Experiência")),
-  lapply(projetos,     function(x) list(id = x$id, titulo = x$titulo,  categoria = "Projeto")),
-  lapply(certificados, function(x) list(id = x$id, titulo = x$titulo,  categoria = "Certificado"))
+  lapply(experiencias, function(x) list(id = x$id, titulo = x$empresa, categoria = "Experiência", tab = "experiencia")),
+  lapply(projetos,     function(x) list(id = x$id, titulo = x$titulo,  categoria = "Projeto",     tab = "projetos")),
+  lapply(certificados, function(x) list(id = x$id, titulo = x$titulo,  categoria = "Certificado", tab = "certificados"))
 )
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -816,111 +777,83 @@ converter_certificados_png <- function(lista_certificados) {
 }
 converter_certificados_png(certificados)
 
-## Card de listagem (hub) - usado nas paginas "Ver todos"----
-gerar_card_hub <- function(id_item, titulo, subtitulo = NULL) {
+## Bloco de Experiência (conteudo completo, sem sub-aba)----
+bloco_experiencia <- function(exp) {
   div(
+    id = exp$id,
     class = "content-card",
-    h4(titulo, class = "accent-text"),
-    if (!is.null(subtitulo)) p(subtitulo),
-    actionButton(paste0("goto_", id_item), "Ver detalhes \u2192", class = "btn-cta")
-  )
-}
-
-## Página de Experiência (sub-aba)----
-gerar_pagina_experiencia <- function(exp) {
-  tabPanel(
-    title = exp$empresa,
-    value = exp$id,
     fluidRow(
       column(
         width = 7,
-        div(
-          class = "content-card",
-          h3(exp$cargo, class = "accent-text"),
-          h5(paste0(exp$empresa, " • ", exp$local)),
-          div(class = "periodo-tag", exp$periodo),
-          tags$hr(),
-          tags$ul(lapply(exp$descricao, tags$li)),
-          h5("Tecnologias utilizadas:"),
-          badge_tech(exp$tecnologias)
-        )
+        h3(exp$cargo, class = "accent-text"),
+        h5(paste0(exp$empresa, " • ", exp$local)),
+        div(class = "periodo-tag", exp$periodo),
+        tags$hr(),
+        tags$ul(lapply(exp$descricao, tags$li)),
+        h5("Tecnologias utilizadas:"),
+        badge_tech(exp$tecnologias)
       ),
       column(
         width = 5,
-        div(
-          class = "content-card",
-          h5("Stack utilizada"),
-          plotlyOutput(outputId = paste0("plot_", exp$id), height = "320px")
-        )
+        h5("Stack utilizada"),
+        plotlyOutput(outputId = paste0("plot_", exp$id), height = "300px")
       )
     )
   )
 }
 
-## Página de Projeto (sub-aba)----
-gerar_pagina_projeto <- function(proj) {
-  tabPanel(
-    title = proj$titulo,
-    value = proj$id,
+## Bloco de Projeto (conteudo completo, sem sub-aba)----
+bloco_projeto <- function(proj) {
+  div(
+    id = proj$id,
+    class = "content-card",
     fluidRow(
       column(
         width = 7,
-        div(
-          class = "content-card",
-          h3(proj$titulo, class = "accent-text"),
-          h5(proj$subtitulo),
-          tags$hr(),
-          tags$ul(lapply(proj$descricao, tags$li)),
-          h5("Tecnologias:"),
-          badge_tech(proj$tecnologias),
-          tags$br(), tags$br(),
-          tags$a(class = "btn btn-cta", href = proj$link_github, target = "_blank",
-                 icon("github"), " Repositório"),
-          if (!is.na(proj$link_demo))
-            tags$a(class = "btn btn-cta", href = proj$link_demo, target = "_blank",
-                   icon("up-right-from-square"), " Demo")
-        )
+        h3(proj$titulo, class = "accent-text"),
+        h5(proj$subtitulo),
+        tags$hr(),
+        tags$ul(lapply(proj$descricao, tags$li)),
+        h5("Tecnologias:"),
+        badge_tech(proj$tecnologias),
+        tags$br(), tags$br(),
+        tags$a(class = "btn btn-cta", href = proj$link_github, target = "_blank",
+               icon("github"), " Repositório"),
+        if (!is.na(proj$link_demo))
+          tags$a(class = "btn btn-cta", href = proj$link_demo, target = "_blank",
+                 icon("up-right-from-square"), " Demo")
       ),
       column(
         width = 5,
-        div(
-          class = "content-card",
-          h5("Resultados / Métricas"),
-          plotlyOutput(outputId = paste0("plot_", proj$id), height = "320px")
-        )
+        h5("Resultados / Métricas"),
+        plotlyOutput(outputId = paste0("plot_", proj$id), height = "300px")
       )
     )
   )
 }
 
-## Página de Certificado (sub-aba)----
-gerar_pagina_certificado <- function(cert) {
+## Bloco de Certificado (conteudo completo, sem sub-aba)----
+bloco_certificado <- function(cert) {
   png_path <- file.path("certificados/png", paste0(cert$id, ".png"))
-  tabPanel(
-    title = cert$titulo,
-    value = cert$id,
+  div(
+    id = cert$id,
+    class = "content-card",
     fluidRow(
       column(
         width = 5,
-        div(
-          class = "content-card",
-          h3(cert$titulo, class = "accent-text"),
-          h5(cert$instituicao),
-          div(class = "periodo-tag", paste(cert$ano, "•", cert$carga_horaria)),
-          tags$hr(),
-          p(cert$descricao),
-          downloadButton(paste0("download_", cert$id), "Baixar PDF original", class = "btn-cta")
-        )
+        h3(cert$titulo, class = "accent-text"),
+        h5(cert$instituicao),
+        div(class = "periodo-tag", paste(cert$ano, "•", cert$carga_horaria)),
+        tags$hr(),
+        p(cert$descricao),
+        downloadButton(paste0("download_", cert$id), "Baixar PDF original", class = "btn-cta")
       ),
       column(
         width = 7,
-        div(
-          class = "content-card",
-          if (file.exists(file.path("www", png_path)))
-            tags$img(class = "cert-img", src = png_path)
-          else
-            p("Pré-visualização indisponível. Adicione o PDF em www/", cert$pdf)
-        )
+        if (file.exists(file.path("www", png_path)))
+          tags$img(class = "cert-img", src = png_path)
+        else
+          p("Pré-visualização indisponível. Adicione o PDF em www/", cert$pdf)
       )
     )
   )
@@ -928,41 +861,38 @@ gerar_pagina_certificado <- function(cert) {
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-# Páginas "Hub" (visão geral / listagem)----
+# Páginas de Categoria (tudo visivel, sem cliques extras)----
 
-pagina_experiencias_home <- function() {
+pagina_experiencia_completa <- function() {
   div(
+    class = "hub-page",
     style = "padding: 30px;",
     h2("Experiência Profissional", class = "accent-text"),
-    p("Um resumo de toda a minha trajetória. Clique em um item para ver os detalhes completos."),
+    p("Um resumo de toda a minha trajetória profissional."),
     tags$hr(),
-    fluidRow(lapply(experiencias, function(exp) {
-      column(width = 4, gerar_card_hub(exp$id, exp$empresa, paste0(exp$cargo, " • ", exp$periodo)))
-    }))
+    lapply(experiencias, bloco_experiencia)
   )
 }
 
-pagina_projetos_home <- function() {
+pagina_projetos_completa <- function() {
   div(
+    class = "hub-page",
     style = "padding: 30px;",
     h2("Meus Projetos", class = "accent-text"),
-    p("Uma seleção dos projetos que desenvolvi. Clique em um item para ver os detalhes completos."),
+    p("Uma seleção dos projetos que desenvolvi."),
     tags$hr(),
-    fluidRow(lapply(projetos, function(proj) {
-      column(width = 4, gerar_card_hub(proj$id, proj$titulo, proj$subtitulo))
-    }))
+    lapply(projetos, bloco_projeto)
   )
 }
 
-pagina_certificados_home <- function() {
+pagina_certificados_completa <- function() {
   div(
+    class = "hub-page",
     style = "padding: 30px;",
     h2("Certificados", class = "accent-text"),
-    p("Cursos e certificações concluídos. Clique em um item para ver os detalhes completos."),
+    p("Cursos e certificações concluídos."),
     tags$hr(),
-    fluidRow(lapply(certificados, function(cert) {
-      column(width = 4, gerar_card_hub(cert$id, cert$titulo, paste0(cert$instituicao, " • ", cert$ano)))
-    }))
+    lapply(certificados, bloco_certificado)
   )
 }
 
@@ -972,7 +902,6 @@ pagina_certificados_home <- function() {
 
 pagina_inicio <- function() {
   tagList(
-    tags$canvas(id = "particles-canvas"),
     div(
       class = "hero",
       tags$img(src = perfil$foto),
@@ -1050,18 +979,13 @@ pagina_contato <- function() {
 
 # Barra de utilidades (canto direito da navbar)----
 
-## Seletor de idioma com bandeiras reais (imagem), funciona em qualquer SO----
 seletor_idioma <- pickerInput(
   inputId  = "idioma",
   label    = NULL,
   choices  = c("pt", "en", "es"),
   selected = "pt",
   width    = "140px",
-  
-  options = list(
-    width = "140px"
-  ),
-  
+  options  = list(width = "140px"),
   choicesOpt = list(
     content = c(
       "<img src='https://flagcdn.com/24x18/br.png' style='width:24px;height:18px;vertical-align:middle;'> PT",
@@ -1085,9 +1009,7 @@ barra_utilidades <- tagList(
   )
 )
 
-
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
 
 # UI----
 ui <- navbarPage(
@@ -1100,42 +1022,20 @@ ui <- navbarPage(
     useShinyjs(),
     tags$head(
       tags$link(rel = "stylesheet",
-                href = "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap"),
+                href = "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"),
       tags$style(HTML(css_custom)),
-      tags$script(HTML("
-        $(document).on('shiny:connected', function() {
-          $('.navbar-nav i.far').removeClass('far').addClass('fas');
-        });
-      ")),
-      tags$script(HTML(js_particles))
-    )
+      tags$script(HTML(js_particles)),
+      tags$script(HTML(js_scroll_to))
+    ),
+    tags$canvas(id = "particles-canvas")
   ),
   
-  tabPanel(tagList(icon("house"), tags$span(id = "lbl_inicio", "Início")), value = "inicio", pagina_inicio()),
-  tabPanel(tagList(icon("user"), tags$span(id = "lbl_perfil", "Perfil")), value = "perfil", pagina_perfil()),
-  
-  do.call(navbarMenu, c(
-    list(title = tagList(icon("briefcase"), tags$span(id = "lbl_experiencia", "Experiência"))),
-    list(tabPanel("Todas as Experiências", value = "experiencias_home", icon = icon("list"), pagina_experiencias_home())),
-    list("----"),
-    lapply(experiencias, gerar_pagina_experiencia)
-  )),
-  
-  do.call(navbarMenu, c(
-    list(title = tagList(icon("diagram-project"), tags$span(id = "lbl_projetos", "Projetos"))),
-    list(tabPanel("Todos os Projetos", value = "projetos_home", icon = icon("list"), pagina_projetos_home())),
-    list("----"),
-    lapply(projetos, gerar_pagina_projeto)
-  )),
-  
-  do.call(navbarMenu, c(
-    list(title = tagList(icon("certificate"), tags$span(id = "lbl_certificados", "Certificados"))),
-    list(tabPanel("Todos os Certificados", value = "certificados_home", icon = icon("list"), pagina_certificados_home())),
-    list("----"),
-    lapply(certificados, gerar_pagina_certificado)
-  )),
-  
-  tabPanel(tagList(icon("envelope"), tags$span(id = "lbl_contato", "Contato")), value = "contato", pagina_contato()),
+  tabPanel(tags$span(id = "lbl_inicio", "Início"), value = "inicio", pagina_inicio()),
+  tabPanel(tags$span(id = "lbl_perfil", "Perfil"), value = "perfil", pagina_perfil()),
+  tabPanel(tags$span(id = "lbl_experiencia", "Experiência"), value = "experiencia", pagina_experiencia_completa()),
+  tabPanel(tags$span(id = "lbl_projetos", "Projetos"), value = "projetos", pagina_projetos_completa()),
+  tabPanel(tags$span(id = "lbl_certificados", "Certificados"), value = "certificados", pagina_certificados_completa()),
+  tabPanel(tags$span(id = "lbl_contato", "Contato"), value = "contato", pagina_contato()),
   
   footer = tags$footer(
     class = "app-footer",
@@ -1160,25 +1060,6 @@ server <- function(input, output, session) {
     updateQueryString(paste0("?aba=", input$navbar_principal), mode = "push")
   }, ignoreInit = TRUE)
   
-  ## Fundo especial (Inicio) somente na pagina Inicio----
-  observeEvent(input$navbar_principal, {
-    if (input$navbar_principal == "inicio") {
-      shinyjs::runjs("document.body.classList.add('pagina-inicio');")
-    } else {
-      shinyjs::runjs("document.body.classList.remove('pagina-inicio');")
-    }
-  })
-  
-  ## Navegação a partir dos cards das páginas "Ver todos"----
-  lapply(c(experiencias, projetos, certificados), function(item) {
-    local({
-      item_id <- item$id
-      observeEvent(input[[paste0("goto_", item_id)]], {
-        updateNavbarPage(session, "navbar_principal", selected = item_id)
-      }, ignoreInit = TRUE)
-    })
-  })
-  
   ## Modo Claro/Escuro----
   modo_escuro <- reactiveVal(FALSE)
   observeEvent(input$toggle_dark, {
@@ -1202,7 +1083,7 @@ server <- function(input, output, session) {
     updateActionButton(session, "btn_ir_contato",  label = lg$btn_fale_comigo)
   }, ignoreInit = TRUE)
   
-  ## Busca----
+  ## Busca: leva a categoria certa e rola ate o item----
   observeEvent(input$abrir_busca, {
     showModal(modalDialog(
       title = "Buscar no portfólio",
@@ -1220,14 +1101,15 @@ server <- function(input, output, session) {
     tagList(lapply(encontrados, function(x) {
       div(
         class = "search-result-item",
-        onclick = sprintf("Shiny.setInputValue('busca_click', '%s', {priority:'event'})", x$id),
+        onclick = sprintf("Shiny.setInputValue('busca_click', {id:'%s', tab:'%s'}, {priority:'event'})", x$id, x$tab),
         span(class = "cat-tag", x$categoria), br(), strong(x$titulo)
       )
     }))
   })
   
   observeEvent(input$busca_click, {
-    updateNavbarPage(session, "navbar_principal", selected = input$busca_click)
+    updateNavbarPage(session, "navbar_principal", selected = input$busca_click$tab)
+    session$sendCustomMessage("scrollToItem", input$busca_click$id)
     removeModal()
   })
   
@@ -1266,7 +1148,7 @@ server <- function(input, output, session) {
   
   ## Navegação via botões da capa----
   observeEvent(input$btn_ver_projetos, {
-    updateNavbarPage(session, "navbar_principal", selected = "projetos_home")
+    updateNavbarPage(session, "navbar_principal", selected = "projetos")
   })
   observeEvent(input$btn_ir_contato, {
     updateNavbarPage(session, "navbar_principal", selected = "contato")
