@@ -21,7 +21,7 @@ tema_app <- bs_theme(
   warning      = "#d97706",
   danger       = "#dc2626",
   base_font    = font_google("Inter"),
-  heading_font = font_google("Poppins"),
+  heading_font = font_google("Sora"),
   code_font    = font_google("JetBrains Mono")
 )
 
@@ -30,13 +30,14 @@ css_custom <- "
   :root { --nav-accent: #2563eb; --underline-color: #9ca3af; }
   body.dark-mode { --nav-accent: #60a5fa; --underline-color: #9ca3af; }
 
-  /* ===== Tipografia: 3 fontes por contexto ===== */
+  /* ===== Tipografia: Sora (titulos/menu) + Inter (corpo) ===== */
   h1, h2, h3, .hero h1, .accent-text {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'Sora', 'Inter', sans-serif;
+    font-weight: 700;
   }
   .navbar .nav-link, .navbar .dropdown-toggle, .dropdown-item,
   .stat-box .lab, .periodo-tag, .tech-badge, .navbar-brand {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Sora', 'Inter', sans-serif !important;
   }
   body, p, li, .content-card, input, textarea, select, .btn {
     font-family: 'Inter', sans-serif;
@@ -48,15 +49,26 @@ css_custom <- "
     color: #1a1a1a;
   }
 
-  /* Fundo com imagem apenas na pagina Inicio ---- */
+  /* ===== Capa (Inicio): fundo em gradiente escuro, sem imagem ===== */
   body.pagina-inicio {
-    background-image:
-      linear-gradient(180deg, rgba(244,245,247,.20) 0%, rgba(244,245,247,0) 20%, rgba(244,245,247,0) 68%, #f4f5f7 100%),
-      url('img/capa-bg.jpg');
-    background-size: cover;
-    background-position: center top;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background: radial-gradient(ellipse at top right, #16213e 0%, #0b0f1a 55%, #060810 100%);
+  }
+  body.dark-mode.pagina-inicio {
+    background: radial-gradient(ellipse at top right, #10131c 0%, #06070b 55%, #030405 100%);
+  }
+
+  /* Canvas de particulas: fixo atras de tudo, so aparece na pagina Inicio ---- */
+  #particles-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity .5s ease;
+    pointer-events: none;
+  }
+  body.pagina-inicio #particles-canvas {
+    opacity: 1;
   }
 
   /* ===== Navbar flutuante, sem painel de fundo ===== */
@@ -165,14 +177,12 @@ css_custom <- "
     outline: none !important;
   }
 
-  /* Modo claro: quando o painel fica branco (hover geral), o texto vira escuro ---- */
   body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link,
   body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-toggle {
     color: #111111 !important;
     text-shadow: none;
   }
 
-  /* Hover individual do link: sempre cor de destaque, tem prioridade sobre a regra acima ---- */
   body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link:hover,
   body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-toggle:hover,
   .navbar .nav-link:hover,
@@ -225,7 +235,7 @@ css_custom <- "
     box-shadow: none !important;
   }
 
-  /* ===== Sub-abas (dropdown): mesma fonte das categorias, transparentes por padrao ===== */
+  /* ===== Sub-abas (dropdown): transparentes por padrao ===== */
   .dropdown-menu {
     border-radius: 10px;
     box-shadow: 0 6px 20px rgba(0,0,0,.10);
@@ -242,9 +252,6 @@ css_custom <- "
   .navbar-utils .no-results {
     display: none !important;
   }
-  /* Impede dupla camada de transparencia: o bootstrap-select usa 2 elementos
-     com classe dropdown-menu (o envolucro externo e a lista .inner interna).
-     Apenas o externo deve ter fundo/borda; o interno fica neutro. ---- */
   .navbar-utils .dropdown-menu.inner {
     background: transparent !important;
     border: none !important;
@@ -261,7 +268,7 @@ css_custom <- "
   }
   .dropdown-item {
     color: #111111 !important;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Sora', sans-serif !important;
     font-size: .92rem !important;
     font-weight: 500 !important;
   }
@@ -295,7 +302,6 @@ css_custom <- "
   }
   .navbar-utils, .navbar-utils * { pointer-events: auto !important; opacity: 1 !important; }
 
-  /* Remove o invólucro branco/com borda que o bootstrap-select adiciona por padrao ---- */
   .navbar-utils .bootstrap-select.form-control,
   .navbar-utils .bootstrap-select .dropdown-toggle.form-control {
     background: transparent !important;
@@ -303,7 +309,6 @@ css_custom <- "
     box-shadow: none !important;
   }
 
-  /* Botoes de icone (lupa / modo escuro): brancos por padrao ---- */
   .btn-icon-nav {
     background: transparent !important;
     border: 1px solid rgba(255,255,255,.4) !important;
@@ -319,7 +324,6 @@ css_custom <- "
   nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
     background: #ffffff !important;
   }
-  /* Quando o painel fica branco (modo claro), os icones escurecem para continuar visiveis ---- */
   body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
     color: #111111 !important;
     border-color: rgba(0,0,0,.15) !important;
@@ -327,7 +331,6 @@ css_custom <- "
   .btn-icon-nav:hover {
     border-color: var(--nav-accent) !important;
   }
-  /* Hover no botao (qualquer icone interno, com ou sem id) vira azul ---- */
   .btn-icon-nav:hover,
   .btn-icon-nav:hover i,
   .btn-icon-nav:hover svg,
@@ -340,7 +343,6 @@ css_custom <- "
     fill: var(--nav-accent) !important;
   }
 
-  /* Botao de idioma: branco por padrao, escurece com o painel, azul no hover proprio ---- */
   .navbar-utils .dropdown-toggle.btn-light {
     background: transparent !important;
     border: 1px solid rgba(255,255,255,.4) !important;
@@ -433,24 +435,32 @@ css_custom <- "
     margin-bottom: 10px;
   }
 
-  .hero { text-align: center; padding: 90px 20px 40px 20px; }
+  /* ===== Hero (capa) ===== */
+  .hero { text-align: center; padding: 90px 20px 40px 20px; position: relative; z-index: 1; }
   .hero img {
     width: 190px; height: 190px; object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #9ca3af;
-    box-shadow: 0 0 35px rgba(156,163,175,.35);
+    border: 4px solid #60a5fa;
+    box-shadow: 0 0 40px rgba(96,165,250,.45);
     margin-top: -30px;
   }
-  .hero h1 { font-size: 2.6rem; margin-top: 22px; color: #111111; }
-  .hero p.subtitle { color: #374151; font-size: 1.2rem; font-family: 'Poppins', sans-serif; }
+  .hero h1 { font-size: 2.6rem; margin-top: 22px; color: #ffffff; }
+  .hero .accent-text {
+    background: linear-gradient(90deg, #60a5fa, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p.subtitle { color: #dbeafe; font-size: 1.2rem; font-weight: 600; font-family: 'Sora', sans-serif; }
+  .hero p:not(.subtitle) { color: #94a3b8; }
 
-  /* ===== Cards de estatistica (Inicio): transparentes, brancos no hover ===== */
+  /* Cards de estatistica (Inicio): transparentes, brancos no hover ---- */
   .stat-box {
+    position: relative; z-index: 1;
     background-color: transparent;
     border-radius: 14px;
     padding: 22px;
     text-align: center;
-    border: 1px solid rgba(255,255,255,.4);
+    border: 1px solid rgba(255,255,255,.25);
     box-shadow: none;
     transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
   }
@@ -461,18 +471,19 @@ css_custom <- "
   }
   .stat-box .num {
     font-size: 2rem; font-weight: 700; color: #ffffff;
-    font-family: 'Lora', serif; transition: color .25s ease;
+    font-family: 'Sora', sans-serif; transition: color .25s ease;
   }
-  .stat-box .lab { color: #ffffff; font-size: .9rem; transition: color .25s ease; }
+  .stat-box .lab { color: #cbd5e1; font-size: .9rem; transition: color .25s ease; }
   .stat-box:hover .num,
   .stat-box:hover .lab { color: #111111 !important; }
 
-  /* ===== Botoes de acao (CTA): gradiente cinza ===== */
+  /* Botoes de acao (CTA): gradiente cinza ---- */
   .btn-cta {
     background: linear-gradient(90deg, #9ca3af, #4b5563);
     border: none; color: #ffffff; font-weight: 600;
     padding: 10px 26px; border-radius: 30px; margin: 6px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Sora', sans-serif;
+    position: relative; z-index: 1;
   }
   .btn-cta:hover { opacity: .88; color: #ffffff; }
 
@@ -492,11 +503,7 @@ css_custom <- "
 
   /* ===== MODO ESCURO ===== */
   body.dark-mode { background-color: #0f1115; color: #e5e7eb; }
-  body.dark-mode.pagina-inicio {
-    background-image:
-      linear-gradient(180deg, rgba(15,17,21,.20) 0%, rgba(15,17,21,0) 20%, rgba(15,17,21,0) 68%, #0f1115 100%),
-      url('img/capa-bg.jpg');
-  }
+
   body.dark-mode nav.navbar.navbar-fixed-top,
   body.dark-mode nav.navbar.navbar-fixed-top[class*='bg-'] {
     background-color: rgba(20,22,28,.35) !important;
@@ -505,7 +512,6 @@ css_custom <- "
   body.dark-mode nav.navbar.navbar-fixed-top:hover,
   body.dark-mode nav.navbar.navbar-fixed-top[class*='bg-']:hover { background-color: #14161c !important; }
 
-  /* Todas as abas ficam claras no modo escuro, inclusive no hover do painel ---- */
   body.dark-mode .navbar .nav-link,
   body.dark-mode .navbar-nav .dropdown-toggle {
     color: #e5e7eb !important;
@@ -550,9 +556,96 @@ css_custom <- "
     background-color: #ffffff !important;
     border-color: rgba(0,0,0,.06) !important;
   }
-  body.dark-mode .hero h1 { color: #f3f4f6; }
-  body.dark-mode .hero p.subtitle { color: #9ca3af; }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
+"
+
+# JavaScript da animacao de particulas (capa interativa)----
+js_particles <- "
+(function(){
+  function initParticles(){
+    var canvas = document.getElementById('particles-canvas');
+    if(!canvas || canvas.dataset.ready) return;
+    canvas.dataset.ready = '1';
+    var ctx = canvas.getContext('2d');
+    var w, h, particles = [];
+    var mouse = { x: null, y: null, radius: 130 };
+
+    function resize(){
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var count = Math.min(90, Math.floor((window.innerWidth * window.innerHeight) / 16000));
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.8 + 1
+      });
+    }
+
+    document.addEventListener('mousemove', function(e){
+      mouse.x = e.clientX; mouse.y = e.clientY;
+    });
+    document.addEventListener('mouseleave', function(){
+      mouse.x = null; mouse.y = null;
+    });
+
+    function draw(){
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(96,165,250,0.85)';
+        ctx.fill();
+
+        for (var j = i + 1; j < particles.length; j++) {
+          var q = particles[j];
+          var dx = p.x - q.x, dy = p.y - q.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = 'rgba(96,165,250,' + (1 - dist / 130) * 0.35 + ')';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+
+        if (mouse.x !== null) {
+          var mdx = p.x - mouse.x, mdy = p.y - mouse.y;
+          var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mdist < mouse.radius) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = 'rgba(255,255,255,' + (1 - mdist / mouse.radius) * 0.6 + ')';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r * 1.8, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,0.9)';
+            ctx.fill();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+  $(document).on('shiny:connected', initParticles);
+})();
 "
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -879,6 +972,7 @@ pagina_certificados_home <- function() {
 
 pagina_inicio <- function() {
   tagList(
+    tags$canvas(id = "particles-canvas"),
     div(
       class = "hero",
       tags$img(src = perfil$foto),
@@ -890,7 +984,7 @@ pagina_inicio <- function() {
       actionButton("btn_ir_contato", labels$pt$btn_fale_comigo, class = "btn-cta", icon = icon("paper-plane"))
     ),
     fluidRow(
-      style = "max-width: 900px; margin: 30px auto;",
+      style = "max-width: 900px; margin: 30px auto; position: relative; z-index: 1;",
       column(4, div(class = "stat-box", div(class = "num", length(experiencias)), div(class = "lab", "Experiências"))),
       column(4, div(class = "stat-box", div(class = "num", length(projetos)), div(class = "lab", "Projetos"))),
       column(4, div(class = "stat-box", div(class = "num", length(certificados)), div(class = "lab", "Certificados")))
@@ -1006,13 +1100,14 @@ ui <- navbarPage(
     useShinyjs(),
     tags$head(
       tags$link(rel = "stylesheet",
-                href = "https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&display=swap"),
+                href = "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap"),
       tags$style(HTML(css_custom)),
       tags$script(HTML("
         $(document).on('shiny:connected', function() {
           $('.navbar-nav i.far').removeClass('far').addClass('fas');
         });
-      "))
+      ")),
+      tags$script(HTML(js_particles))
     )
   ),
   
@@ -1065,7 +1160,7 @@ server <- function(input, output, session) {
     updateQueryString(paste0("?aba=", input$navbar_principal), mode = "push")
   }, ignoreInit = TRUE)
   
-  ## Imagem de fundo (hero) somente na pagina Inicio----
+  ## Fundo especial (Inicio) somente na pagina Inicio----
   observeEvent(input$navbar_principal, {
     if (input$navbar_principal == "inicio") {
       shinyjs::runjs("document.body.classList.add('pagina-inicio');")
