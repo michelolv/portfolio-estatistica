@@ -127,6 +127,7 @@ css_custom <- "
   .bslib-page-dashboard > .navbar + div {
     border-top: none !important;
   }
+
   .navbar-nav .nav-item.dropdown {
     position: relative !important;
   }
@@ -134,13 +135,13 @@ css_custom <- "
     position: absolute !important;
     top: 100% !important;
     left: 0 !important;
-    margin-top: 18px !important;
+    margin-top: 28px !important;
     min-width: 220px !important;
     width: max-content !important;
     max-width: 320px !important;
   }
   .navbar-utils .dropdown-menu {
-    margin-top: 19px !important;
+    margin-top: 28px !important;
   }
 
   /* ===== Icones das abas: garantir preenchimento pela cor do texto ===== */
@@ -150,7 +151,6 @@ css_custom <- "
   .navbar-nav .dropdown-toggle svg path {
     fill: currentColor !important;
   }
-  
 
   /* ===== Cor e tamanho das abas ===== */
   .navbar .nav-link,
@@ -196,7 +196,6 @@ css_custom <- "
   .navbar .nav-link:not(.dropdown-toggle).active::after {
     width: 70%; left: 15%;
   }
-  
   .navbar-nav .dropdown-toggle {
     position: relative;
   }
@@ -212,7 +211,6 @@ css_custom <- "
   .navbar-nav .nav-item.dropdown.show .dropdown-toggle::before {
     width: 70%; left: 15%;
   }
-  
   .navbar .nav-link.active,
   .navbar .show > .nav-link,
   .navbar .dropdown-toggle.active {
@@ -227,12 +225,11 @@ css_custom <- "
     box-shadow: none !important;
   }
 
-  /* ===== Sub-abas (dropdown): mesma fonte das categorias, tamanho controlado ===== */
+  /* ===== Sub-abas (dropdown): mesma fonte das categorias, transparentes por padrao ===== */
   .dropdown-menu {
     border-radius: 10px;
     box-shadow: 0 6px 20px rgba(0,0,0,.10);
   }
-  
   .navbar-nav .dropdown-menu,
   .navbar-utils .dropdown-menu {
     background-color: rgba(255,255,255,.55) !important;
@@ -245,7 +242,6 @@ css_custom <- "
   .navbar-utils .no-results {
     display: none !important;
   }
-  
   /* Impede dupla camada de transparencia: o bootstrap-select usa 2 elementos
      com classe dropdown-menu (o envolucro externo e a lista .inner interna).
      Apenas o externo deve ter fundo/borda; o interno fica neutro. ---- */
@@ -256,7 +252,6 @@ css_custom <- "
     margin: 0 !important;
     padding: 4px 0 !important;
   }
-  
   nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-menu,
   nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-menu,
   .navbar-nav .dropdown-menu:hover,
@@ -320,6 +315,7 @@ css_custom <- "
     font-size: 16px;
     transition: background-color .25s ease, border-color .2s ease, color .2s ease;
   }
+  .btn-icon-nav i, .btn-icon-nav span { font-size: 18px; }
   nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
     background: #ffffff !important;
   }
@@ -331,7 +327,6 @@ css_custom <- "
   .btn-icon-nav:hover {
     border-color: var(--nav-accent) !important;
   }
-  
   /* Hover no botao (qualquer icone interno, com ou sem id) vira azul ---- */
   .btn-icon-nav:hover,
   .btn-icon-nav:hover i,
@@ -374,14 +369,6 @@ css_custom <- "
   .navbar-utils .dropdown-toggle.btn-light:hover::after {
     border-top-color: var(--nav-accent) !important;
   }
-  .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner,
-  .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner * {
-    color: #2563eb !important;
-  }
-  body.dark-mode .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner,
-  body.dark-mode .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner * {
-    color: var(--nav-accent) !important;
-  }
   .navbar-utils .dropdown-toggle.btn-light:focus,
   .navbar-utils .dropdown-toggle.btn-light:active,
   .navbar-utils .dropdown-toggle.btn-light.show {
@@ -390,6 +377,10 @@ css_custom <- "
     border-color: rgba(255,255,255,.4) !important;
   }
   .navbar-utils .filter-option-inner-inner { color: inherit !important; }
+  .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner,
+  .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner * {
+    color: var(--nav-accent) !important;
+  }
 
   .bootstrap-select .filter-option{
     display:flex !important;
@@ -530,7 +521,6 @@ css_custom <- "
     background-color: rgba(20,22,28,.65) !important;
     border-color: rgba(255,255,255,.15) !important;
   }
-  
   body.dark-mode nav.navbar.navbar-fixed-top:hover .navbar-nav .dropdown-menu,
   body.dark-mode nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-menu,
   body.dark-mode .navbar-nav .dropdown-menu:hover,
@@ -556,14 +546,13 @@ css_custom <- "
 
   body.dark-mode .content-card,
   body.dark-mode .stat-box { background-color: #171922; border-color: rgba(255,255,255,.06); }
-  body.dark-mode .hero h1 { color: #f3f4f6; }
-  body.dark-mode .hero p.subtitle { color: #9ca3af; }
-  body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
   body.dark-mode .stat-box:hover {
     background-color: #ffffff !important;
     border-color: rgba(0,0,0,.06) !important;
   }
-  
+  body.dark-mode .hero h1 { color: #f3f4f6; }
+  body.dark-mode .hero p.subtitle { color: #9ca3af; }
+  body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
 "
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -572,17 +561,17 @@ css_custom <- "
 labels <- list(
   pt = list(nav_inicio = "Início", nav_perfil = "Perfil", nav_experiencia = "Experiência",
             nav_projetos = "Projetos", nav_certificados = "Certificados",
-            nav_habilidades = "Habilidades", nav_contato = "Contato",
+            nav_contato = "Contato",
             btn_ver_projetos = "Ver Projetos", btn_baixar_cv = "Baixar CV", btn_fale_comigo = "Fale comigo",
             busca_placeholder = "Digite para buscar..."),
   en = list(nav_inicio = "Home", nav_perfil = "Profile", nav_experiencia = "Experience",
             nav_projetos = "Projects", nav_certificados = "Certificates",
-            nav_habilidades = "Skills", nav_contato = "Contact",
+            nav_contato = "Contact",
             btn_ver_projetos = "View Projects", btn_baixar_cv = "Download CV", btn_fale_comigo = "Contact me",
             busca_placeholder = "Type to search..."),
   es = list(nav_inicio = "Inicio", nav_perfil = "Perfil", nav_experiencia = "Experiencia",
             nav_projetos = "Proyectos", nav_certificados = "Certificados",
-            nav_habilidades = "Habilidades", nav_contato = "Contacto",
+            nav_contato = "Contacto",
             btn_ver_projetos = "Ver Proyectos", btn_baixar_cv = "Descargar CV", btn_fale_comigo = "Contáctame",
             busca_placeholder = "Escribe para buscar...")
 )
@@ -613,12 +602,6 @@ perfil <- list(
   lattes      = "http://lattes.cnpq.br/0000000000000000",
   localizacao = "Ouro Preto, MG - Brasil",
   cv_path     = "www/cv/curriculo.pdf"
-)
-
-## Habilidades técnicas (para gráfico radar)----
-habilidades_tecnicas <- data.frame(
-  habilidade = c("R", "Python", "SQL", "Power BI", "Estatística", "Machine Learning", "Excel", "Git"),
-  nivel      = c(90, 70, 75, 65, 85, 60, 80, 65)
 )
 
 ## Experiências de trabalho (cada item = uma sub-aba)----
@@ -892,7 +875,7 @@ pagina_certificados_home <- function() {
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-# Páginas Fixas (Início, Perfil, Habilidades, Contato)----
+# Páginas Fixas (Início, Perfil, Contato)----
 
 pagina_inicio <- function() {
   tagList(
@@ -938,16 +921,6 @@ pagina_perfil <- function() {
       div(class = "content-card", h3("Idiomas", class = "accent-text"),
           p("Inglês: Intermediário - Leitura técnica e escrita."))
     )
-  )
-}
-
-pagina_habilidades <- function() {
-  fluidRow(
-    style = "padding: 30px;",
-    column(6, div(class = "content-card", h3("Radar de Competências", class = "accent-text"),
-                  plotlyOutput("radar_habilidades", height = "420px"))),
-    column(6, div(class = "content-card", h3("Ferramentas & Linguagens", class = "accent-text"),
-                  badge_tech(habilidades_tecnicas$habilidade)))
   )
 }
 
@@ -1067,7 +1040,6 @@ ui <- navbarPage(
     lapply(certificados, gerar_pagina_certificado)
   )),
   
-  tabPanel(tagList(icon("chart-simple"), tags$span(id = "lbl_habilidades", "Habilidades")), value = "habilidades", pagina_habilidades()),
   tabPanel(tagList(icon("envelope"), tags$span(id = "lbl_contato", "Contato")), value = "contato", pagina_contato()),
   
   footer = tags$footer(
@@ -1125,7 +1097,7 @@ server <- function(input, output, session) {
   ## Idioma: atualiza rotulos do menu e botoes da capa----
   observeEvent(input$idioma, {
     lg <- labels[[input$idioma]]
-    for (nm in c("inicio", "perfil", "experiencia", "projetos", "certificados", "habilidades", "contato")) {
+    for (nm in c("inicio", "perfil", "experiencia", "projetos", "certificados", "contato")) {
       shinyjs::runjs(sprintf(
         "var el = document.getElementById('lbl_%s'); if (el) el.textContent = '%s';",
         nm, lg[[paste0("nav_", nm)]]
@@ -1189,19 +1161,6 @@ server <- function(input, output, session) {
         content  = function(file) file.copy(file.path("www", cert_local$pdf), file)
       )
     })
-  })
-  
-  ## Radar de Habilidades----
-  output$radar_habilidades <- renderPlotly({
-    plot_ly(
-      type = "scatterpolar", r = habilidades_tecnicas$nivel,
-      theta = habilidades_tecnicas$habilidade, fill = "toself",
-      line = list(color = "#2563eb"), fillcolor = "rgba(37,99,235,.15)"
-    ) %>%
-      layout(
-        polar = list(radialaxis = list(visible = TRUE, range = c(0, 100), color = "#1a1a1a"), bgcolor = "rgba(0,0,0,0)"),
-        paper_bgcolor = "rgba(0,0,0,0)", font = list(color = "#1a1a1a"), showlegend = FALSE
-      )
   })
   
   ## Download do CV----
