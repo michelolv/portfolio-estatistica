@@ -45,9 +45,17 @@ css_custom <- "
   }
   h1, h2, h3, .accent-text { font-weight: 700; }
 
-  html, body { background-color: #060810; }
-  body { min-height: 100vh; padding-top: 140px; color: #e5e7eb; }
+  html, body { background-color: #060810; height: 100%; }
+  body {
+    min-height: 100vh;
+    padding-top: 140px;
+    color: #e5e7eb;
+    display: flex;
+    flex-direction: column;
+  }
   .tab-content, .tab-pane, .container-fluid { background: transparent !important; }
+  .tab-content { flex: 1 0 auto; }
+  footer.app-footer { flex-shrink: 0; }
 
   /* ===== Fundo fixo em relacao a JANELA (nao ao tamanho da pagina) ===== */
   #app-bg-gradient {
@@ -218,7 +226,7 @@ css_custom <- "
   footer.app-footer { text-align: center; padding: 30px; color: #94a3b8; border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px; }
 
   .cert-logo-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }
-  .cert-logo-box img { max-width: 160px; max-height: 90px; object-fit: contain; }
+  .cert-logo-box img { max-width: 100%; width: 100%; border-radius: 12px; border: 1px solid var(--panel-border); object-fit: cover; }
 
   .search-result-item { padding: 10px 14px; border-radius: 8px; cursor: pointer; border: 1px solid rgba(255,255,255,.1); margin-bottom: 6px; color: #e5e7eb; }
   .search-result-item:hover { background-color: rgba(37,99,235,.15); }
@@ -242,7 +250,7 @@ css_custom <- "
 
   /* Modal de busca: titulo legivel ---- */
   .modal-content { background-color: #0f172a; color: #e5e7eb; }
-  .modal-title { color: #111111 !important; }
+  .modal-title { color: #ffffff !important; }
   .modal-header, .modal-footer { border-color: rgba(255,255,255,.1); }
 
   /* ===== MODO ESCURO ===== */
@@ -304,14 +312,12 @@ js_particles <- "
 })();
 
 (function(){
-  var lastScroll = 0;
+  var nav_scroll_threshold = 80;
   window.addEventListener('scroll', function(){
     var nav = document.querySelector('nav.navbar.navbar-fixed-top');
     if(!nav) return;
-    var current = window.scrollY;
-    if (current > lastScroll && current > 80) { nav.classList.add('nav-hidden'); }
+    if (window.scrollY > nav_scroll_threshold) { nav.classList.add('nav-hidden'); }
     else { nav.classList.remove('nav-hidden'); }
-    lastScroll = current;
   });
 })();
 "
