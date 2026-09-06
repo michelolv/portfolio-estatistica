@@ -45,13 +45,20 @@ css_custom <- "
     font-family: 'Inter', sans-serif;
   }
 
+  /* ===== Fundo global: gradiente + particulas cobrindo 100% da tela, em toda pagina ===== */
+  html {
+    min-height: 100%;
+    background: radial-gradient(ellipse at top right, #16213e 0%, #0b0f1a 55%, #060810 100%);
+  }
   body {
-    padding-top: 200px;
+    min-height: 100vh;
+    padding-top: 140px;
     background: radial-gradient(ellipse at top right, #16213e 0%, #0b0f1a 55%, #060810 100%);
     color: #e5e7eb;
   }
-
-  /* Canvas de particulas: fixo atras de tudo, visivel em todas as paginas ---- */
+  .tab-content, .tab-pane, .container-fluid {
+    background: transparent !important;
+  }
   #particles-canvas {
     position: fixed;
     top: 0; left: 0;
@@ -377,7 +384,7 @@ css_custom <- "
   }
 
   /* ===== Hero (capa) ===== */
-  .hero { text-align: center; padding: 90px 20px 40px 20px; position: relative; z-index: 1; }
+  .hero { text-align: center; padding: 90px 20px 60px 20px; position: relative; z-index: 1; }
   .hero img {
     width: 190px; height: 190px; object-fit: cover;
     border-radius: 50%;
@@ -393,29 +400,7 @@ css_custom <- "
   }
   .hero p.subtitle { color: #dbeafe; font-size: 1.2rem; font-weight: 600; font-family: 'Sora', sans-serif; }
   .hero p:not(.subtitle) { color: #94a3b8; }
-
-  .stat-box {
-    position: relative; z-index: 1;
-    background-color: transparent;
-    border-radius: 14px;
-    padding: 22px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,.25);
-    box-shadow: none;
-    transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
-  }
-  .stat-box:hover {
-    background-color: #1e293b;
-    border-color: rgba(255,255,255,.15);
-    box-shadow: 0 4px 20px rgba(0,0,0,.3);
-  }
-  .stat-box .num {
-    font-size: 2rem; font-weight: 700; color: #ffffff;
-    font-family: 'Sora', sans-serif; transition: color .25s ease;
-  }
-  .stat-box .lab { color: #cbd5e1; font-size: .9rem; transition: color .25s ease; }
-  .stat-box:hover .num,
-  .stat-box:hover .lab { color: #ffffff !important; }
+  .hero-actions { margin-top: 36px; }
 
   .btn-cta {
     background: linear-gradient(90deg, #9ca3af, #4b5563);
@@ -423,15 +408,37 @@ css_custom <- "
     padding: 10px 26px; border-radius: 30px; margin: 6px;
     font-family: 'Sora', sans-serif;
     position: relative; z-index: 1;
+    display: inline-block;
+    text-decoration: none !important;
   }
   .btn-cta:hover { opacity: .88; color: #ffffff; }
+
+  /* Botao secundario (Leia mais / Ver certificado): contorno, sem preenchimento ---- */
+  .btn-outline-cta {
+    background: transparent;
+    border: 1.5px solid #6b7280;
+    color: #374151;
+    font-weight: 600;
+    padding: 8px 22px;
+    border-radius: 30px;
+    margin: 4px 6px 4px 0;
+    font-family: 'Sora', sans-serif;
+    display: inline-block;
+    text-decoration: none !important;
+    transition: background-color .2s ease, color .2s ease;
+  }
+  .btn-outline-cta:hover { background-color: #374151; color: #ffffff; }
 
   footer.app-footer {
     text-align: center; padding: 30px; color: #94a3b8;
     border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px;
   }
 
-  .cert-img { max-width: 100%; border-radius: 10px; border: 1px solid rgba(0,0,0,.08); }
+  .cert-logo-box {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; height: 100%; text-align: center;
+  }
+  .cert-logo-box img { max-width: 160px; max-height: 90px; object-fit: contain; }
 
   .search-result-item {
     padding: 10px 14px; border-radius: 8px; cursor: pointer;
@@ -451,6 +458,7 @@ css_custom <- "
   }
 
   /* ===== MODO ESCURO ===== */
+  html.dark-mode-html,
   body.dark-mode {
     background: radial-gradient(ellipse at top right, #10131c 0%, #06070b 55%, #030405 100%);
     color: #e5e7eb;
@@ -496,12 +504,7 @@ css_custom <- "
     color: #e5e7eb !important;
   }
 
-  body.dark-mode .content-card,
-  body.dark-mode .stat-box { background-color: #171922; color: #e5e7eb; border-color: rgba(255,255,255,.06); }
-  body.dark-mode .stat-box:hover {
-    background-color: #1e293b !important;
-    border-color: rgba(255,255,255,.15) !important;
-  }
+  body.dark-mode .content-card { background-color: #171922; color: #e5e7eb; border-color: rgba(255,255,255,.06); }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
 "
 
@@ -616,17 +619,17 @@ labels <- list(
   pt = list(nav_inicio = "Início", nav_perfil = "Perfil", nav_experiencia = "Experiência",
             nav_projetos = "Projetos", nav_certificados = "Certificados",
             nav_contato = "Contato",
-            btn_ver_projetos = "Ver Projetos", btn_baixar_cv = "Baixar CV", btn_fale_comigo = "Fale comigo",
+            btn_ver_projetos = "Ver Projetos", btn_ver_cv = "Ver Currículo", btn_fale_comigo = "Fale comigo",
             busca_placeholder = "Digite para buscar..."),
   en = list(nav_inicio = "Home", nav_perfil = "Profile", nav_experiencia = "Experience",
             nav_projetos = "Projects", nav_certificados = "Certificates",
             nav_contato = "Contact",
-            btn_ver_projetos = "View Projects", btn_baixar_cv = "Download CV", btn_fale_comigo = "Contact me",
+            btn_ver_projetos = "View Projects", btn_ver_cv = "View Resume", btn_fale_comigo = "Contact me",
             busca_placeholder = "Type to search..."),
   es = list(nav_inicio = "Inicio", nav_perfil = "Perfil", nav_experiencia = "Experiencia",
             nav_projetos = "Proyectos", nav_certificados = "Certificados",
             nav_contato = "Contacto",
-            btn_ver_projetos = "Ver Proyectos", btn_baixar_cv = "Descargar CV", btn_fale_comigo = "Contáctame",
+            btn_ver_projetos = "Ver Proyectos", btn_ver_cv = "Ver Currículum", btn_fale_comigo = "Contáctame",
             busca_placeholder = "Escribe para buscar...")
 )
 
@@ -638,7 +641,7 @@ labels <- list(
 perfil <- list(
   nome        = "Michel Lima",
   cargo       = "Estatístico e Cientista de Dados em Formação",
-  tagline     = "Transformando dados em decisões",
+  tagline     = "EM DESENVOLVIMENTO", # "Transformando dados em decisões" - restaurar no futuro
   bio         = "Bacharelando em Estatística e Ciência de Dados pela Universidade
   Federal de Ouro Preto (UFOP), com <em>background</em> em Ciências Econômicas e 
   experiência aplicada em consultoria estatística, iniciação científica e diagnóstico
@@ -655,7 +658,7 @@ perfil <- list(
   github      = "https://github.com/michelolv",
   lattes      = "http://lattes.cnpq.br/0000000000000000",
   localizacao = "Ouro Preto, MG - Brasil",
-  cv_path     = "www/cv/curriculo.pdf"
+  cv_path     = "cv/curriculo.pdf"   # caminho relativo a /www (abre em nova aba, sem download forcado)
 )
 
 ## Experiências de trabalho----
@@ -671,13 +674,37 @@ experiencias <- list(
       "Automatização de relatórios em R, reduzindo o tempo de entrega.",
       "Aplicação de testes estatísticos e modelos exploratórios."
     ),
-    tecnologias = c("R", "SQL", "Power BI", "Excel"),
-    grafico     = data.frame(
-      tecnologia     = c("R", "SQL", "Power BI", "Excel"),
-      uso_percentual = c(90, 60, 70, 50)
-    )
+    tecnologias   = c("R", "SQL", "Power BI", "Excel"),
+    saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
+  ),
+  list(
+    id          = "exp2",
+    empresa     = "Empresa Fictícia LTDA",
+    cargo       = "Analista de Dados Júnior",
+    periodo     = "Jan/2023 - Fev/2024",
+    local       = "Presencial",
+    descricao   = c(
+      "Construção de pipelines de tratamento e limpeza de dados em R.",
+      "Elaboração de relatórios gerenciais periódicos para diretoria.",
+      "Apoio na modelagem estatística de indicadores de desempenho."
+    ),
+    tecnologias   = c("R", "Excel", "SQL"),
+    saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
+  ),
+  list(
+    id          = "exp3",
+    empresa     = "Instituto de Pesquisa XYZ",
+    cargo       = "Bolsista de Iniciação Científica",
+    periodo     = "Ago/2022 - Dez/2022",
+    local       = "Híbrido",
+    descricao   = c(
+      "Análise exploratória de dados demográficos e socioeconômicos.",
+      "Suporte na produção de relatórios técnicos para publicação.",
+      "Participação em reuniões de acompanhamento de projeto de pesquisa."
+    ),
+    tecnologias   = c("R", "Python", "Excel"),
+    saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
   )
-  # , list(id = "exp2", empresa = "...", ...)
 )
 
 ## Projetos diversos----
@@ -691,29 +718,79 @@ projetos <- list(
       "Metodologia estatística/ML utilizada.",
       "Principais resultados e conclusões."
     ),
-    tecnologias = c("R", "ggplot2", "Shiny"),
-    link_github = "https://github.com/seu-usuario/projeto1",
-    link_demo   = NA,
-    grafico     = data.frame(
-      metrica = c("Acurácia", "Precisão", "Recall", "F1"),
-      valor   = c(88, 82, 79, 80)
-    )
+    tecnologias    = c("R", "ggplot2", "Shiny"),
+    link_github    = "https://github.com/seu-usuario/projeto1",
+    link_demo      = NA,
+    saiba_mais_url = "https://github.com/seu-usuario/projeto1"
+  ),
+  list(
+    id          = "proj2",
+    titulo      = "Dashboard de Indicadores Municipais",
+    subtitulo   = "Painel interativo para acompanhamento de dados públicos",
+    descricao   = c(
+      "Integração de bases públicas (IBGE, DATASUS) em um único painel.",
+      "Visualizações dinâmicas para comparação entre municípios.",
+      "Publicação e hospedagem gratuita via Posit Connect Cloud."
+    ),
+    tecnologias    = c("R", "Shiny", "Plotly"),
+    link_github    = "https://github.com/seu-usuario/projeto2",
+    link_demo      = NA,
+    saiba_mais_url = "https://github.com/seu-usuario/projeto2"
+  ),
+  list(
+    id          = "proj3",
+    titulo      = "Modelo Preditivo Fictício",
+    subtitulo   = "Estudo de caso de classificação estatística",
+    descricao   = c(
+      "Preparação e balanceamento de base de dados de exemplo.",
+      "Comparação entre diferentes modelos estatísticos/ML.",
+      "Avaliação de desempenho com métricas de classificação."
+    ),
+    tecnologias    = c("R", "tidymodels"),
+    link_github    = "https://github.com/seu-usuario/projeto3",
+    link_demo      = NA,
+    saiba_mais_url = "https://github.com/seu-usuario/projeto3"
   )
-  # , list(id = "proj2", titulo = "...", ...)
 )
 
-## Certificados----
+## Certificados (logo via Clearbit API a partir do dominio da instituicao - sem hospedar imagem)----
 certificados <- list(
   list(
     id            = "cert1",
     titulo        = "Nome do Certificado 1",
     instituicao   = "Instituição / Plataforma",
+    dominio       = "coursera.org",
+    site          = "https://www.coursera.org",
     carga_horaria = "40h",
     ano           = "2024",
     descricao     = "Breve descrição do que foi aprendido no curso/certificação.",
+    skills        = c("R", "Estatística"),
     pdf           = "certificados/cert1.pdf"
+  ),
+  list(
+    id            = "cert2",
+    titulo        = "Estatística Aplicada com R",
+    instituicao   = "Plataforma de Ensino Fictícia",
+    dominio       = "alura.com.br",
+    site          = "https://www.alura.com.br",
+    carga_horaria = "60h",
+    ano           = "2023",
+    descricao     = "Curso com foco em testes estatísticos, modelagem e visualização de dados em R.",
+    skills        = c("R", "Testes Estatísticos", "Visualização"),
+    pdf           = "certificados/cert2.pdf"
+  ),
+  list(
+    id            = "cert3",
+    titulo        = "Fundamentos de Ciência de Dados",
+    instituicao   = "Instituição Fictícia de Tecnologia",
+    dominio       = "udemy.com",
+    site          = "https://www.udemy.com",
+    carga_horaria = "80h",
+    ano           = "2023",
+    descricao     = "Formação introdutória cobrindo Python, SQL e fundamentos de Machine Learning.",
+    skills        = c("Python", "SQL", "Machine Learning"),
+    pdf           = "certificados/cert3.pdf"
   )
-  # , list(id = "cert2", titulo = "...", ...)
 )
 
 ## Índice combinado para a busca (id -> categoria/aba de destino)----
@@ -732,128 +809,72 @@ badge_tech <- function(techs) {
   tagList(lapply(techs, function(t) span(class = "tech-badge", t)))
 }
 
-## Gráfico de barras (stack de tecnologias / métricas)----
-grafico_barras <- function(df, titulo = "") {
-  names(df) <- c("categoria", "valor")
-  p <- ggplot(df, aes(x = reorder(categoria, valor), y = valor, fill = valor)) +
-    geom_col(width = 0.6) +
-    coord_flip() +
-    scale_fill_gradient(low = "#93c5fd", high = "#1e3a8a") +
-    theme_minimal(base_size = 13) +
-    theme(
-      legend.position   = "none",
-      plot.background   = element_rect(fill = "transparent", color = NA),
-      panel.background  = element_rect(fill = "transparent", color = NA),
-      text              = element_text(color = "#1a1a1a"),
-      axis.text         = element_text(color = "#1a1a1a"),
-      panel.grid.major  = element_line(color = "rgba(0,0,0,.06)"),
-      panel.grid.minor  = element_blank()
-    ) +
-    labs(x = NULL, y = NULL, title = titulo)
-  
-  ggplotly(p) %>%
-    layout(
-      paper_bgcolor = "rgba(0,0,0,0)",
-      plot_bgcolor  = "rgba(0,0,0,0)",
-      font          = list(color = "#1a1a1a")
-    )
-}
-
-## Conversão de PDFs de certificados em imagem (executa 1x no boot)----
-converter_certificados_png <- function(lista_certificados) {
-  png_dir <- "www/certificados/png"
-  if (!dir.exists(png_dir)) dir.create(png_dir, recursive = TRUE)
-  
-  for (cert in lista_certificados) {
-    pdf_path <- file.path("www", cert$pdf)
-    png_path <- file.path(png_dir, paste0(cert$id, ".png"))
-    if (file.exists(pdf_path) && !file.exists(png_path)) {
-      tryCatch(
-        pdftools::pdf_convert(pdf_path, format = "png", pages = 1, dpi = 150, filenames = png_path),
-        error = function(e) message("Falha ao converter ", cert$id, ": ", e$message)
-      )
-    }
-  }
-}
-converter_certificados_png(certificados)
-
-## Bloco de Experiência (conteudo completo, sem sub-aba)----
+## Bloco de Experiência (conteudo completo + botao Leia mais)----
 bloco_experiencia <- function(exp) {
   div(
     id = exp$id,
     class = "content-card",
-    fluidRow(
-      column(
-        width = 7,
-        h3(exp$cargo, class = "accent-text"),
-        h5(paste0(exp$empresa, " • ", exp$local)),
-        div(class = "periodo-tag", exp$periodo),
-        tags$hr(),
-        tags$ul(lapply(exp$descricao, tags$li)),
-        h5("Tecnologias utilizadas:"),
-        badge_tech(exp$tecnologias)
-      ),
-      column(
-        width = 5,
-        h5("Stack utilizada"),
-        plotlyOutput(outputId = paste0("plot_", exp$id), height = "300px")
-      )
-    )
+    h3(exp$cargo, class = "accent-text"),
+    h5(paste0(exp$empresa, " • ", exp$local)),
+    div(class = "periodo-tag", exp$periodo),
+    tags$hr(),
+    tags$ul(lapply(exp$descricao, tags$li)),
+    h5("Tecnologias utilizadas:"),
+    badge_tech(exp$tecnologias),
+    tags$br(), tags$br(),
+    tags$a(class = "btn-outline-cta", href = exp$saiba_mais_url, target = "_blank", "Leia mais \u2192")
   )
 }
 
-## Bloco de Projeto (conteudo completo, sem sub-aba)----
+## Bloco de Projeto (conteudo completo + botao Leia mais)----
 bloco_projeto <- function(proj) {
   div(
     id = proj$id,
     class = "content-card",
-    fluidRow(
-      column(
-        width = 7,
-        h3(proj$titulo, class = "accent-text"),
-        h5(proj$subtitulo),
-        tags$hr(),
-        tags$ul(lapply(proj$descricao, tags$li)),
-        h5("Tecnologias:"),
-        badge_tech(proj$tecnologias),
-        tags$br(), tags$br(),
-        tags$a(class = "btn btn-cta", href = proj$link_github, target = "_blank",
-               icon("github"), " Repositório"),
-        if (!is.na(proj$link_demo))
-          tags$a(class = "btn btn-cta", href = proj$link_demo, target = "_blank",
-                 icon("up-right-from-square"), " Demo")
-      ),
-      column(
-        width = 5,
-        h5("Resultados / Métricas"),
-        plotlyOutput(outputId = paste0("plot_", proj$id), height = "300px")
-      )
-    )
+    h3(proj$titulo, class = "accent-text"),
+    h5(proj$subtitulo),
+    tags$hr(),
+    tags$ul(lapply(proj$descricao, tags$li)),
+    h5("Tecnologias:"),
+    badge_tech(proj$tecnologias),
+    tags$br(), tags$br(),
+    tags$a(class = "btn btn-cta", href = proj$link_github, target = "_blank",
+           icon("github"), " Repositório"),
+    if (!is.na(proj$link_demo))
+      tags$a(class = "btn btn-cta", href = proj$link_demo, target = "_blank",
+             icon("up-right-from-square"), " Demo"),
+    tags$a(class = "btn-outline-cta", href = proj$saiba_mais_url, target = "_blank", "Leia mais \u2192")
   )
 }
 
-## Bloco de Certificado (conteudo completo, sem sub-aba)----
+## Bloco de Certificado (logo da instituicao + Leia mais + skills, sem pre-visualizacao de PDF)----
 bloco_certificado <- function(cert) {
-  png_path <- file.path("certificados/png", paste0(cert$id, ".png"))
+  logo_url <- paste0("https://logo.clearbit.com/", cert$dominio)
   div(
     id = cert$id,
     class = "content-card",
     fluidRow(
       column(
-        width = 5,
+        width = 7,
         h3(cert$titulo, class = "accent-text"),
         h5(cert$instituicao),
         div(class = "periodo-tag", paste(cert$ano, "•", cert$carga_horaria)),
         tags$hr(),
         p(cert$descricao),
-        downloadButton(paste0("download_", cert$id), "Baixar PDF original", class = "btn-cta")
+        h5("Skills:"),
+        badge_tech(cert$skills),
+        tags$br(),
+        tags$a(class = "btn btn-cta", href = cert$pdf, target = "_blank",
+               icon("file-lines"), " Ver certificado")
       ),
       column(
-        width = 7,
-        if (file.exists(file.path("www", png_path)))
-          tags$img(class = "cert-img", src = png_path)
-        else
-          p("Pré-visualização indisponível. Adicione o PDF em www/", cert$pdf)
+        width = 5,
+        div(
+          class = "cert-logo-box",
+          tags$img(src = logo_url, alt = cert$instituicao,
+                   onerror = "this.style.display='none';"),
+          tags$a(class = "btn-outline-cta", href = cert$site, target = "_blank", "Leia mais \u2192")
+        )
       )
     )
   )
@@ -866,7 +887,7 @@ bloco_certificado <- function(cert) {
 pagina_experiencia_completa <- function() {
   div(
     class = "hub-page",
-    style = "padding: 30px;",
+    style = "padding: 10px 30px 30px 30px;",
     h2("Experiência Profissional", class = "accent-text"),
     p("Um resumo de toda a minha trajetória profissional."),
     tags$hr(),
@@ -877,7 +898,7 @@ pagina_experiencia_completa <- function() {
 pagina_projetos_completa <- function() {
   div(
     class = "hub-page",
-    style = "padding: 30px;",
+    style = "padding: 10px 30px 30px 30px;",
     h2("Meus Projetos", class = "accent-text"),
     p("Uma seleção dos projetos que desenvolvi."),
     tags$hr(),
@@ -888,7 +909,7 @@ pagina_projetos_completa <- function() {
 pagina_certificados_completa <- function() {
   div(
     class = "hub-page",
-    style = "padding: 30px;",
+    style = "padding: 10px 30px 30px 30px;",
     h2("Certificados", class = "accent-text"),
     p("Cursos e certificações concluídos."),
     tags$hr(),
@@ -908,22 +929,20 @@ pagina_inicio <- function() {
       h1(HTML(paste0("Olá, eu sou <span class='accent-text'>", perfil$nome, "</span>"))),
       p(class = "subtitle", perfil$cargo),
       p(perfil$tagline),
-      actionButton("btn_ver_projetos", labels$pt$btn_ver_projetos, class = "btn-cta", icon = icon("diagram-project")),
-      downloadButton("btn_download_cv", labels$pt$btn_baixar_cv, class = "btn-cta"),
-      actionButton("btn_ir_contato", labels$pt$btn_fale_comigo, class = "btn-cta", icon = icon("paper-plane"))
-    ),
-    fluidRow(
-      style = "max-width: 900px; margin: 30px auto; position: relative; z-index: 1;",
-      column(4, div(class = "stat-box", div(class = "num", length(experiencias)), div(class = "lab", "Experiências"))),
-      column(4, div(class = "stat-box", div(class = "num", length(projetos)), div(class = "lab", "Projetos"))),
-      column(4, div(class = "stat-box", div(class = "num", length(certificados)), div(class = "lab", "Certificados")))
+      div(
+        class = "hero-actions",
+        actionButton("btn_ver_projetos", labels$pt$btn_ver_projetos, class = "btn-cta", icon = icon("diagram-project")),
+        tags$a(class = "btn btn-cta", href = perfil$cv_path, target = "_blank",
+               icon("file-lines"), " ", labels$pt$btn_ver_cv),
+        actionButton("btn_ir_contato", labels$pt$btn_fale_comigo, class = "btn-cta", icon = icon("paper-plane"))
+      )
     )
   )
 }
 
 pagina_perfil <- function() {
   fluidRow(
-    style = "padding: 30px;",
+    style = "padding: 10px 30px 30px 30px;",
     column(
       width = 4,
       div(
@@ -940,16 +959,14 @@ pagina_perfil <- function() {
       width = 8,
       div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
       div(class = "content-card", h3("Formação Acadêmica", class = "accent-text"),
-          p("Bacharelado: Estatística e Ciência de Dados, Universidade Federal de Ouro Preto (UFOP), 8º período.")),
-      div(class = "content-card", h3("Idiomas", class = "accent-text"),
-          p("Inglês: Intermediário - Leitura técnica e escrita."))
+          p("Bacharelado: Estatística e Ciência de Dados, Universidade Federal de Ouro Preto (UFOP), 8º período."))
     )
   )
 }
 
 pagina_contato <- function() {
   fluidRow(
-    style = "padding: 30px;",
+    style = "padding: 10px 30px 30px 30px;",
     column(
       width = 6,
       div(
@@ -1112,39 +1129,6 @@ server <- function(input, output, session) {
     session$sendCustomMessage("scrollToItem", input$busca_click$id)
     removeModal()
   })
-  
-  ## Gráficos de Experiências----
-  lapply(experiencias, function(exp) {
-    local({
-      exp_local <- exp
-      output[[paste0("plot_", exp_local$id)]] <- renderPlotly({ grafico_barras(exp_local$grafico, "") })
-    })
-  })
-  
-  ## Gráficos de Projetos----
-  lapply(projetos, function(proj) {
-    local({
-      proj_local <- proj
-      output[[paste0("plot_", proj_local$id)]] <- renderPlotly({ grafico_barras(proj_local$grafico, "") })
-    })
-  })
-  
-  ## Downloads de Certificados----
-  lapply(certificados, function(cert) {
-    local({
-      cert_local <- cert
-      output[[paste0("download_", cert_local$id)]] <- downloadHandler(
-        filename = function() paste0(cert_local$id, ".pdf"),
-        content  = function(file) file.copy(file.path("www", cert_local$pdf), file)
-      )
-    })
-  })
-  
-  ## Download do CV----
-  output$btn_download_cv <- downloadHandler(
-    filename = function() "curriculo.pdf",
-    content  = function(file) file.copy(perfil$cv_path, file)
-  )
   
   ## Navegação via botões da capa----
   observeEvent(input$btn_ver_projetos, {
