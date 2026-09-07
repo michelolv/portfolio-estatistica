@@ -53,20 +53,29 @@ css_custom <- "
     display: flex;
     flex-direction: column;
   }
-  .tab-content, .tab-pane, .container-fluid { background: transparent !important; }
-  .tab-content { flex: 1 0 auto; }
+  body > .container-fluid,
+  .navbar-static-top + .container-fluid,
+  .tab-content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .tab-content .tab-pane { flex: 1 0 auto; }
+  .tab-content, .container-fluid { background: transparent !important; }
   footer.app-footer { flex-shrink: 0; }
 
   /* ===== Fundo fixo em relacao a JANELA (nao ao tamanho da pagina) ===== */
   #app-bg-gradient {
-    position: fixed; inset: 0; z-index: -2;
+    position: fixed !important; top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100vh !important; z-index: -2 !important;
     background: radial-gradient(ellipse at top right, #16213e 0%, #0b0f1a 55%, #060810 100%);
   }
   body.dark-mode #app-bg-gradient {
     background: radial-gradient(ellipse at top right, #10131c 0%, #06070b 55%, #030405 100%);
   }
   #particles-canvas {
-    position: fixed; inset: 0; z-index: -1;
+    position: fixed !important; top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100vh !important; z-index: -1 !important;
     pointer-events: none;
   }
 
@@ -205,7 +214,7 @@ css_custom <- "
   .hero .accent-text { background: linear-gradient(90deg, #60a5fa, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .hero p.subtitle { color: #dbeafe; font-size: 1.2rem; font-weight: 600; }
   .hero p:not(.subtitle) { color: #94a3b8; }
-  .hero-actions { margin-top: 60px; }
+  .hero-actions { margin-top: 110px; }
 
   .btn-cta { background: linear-gradient(90deg, #9ca3af, #4b5563); border: none; color: #ffffff; font-weight: 600; padding: 10px 26px; border-radius: 30px; margin: 6px; position: relative; z-index: 1; display: inline-block; text-decoration: none !important; }
   .btn-cta:hover { opacity: .88; color: #ffffff; }
@@ -252,6 +261,16 @@ css_custom <- "
   .modal-content { background-color: #0f172a; color: #e5e7eb; }
   .modal-title { color: #ffffff !important; }
   .modal-header, .modal-footer { border-color: rgba(255,255,255,.1); }
+  
+  #busca_txt {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid rgba(0,0,0,.15) !important;
+  }
+  #busca_txt::placeholder {
+    color: #6b7280 !important;
+    opacity: 1;
+  }
 
   /* ===== MODO ESCURO ===== */
   body.dark-mode #app-bg-gradient {
@@ -266,6 +285,16 @@ css_custom <- "
 # JavaScript: particulas + esconder navbar ao rolar----
 js_particles <- "
 (function(){
+  (function(){
+    function moveFixedLayersToBody(){
+      var bg = document.getElementById('app-bg-gradient');
+      var canvas = document.getElementById('particles-canvas');
+      if (bg && bg.parentElement !== document.body) document.body.appendChild(bg);
+      if (canvas && canvas.parentElement !== document.body) document.body.appendChild(canvas);
+    }
+    $(document).on('shiny:connected', moveFixedLayersToBody);
+  })();
+
   function initParticles(){
     var canvas = document.getElementById('particles-canvas');
     if(!canvas || canvas.dataset.ready) return;
