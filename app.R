@@ -286,14 +286,24 @@ css_custom <- "
 js_particles <- "
 (function(){
   (function(){
-    function moveFixedLayersToBody(){
-      var bg = document.getElementById('app-bg-gradient');
-      var canvas = document.getElementById('particles-canvas');
-      if (bg && bg.parentElement !== document.body) document.body.appendChild(bg);
-      if (canvas && canvas.parentElement !== document.body) document.body.appendChild(canvas);
-    }
-    $(document).on('shiny:connected', moveFixedLayersToBody);
-  })();
+  function ensureFixedLayers(){
+    if (document.getElementById('particles-canvas')) return;
+
+    var bg = document.createElement('div');
+    bg.id = 'app-bg-gradient';
+    bg.style.cssText = 'position:fixed !important;top:0 !important;left:0 !important;' +
+      'width:100vw !important;height:100vh !important;z-index:-2 !important;pointer-events:none;';
+    document.body.insertBefore(bg, document.body.firstChild);
+
+    var canvas = document.createElement('canvas');
+    canvas.id = 'particles-canvas';
+    canvas.style.cssText = 'position:fixed !important;top:0 !important;left:0 !important;' +
+      'width:100vw !important;height:100vh !important;z-index:-1 !important;pointer-events:none;';
+    document.body.insertBefore(canvas, bg.nextSibling);
+  }
+  ensureFixedLayers();
+  $(document).on('shiny:connected', ensureFixedLayers);
+})();
 
   function initParticles(){
     var canvas = document.getElementById('particles-canvas');
@@ -731,8 +741,6 @@ ui <- navbarPage(
       tags$script(HTML(js_particles)),
       tags$script(HTML(js_scroll_to))
     ),
-    tags$div(id="app-bg-gradient"),
-    tags$canvas(id="particles-canvas")
   ),
   
   tabPanel(tags$span(id="lbl_inicio","Início"), value="inicio", pagina_inicio()),
