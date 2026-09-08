@@ -48,9 +48,20 @@ css_custom <- "
   /* ===== FUNDO GLOBAL (NAO ALTERAR - versao que funciona) ===== */
   body {
     padding-top: 140px;
+    min-height: 100vh;
     background: radial-gradient(ellipse at top right, #16213e 0%, #0b0f1a 55%, #060810 100%);
     color: #e5e7eb;
+    display: flex;
+    flex-direction: column;
   }
+  body > .container-fluid,
+  .tab-content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .tab-content .tab-pane { flex: 1 0 auto; }
+  footer.app-footer { flex-shrink: 0; }
   #particles-canvas {
     position: fixed;
     top: 0; left: 0;
@@ -132,6 +143,27 @@ css_custom <- "
   .bslib-page-dashboard > .navbar + div {
     border-top: none !important;
   }
+  
+    .profile-avatar-card h4 { margin-top: 20px; margin-bottom: 4px; }
+  .profile-avatar-card h6 { margin-bottom: 16px; color: #94a3b8; }
+  .profile-avatar-card p { margin-bottom: 18px; }
+  .profile-social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .profile-social-links a {
+    color: #e5e7eb;
+    font-size: 1.2rem;
+    transition: color .2s ease;
+  }
+  .profile-social-links a:hover { color: var(--nav-accent); }
+  .profile-social-links a::after { content: none !important; }
+  
+  
 
   /* ===== Cor, tamanho e espacamento das abas ===== */
   .navbar-nav {
@@ -149,7 +181,7 @@ css_custom <- "
     outline: none !important;
   }
 
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link {
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link:not(:hover) {
     color: #ffffff !important;
     text-shadow: none;
   }
@@ -225,7 +257,7 @@ css_custom <- "
   nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
     background: #1e293b !important;
   }
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .btn-icon-nav:not(:hover) {
     color: #ffffff !important;
     border-color: rgba(255,255,255,.2) !important;
   }
@@ -258,7 +290,7 @@ css_custom <- "
   nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
     background: #1e293b !important;
   }
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
+  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light:not(:hover) {
     color: #ffffff !important;
     border-color: rgba(255,255,255,.2) !important;
   }
@@ -351,8 +383,8 @@ css_custom <- "
     background-color: var(--panel-bg);
     color: #e5e7eb;
     border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 22px;
+    padding: 20px;
+    margin-bottom: 18px;
     border: 1px solid var(--panel-border);
     box-shadow: 0 4px 18px rgba(0,0,0,.25);
     transition: background-color .25s ease, border-color .25s ease;
@@ -369,6 +401,18 @@ css_custom <- "
     border-radius: 20px;
     margin: 3px;
     font-size: .8rem;
+  }
+  
+  .skill-label {
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--nav-accent);
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    border-top: 1px solid var(--panel-border);
+    padding-top: 14px;
   }
 
   .periodo-tag {
@@ -428,7 +472,7 @@ css_custom <- "
 
   /* Coluna direita padronizada: imagem/grafico + botoes empilhados, mesmo tamanho ---- */
   .side-media { text-align: center; }
-  .side-media img { max-width: 100%; border-radius: 12px; border: 1px solid var(--panel-border); margin-bottom: 14px; }
+  .side-media img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; border: 1px solid var(--panel-border); margin-bottom: 14px; } 
   .side-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
   .side-actions .btn-cta, .side-actions .btn-outline-cta { width: 100%; text-align: center; margin: 0; }
 
@@ -440,7 +484,7 @@ css_custom <- "
   }
 
   .cert-logo-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }
-  .cert-logo-box img { max-width: 100%; width: 100%; border-radius: 12px; border: 1px solid var(--panel-border); object-fit: cover; }
+  .cert-logo-box img { width: 100%; height: 200px; border-radius: 12px; border: 1px solid var(--panel-border); object-fit: cover; }
 
   .search-result-item {
     padding: 10px 14px; border-radius: 8px; cursor: pointer;
@@ -533,6 +577,25 @@ css_custom <- "
 
   body.dark-mode .content-card { background-color: rgba(20,22,30,.9); color: #e5e7eb; border-color: rgba(255,255,255,.06); }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
+  
+  /* ===== Botão de voltar ao topo ao final de cada página ===== */
+  .back-to-top-wrap { text-align: center; margin: 30px 0 10px 0; }
+  .btn-back-top {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.4);
+    color: #e5e7eb;
+    border-radius: 50%;
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .btn-back-top:hover {
+    background-color: #1e293b;
+    border-color: var(--nav-accent);
+    color: var(--nav-accent);
+  }
 "
 
 # JavaScript da animacao de particulas (NAO ALTERAR - versao que funciona)----
@@ -704,60 +767,110 @@ perfil <- list(
 ## Experiências de trabalho (imagem: img/Experiência_<n>.png)----
 experiencias <- list(
   list(
-    id          = "exp1",
-    empresa     = "Nome da Empresa 1",
-    cargo       = "Estagiário(a) de Dados",
-    periodo     = "Mar/2024 - Atual",
-    local       = "Remoto",
-    descricao   = c(
+    id = "exp1", empresa = "Nome da Empresa 1", cargo = "Estagiário(a) de Dados",
+    periodo = "Mar/2024 - Atual", local = "Remoto",
+    descricao = c(
       "Desenvolvimento de dashboards em R Shiny / Power BI para acompanhamento de KPIs.",
       "Automatização de relatórios em R, reduzindo o tempo de entrega.",
       "Aplicação de testes estatísticos e modelos exploratórios."
     ),
-    tecnologias    = c("R", "SQL", "Power BI", "Excel"),
-    imagem         = "img/Experiência_1.png",
+    tecnologias = c("R", "SQL", "Power BI", "Excel"),
+    imagem = "img/Experiência_1.png",
+    saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
+  ),
+  list(
+    id = "exp2", empresa = "Empresa Fictícia LTDA", cargo = "Analista de Dados Júnior",
+    periodo = "Jan/2023 - Fev/2024", local = "Presencial",
+    descricao = c(
+      "Construção de pipelines de tratamento e limpeza de dados em R.",
+      "Elaboração de relatórios gerenciais periódicos para diretoria.",
+      "Apoio na modelagem estatística de indicadores de desempenho."
+    ),
+    tecnologias = c("R", "Excel", "SQL"),
+    imagem = "img/Experiência_2.png",
+    saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
+  ),
+  list(
+    id = "exp3", empresa = "Instituto de Pesquisa XYZ", cargo = "Bolsista de Iniciação Científica",
+    periodo = "Ago/2022 - Dez/2022", local = "Híbrido",
+    descricao = c(
+      "Análise exploratória de dados demográficos e socioeconômicos.",
+      "Suporte na produção de relatórios técnicos para publicação.",
+      "Participação em reuniões de acompanhamento de projeto de pesquisa."
+    ),
+    tecnologias = c("R", "Python", "Excel"),
+    imagem = "img/Experiência_3.png",
     saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
   )
-  # , list(id = "exp2", empresa = "...", imagem = "img/Experiência_2.png", ...)
 )
+
 
 ## Projetos diversos (tipo_grafico: barra / likert / rede)----
 projetos <- list(
   list(
-    id          = "proj1",
-    titulo      = "Nome do Projeto 1",
-    subtitulo   = "Curta descrição / objetivo do projeto",
-    descricao   = c(
+    id = "proj1", titulo = "Nome do Projeto 1", subtitulo = "Curta descrição / objetivo do projeto",
+    descricao = c(
       "Contexto do problema e motivação.",
       "Metodologia estatística/ML utilizada.",
       "Principais resultados e conclusões."
     ),
-    tecnologias    = c("R", "ggplot2", "Shiny"),
-    link_github    = "https://github.com/seu-usuario/projeto1",
-    link_demo      = NA,
-    tipo_grafico   = "barra",
-    saiba_mais_url = "https://github.com/seu-usuario/projeto1"
+    tecnologias = c("R", "ggplot2", "Shiny"),
+    link_github = "https://github.com/seu-usuario/projeto1", link_demo = NA,
+    tipo_grafico = "barra", saiba_mais_url = "https://github.com/seu-usuario/projeto1"
+  ),
+  list(
+    id = "proj2", titulo = "Dashboard de Indicadores Municipais", subtitulo = "Painel interativo para acompanhamento de dados públicos",
+    descricao = c(
+      "Integração de bases públicas (IBGE, DATASUS) em um único painel.",
+      "Visualizações dinâmicas para comparação entre municípios.",
+      "Publicação e hospedagem gratuita via Posit Connect Cloud."
+    ),
+    tecnologias = c("R", "Shiny", "Plotly"),
+    link_github = "https://github.com/seu-usuario/projeto2", link_demo = NA,
+    tipo_grafico = "likert", saiba_mais_url = "https://github.com/seu-usuario/projeto2"
+  ),
+  list(
+    id = "proj3", titulo = "Modelo Preditivo Fictício", subtitulo = "Estudo de caso de classificação estatística",
+    descricao = c(
+      "Preparação e balanceamento de base de dados de exemplo.",
+      "Comparação entre diferentes modelos estatísticos/ML.",
+      "Avaliação de desempenho com métricas de classificação."
+    ),
+    tecnologias = c("R", "tidymodels"),
+    link_github = "https://github.com/seu-usuario/projeto3", link_demo = NA,
+    tipo_grafico = "rede", saiba_mais_url = "https://github.com/seu-usuario/projeto3"
   )
-  # , list(id = "proj2", titulo = "...", tipo_grafico = "likert", ...)
-  # , list(id = "proj3", titulo = "...", tipo_grafico = "rede", ...)
 )
+
 
 ## Certificados (logo: img/Empresa_<n>.png | certificado: img/Certificado_<n>.png)----
 certificados <- list(
   list(
-    id             = "cert1",
-    titulo         = "Nome do Certificado 1",
-    instituicao    = "Instituição / Plataforma",
-    carga_horaria  = "40h",
-    ano            = "2024",
-    descricao      = "Breve descrição do que foi aprendido no curso/certificação.",
-    skills         = c("R", "Estatística"),
-    logo_img       = "img/Empresa_1.png",
-    certificado_img = "img/Certificado_1.png",
+    id = "cert1", titulo = "Nome do Certificado 1", instituicao = "Instituição / Plataforma",
+    carga_horaria = "40h", ano = "2024",
+    descricao = "Breve descrição do que foi aprendido no curso/certificação.",
+    skills = c("R", "Estatística"),
+    logo_img = "img/Empresa_1.png", certificado_img = "img/Certificado_1.png",
     saiba_mais_url = "https://www.coursera.org"
+  ),
+  list(
+    id = "cert2", titulo = "Estatística Aplicada com R", instituicao = "Plataforma de Ensino Fictícia",
+    carga_horaria = "60h", ano = "2023",
+    descricao = "Curso com foco em testes estatísticos, modelagem e visualização de dados em R.",
+    skills = c("R", "Testes Estatísticos", "Visualização"),
+    logo_img = "img/Empresa_2.png", certificado_img = "img/Certificado_2.png",
+    saiba_mais_url = "https://www.alura.com.br"
+  ),
+  list(
+    id = "cert3", titulo = "Fundamentos de Ciência de Dados", instituicao = "Instituição Fictícia de Tecnologia",
+    carga_horaria = "80h", ano = "2023",
+    descricao = "Formação introdutória cobrindo Python, SQL e fundamentos de Machine Learning.",
+    skills = c("Python", "SQL", "Machine Learning"),
+    logo_img = "img/Empresa_3.png", certificado_img = "img/Certificado_3.png",
+    saiba_mais_url = "https://www.udemy.com"
   )
-  # , list(id = "cert2", titulo = "...", logo_img = "img/Empresa_2.png", ...)
 )
+
 
 ## Índice combinado para a busca (id -> categoria/aba de destino)----
 indice_busca <- c(
@@ -924,32 +1037,56 @@ bloco_certificado <- function(cert) {
   )
 }
 
+
+## Botao "voltar ao topo", inserido ao final de cada pagina----
+botao_voltar_topo <- function() {
+  div(class = "back-to-top-wrap",
+      tags$button(
+        class = "btn-back-top", type = "button",
+        onclick = "window.scrollTo({top:0, behavior:'smooth'});",
+        title = "Voltar ao topo",
+        icon("arrow-up")
+      )
+  )
+}
+
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 # Páginas de Categoria (tudo visivel, sem cliques extras)----
 
 pagina_experiencia_completa <- function() {
-  div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
-      h2("Experiência Profissional", class = "accent-text"),
-      p("Um resumo de toda a minha trajetória profissional."),
-      tags$hr(),
-      lapply(experiencias, bloco_experiencia))
+  tagList(
+    div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
+        h2("Experiência Profissional", class = "accent-text"),
+        p("Um resumo de toda a minha trajetória profissional."),
+        tags$hr(),
+        lapply(experiencias, bloco_experiencia)),
+    botao_voltar_topo()
+  )
 }
+
 
 pagina_projetos_completa <- function() {
-  div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
-      h2("Meus Projetos", class = "accent-text"),
-      p("Uma seleção dos projetos que desenvolvi."),
-      tags$hr(),
-      lapply(projetos, bloco_projeto))
+  tagList(
+    div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
+        h2("Meus Projetos", class = "accent-text"),
+        p("Uma seleção dos projetos que desenvolvi."),
+        tags$hr(),
+        lapply(projetos, bloco_projeto)),
+    botao_voltar_topo()
+  )
 }
 
+
 pagina_certificados_completa <- function() {
-  div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
-      h2("Certificados", class = "accent-text"),
-      p("Cursos e certificações concluídos."),
-      tags$hr(),
-      lapply(certificados, bloco_certificado))
+  tagList(
+    div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
+        h2("Certificados", class = "accent-text"),
+        p("Cursos e certificações concluídos."),
+        tags$hr(),
+        lapply(certificados, bloco_certificado)),
+    botao_voltar_topo()
+  )
 }
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -974,31 +1111,37 @@ pagina_inicio <- function() {
 }
 
 pagina_perfil <- function() {
-  fluidRow(
-    style = "padding: 10px 30px 30px 30px;",
-    column(
-      width = 4,
-      div(
-        class = "content-card", style = "text-align:center;",
-        tags$img(src = perfil$foto, style = "width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #60a5fa;"),
-        h4(perfil$nome), h6(perfil$cargo),
-        p(icon("location-dot"), perfil$localizacao),
-        tags$a(icon("linkedin"), href = perfil$linkedin, target = "_blank", style = "margin:6px;color:#e5e7eb;"),
-        tags$a(icon("github"), href = perfil$github, target = "_blank", style = "margin:6px;color:#e5e7eb;"),
-        tags$a(icon("envelope"), href = paste0("mailto:", perfil$email), style = "margin:6px;color:#e5e7eb;")
+  tagList(
+    fluidRow(
+      style = "padding: 10px 30px 30px 30px;",
+      column(
+        width = 4,
+        div(
+          class = "content-card profile-avatar-card", style = "text-align:center;",
+          tags$img(src = perfil$foto, style = "width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #60a5fa;"),
+          h4(perfil$nome), h6(perfil$cargo),
+          p(icon("location-dot"), perfil$localizacao),
+          div(class = "profile-social-links",
+              tags$a(icon("linkedin"), href = perfil$linkedin, target = "_blank", rel = "noopener noreferrer", title = "LinkedIn"),
+              tags$a(icon("github"), href = perfil$github, target = "_blank", rel = "noopener noreferrer", title = "GitHub"),
+              tags$a(icon("envelope"), href = paste0("mailto:", perfil$email), title = "E-mail")
+          )
+        )
+      ),
+      column(
+        width = 8,
+        div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
+        div(class = "content-card", h3("Formação Acadêmica", class = "accent-text"),
+            p("Bacharelado: Estatística e Ciência de Dados, Universidade Federal de Ouro Preto (UFOP), 8º período."))
       )
     ),
-    column(
-      width = 8,
-      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
-      div(class = "content-card", h3("Formação Acadêmica", class = "accent-text"),
-          p("Bacharelado: Estatística e Ciência de Dados, Universidade Federal de Ouro Preto (UFOP), 8º período."))
-    )
+    botao_voltar_topo()
   )
 }
 
 pagina_contato <- function() {
-  fluidRow(
+  tagList(
+    fluidRow(
     style = "padding: 10px 30px 30px 30px;",
     column(
       width = 6,
@@ -1024,6 +1167,8 @@ pagina_contato <- function() {
         actionButton("btn_enviar_contato", "Enviar mensagem", class = "btn-cta", icon = icon("paper-plane"))
       )
     )
+    ),
+    botao_voltar_topo()
   )
 }
 
