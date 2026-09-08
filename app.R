@@ -27,8 +27,8 @@ tema_app <- bs_theme(
 
 # CSS customizado----
 css_custom <- "
-  :root { --nav-accent: #2563eb; --underline-color: #9ca3af; --panel-bg: rgba(15,23,42,.82); --panel-border: rgba(255,255,255,.10); }
-  body.dark-mode { --nav-accent: #60a5fa; --underline-color: #9ca3af; }
+  :root { --nav-accent: #2563eb; --underline-color: #2563eb; --panel-bg: rgba(15,23,42,.82); --panel-border: rgba(255,255,255,.10); }
+  body.dark-mode { --nav-accent: #60a5fa; --underline-color: #60a5fa; }
 
   /* ===== Tipografia ===== */
   h1, h2, h3, .hero h1, .accent-text {
@@ -62,6 +62,7 @@ css_custom <- "
   }
   .tab-content .tab-pane { flex: 1 0 auto; }
   footer.app-footer { flex-shrink: 0; }
+
   #particles-canvas {
     position: fixed;
     top: 0; left: 0;
@@ -88,7 +89,6 @@ css_custom <- "
     z-index: 1030;
     transition: background-color .25s ease, box-shadow .25s ease, border-color .25s ease, transform .3s ease;
   }
-  /* Painel some ao rolar, so aparece perto do topo ---- */
   nav.navbar.navbar-fixed-top.nav-hidden {
     transform: translateX(-50%) translateY(-140px) !important;
   }
@@ -143,27 +143,6 @@ css_custom <- "
   .bslib-page-dashboard > .navbar + div {
     border-top: none !important;
   }
-  
-    .profile-avatar-card h4 { margin-top: 20px; margin-bottom: 4px; }
-  .profile-avatar-card h6 { margin-bottom: 16px; color: #94a3b8; }
-  .profile-avatar-card p { margin-bottom: 18px; }
-  .profile-social-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-top: 12px;
-  }
-  .profile-social-links a {
-    color: #e5e7eb;
-    font-size: 1.2rem;
-    transition: color .2s ease;
-  }
-  .profile-social-links a:hover { color: var(--nav-accent); }
-  .profile-social-links a::after { content: none !important; }
-  
-  
 
   /* ===== Cor, tamanho e espacamento das abas ===== */
   .navbar-nav {
@@ -172,7 +151,7 @@ css_custom <- "
   .navbar .nav-link {
     color: #ffffff !important;
     font-weight: 600;
-    font-size: 1.12rem;
+    font-size: 1.3rem;
     letter-spacing: .02em;
     text-shadow: 0 1px 5px rgba(0,0,0,.55);
     transition: color .2s ease;
@@ -196,7 +175,7 @@ css_custom <- "
   .navbar .nav-link::after {
     content: '';
     position: absolute;
-    left: 50%; bottom: -2px;
+    left: 50%; bottom: 4px;
     width: 0%; height: 2px;
     background: var(--underline-color);
     transition: width .25s ease, left .25s ease;
@@ -402,7 +381,7 @@ css_custom <- "
     margin: 3px;
     font-size: .8rem;
   }
-  
+
   .skill-label {
     margin-top: 18px;
     margin-bottom: 8px;
@@ -455,6 +434,14 @@ css_custom <- "
   }
   .btn-cta:hover { opacity: .88; color: #ffffff; }
 
+  /* Modificador de tamanho reduzido (Repositorio, Ver certificado, Enviar mensagem) ---- */
+  .btn-cta-sm {
+    padding: 6px 18px !important;
+    font-size: .85rem !important;
+    width: auto !important;
+    margin: 0 auto !important;
+  }
+
   /* Botao secundario (Leia mais): contorno, mesmo tamanho medio ---- */
   .btn-outline-cta {
     background: transparent;
@@ -470,11 +457,20 @@ css_custom <- "
   }
   .btn-outline-cta:hover { background-color: #94a3b8; color: #0b0f1a; }
 
-  /* Coluna direita padronizada: imagem/grafico + botoes empilhados, mesmo tamanho ---- */
+  /* Coluna direita padronizada: imagem/grafico + botoes empilhados ---- */
   .side-media { text-align: center; }
-  .side-media img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; border: 1px solid var(--panel-border); margin-bottom: 14px; } 
-  .side-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-  .side-actions .btn-cta, .side-actions .btn-outline-cta { width: 100%; text-align: center; margin: 0; }
+  .side-media img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--panel-border);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .side-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 10px; }
+  .side-actions .btn-cta:not(.btn-cta-sm), .side-actions .btn-outline-cta:not(.btn-cta-sm) { width: 100%; text-align: center; margin: 0; }
 
   .left-actions { margin-top: 16px; }
 
@@ -484,7 +480,15 @@ css_custom <- "
   }
 
   .cert-logo-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }
-  .cert-logo-box img { width: 100%; height: 200px; border-radius: 12px; border: 1px solid var(--panel-border); object-fit: cover; }
+  .cert-logo-box img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    border: 1px solid var(--panel-border);
+    object-fit: cover;
+    display: block;
+  }
 
   .search-result-item {
     padding: 10px 14px; border-radius: 8px; cursor: pointer;
@@ -503,6 +507,45 @@ css_custom <- "
     -webkit-text-fill-color: transparent;
   }
 
+  /* ===== Botao voltar ao topo ===== */
+  .back-to-top-wrap { text-align: center; margin: 30px 0 10px 0; }
+  .btn-back-top {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.4);
+    color: #e5e7eb;
+    border-radius: 50%;
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .btn-back-top:hover {
+    background-color: #1e293b;
+    border-color: var(--nav-accent);
+    color: var(--nav-accent);
+  }
+
+  /* ===== Perfil: avatar e links sociais ===== */
+  .profile-avatar-card h4 { margin-top: 20px; margin-bottom: 4px; }
+  .profile-avatar-card h6 { margin-bottom: 16px; color: #94a3b8; }
+  .profile-avatar-card p { margin-bottom: 18px; }
+  .profile-social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .profile-social-links a {
+    color: #e5e7eb;
+    font-size: 1.2rem;
+    transition: color .2s ease;
+  }
+  .profile-social-links a:hover { color: var(--nav-accent); }
+  .profile-social-links a::after { content: none !important; }
+
   /* ===== Formulario de contato modernizado ===== */
   .modern-form .form-group { margin-bottom: 22px; }
   .modern-form label { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; margin-bottom: 6px; }
@@ -513,7 +556,7 @@ css_custom <- "
   }
   .modern-form .form-control:focus { border-bottom-color: #60a5fa !important; }
   .modern-form .form-control::placeholder { color: #64748b; }
-  .modern-form .btn-cta { width: 100%; padding: 12px; font-size: 1rem; }
+  .modern-form .btn-cta:not(.btn-cta-sm) { width: 100%; padding: 12px; font-size: 1rem; }
 
   /* Modal de busca ---- */
   .modal-content { background-color: #0f172a; color: #e5e7eb; border: 1px solid rgba(255,255,255,.1); }
@@ -577,25 +620,6 @@ css_custom <- "
 
   body.dark-mode .content-card { background-color: rgba(20,22,30,.9); color: #e5e7eb; border-color: rgba(255,255,255,.06); }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
-  
-  /* ===== Botão de voltar ao topo ao final de cada página ===== */
-  .back-to-top-wrap { text-align: center; margin: 30px 0 10px 0; }
-  .btn-back-top {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,.4);
-    color: #e5e7eb;
-    border-radius: 50%;
-    width: 44px; height: 44px;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
-  }
-  .btn-back-top:hover {
-    background-color: #1e293b;
-    border-color: var(--nav-accent);
-    color: var(--nav-accent);
-  }
 "
 
 # JavaScript da animacao de particulas (NAO ALTERAR - versao que funciona)----
@@ -804,7 +828,6 @@ experiencias <- list(
   )
 )
 
-
 ## Projetos diversos (tipo_grafico: barra / likert / rede)----
 projetos <- list(
   list(
@@ -842,7 +865,6 @@ projetos <- list(
   )
 )
 
-
 ## Certificados (logo: img/Empresa_<n>.png | certificado: img/Certificado_<n>.png)----
 certificados <- list(
   list(
@@ -870,7 +892,6 @@ certificados <- list(
     saiba_mais_url = "https://www.udemy.com"
   )
 )
-
 
 ## Índice combinado para a busca (id -> categoria/aba de destino)----
 indice_busca <- c(
@@ -968,7 +989,7 @@ bloco_experiencia <- function(exp) {
         div(class = "periodo-tag", exp$periodo),
         tags$hr(),
         tags$ul(lapply(exp$descricao, tags$li)),
-        h5("Tecnologias utilizadas:"),
+        h5(class = "skill-label", "Tecnologias utilizadas:"),
         badge_tech(exp$tecnologias),
         div(class = "left-actions",
             tags$a(class = "btn-outline-cta", href = exp$saiba_mais_url, target = "_blank", "Leia mais \u2192"))
@@ -993,18 +1014,18 @@ bloco_projeto <- function(proj) {
         h5(proj$subtitulo),
         tags$hr(),
         tags$ul(lapply(proj$descricao, tags$li)),
-        h5("Tecnologias:"),
+        h5(class = "skill-label", "Tecnologias:"),
         badge_tech(proj$tecnologias),
         div(class = "left-actions",
             tags$a(class = "btn-outline-cta", href = proj$saiba_mais_url, target = "_blank", "Leia mais \u2192"))
       ),
       column(
         width = 5,
-        plotlyOutput(grafico_id, height = "260px"),
+        plotlyOutput(grafico_id, height = "200px"),
         div(class = "side-actions",
-            tags$a(class = "btn-cta", href = proj$link_github, target = "_blank", icon("github"), " Repositório"),
+            tags$a(class = "btn-cta btn-cta-sm", href = proj$link_github, target = "_blank", icon("github"), " Repositório"),
             if (!is.na(proj$link_demo))
-              tags$a(class = "btn-cta", href = proj$link_demo, target = "_blank", icon("up-right-from-square"), " Demo")
+              tags$a(class = "btn-cta btn-cta-sm", href = proj$link_demo, target = "_blank", icon("up-right-from-square"), " Demo")
         )
       )
     )
@@ -1023,7 +1044,7 @@ bloco_certificado <- function(cert) {
         div(class = "periodo-tag", paste(cert$ano, "•", cert$carga_horaria)),
         tags$hr(),
         p(cert$descricao),
-        h5("Skills:"), badge_tech(cert$skills),
+        h5(class = "skill-label", "Skills:"), badge_tech(cert$skills),
         div(class = "left-actions",
             tags$a(class = "btn-outline-cta", href = cert$saiba_mais_url, target = "_blank", "Leia mais \u2192"))
       ),
@@ -1031,14 +1052,15 @@ bloco_certificado <- function(cert) {
         width = 5,
         div(class = "cert-logo-box", tag_img_segura(cert$logo_img, cert$instituicao)),
         div(class = "side-actions",
-            tags$a(class = "btn-cta", href = cert$certificado_img, target = "_blank", icon("file-lines"), " Ver certificado"))
+            tags$a(class = "btn-cta btn-cta-sm", href = cert$certificado_img, target = "_blank", icon("file-lines"), " Ver certificado"))
       )
     )
   )
 }
 
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-## Botao "voltar ao topo", inserido ao final de cada pagina----
+## Botao "voltar ao topo", inserido ao final das paginas de listagem----
 botao_voltar_topo <- function() {
   div(class = "back-to-top-wrap",
       tags$button(
@@ -1049,8 +1071,6 @@ botao_voltar_topo <- function() {
       )
   )
 }
-
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 # Páginas de Categoria (tudo visivel, sem cliques extras)----
 
@@ -1065,7 +1085,6 @@ pagina_experiencia_completa <- function() {
   )
 }
 
-
 pagina_projetos_completa <- function() {
   tagList(
     div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
@@ -1076,7 +1095,6 @@ pagina_projetos_completa <- function() {
     botao_voltar_topo()
   )
 }
-
 
 pagina_certificados_completa <- function() {
   tagList(
@@ -1111,37 +1129,33 @@ pagina_inicio <- function() {
 }
 
 pagina_perfil <- function() {
-  tagList(
-    fluidRow(
-      style = "padding: 10px 30px 30px 30px;",
-      column(
-        width = 4,
-        div(
-          class = "content-card profile-avatar-card", style = "text-align:center;",
-          tags$img(src = perfil$foto, style = "width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #60a5fa;"),
-          h4(perfil$nome), h6(perfil$cargo),
-          p(icon("location-dot"), perfil$localizacao),
-          div(class = "profile-social-links",
-              tags$a(icon("linkedin"), href = perfil$linkedin, target = "_blank", rel = "noopener noreferrer", title = "LinkedIn"),
-              tags$a(icon("github"), href = perfil$github, target = "_blank", rel = "noopener noreferrer", title = "GitHub"),
-              tags$a(icon("envelope"), href = paste0("mailto:", perfil$email), title = "E-mail")
-          )
+  fluidRow(
+    style = "padding: 10px 30px 30px 30px;",
+    column(
+      width = 4,
+      div(
+        class = "content-card profile-avatar-card", style = "text-align:center;",
+        tags$img(src = perfil$foto, style = "width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #60a5fa;"),
+        h4(perfil$nome), h6(perfil$cargo),
+        p(icon("location-dot"), perfil$localizacao),
+        div(class = "profile-social-links",
+            tags$a(icon("linkedin"), href = perfil$linkedin, target = "_blank", rel = "noopener noreferrer", title = "LinkedIn"),
+            tags$a(icon("github"), href = perfil$github, target = "_blank", rel = "noopener noreferrer", title = "GitHub"),
+            tags$a(icon("envelope"), href = paste0("mailto:", perfil$email), title = "E-mail")
         )
-      ),
-      column(
-        width = 8,
-        div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
-        div(class = "content-card", h3("Formação Acadêmica", class = "accent-text"),
-            p("Bacharelado: Estatística e Ciência de Dados, Universidade Federal de Ouro Preto (UFOP), 8º período."))
       )
     ),
-    botao_voltar_topo()
+    column(
+      width = 8,
+      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
+      div(class = "content-card", h3("Formação Acadêmica", class = "accent-text"),
+          p("Bacharelado: Estatística e Ciência de Dados, Universidade Federal de Ouro Preto (UFOP), 8º período."))
+    )
   )
 }
 
 pagina_contato <- function() {
-  tagList(
-    fluidRow(
+  fluidRow(
     style = "padding: 10px 30px 30px 30px;",
     column(
       width = 6,
@@ -1164,11 +1178,9 @@ pagina_contato <- function() {
           column(6, div(class = "form-group", tags$label("E-mail"), textInput("contato_email", NULL, placeholder = "seu@email.com")))
         ),
         div(class = "form-group", tags$label("Mensagem"), textAreaInput("contato_msg", NULL, rows = 4, placeholder = "Escreva sua mensagem...")),
-        actionButton("btn_enviar_contato", "Enviar mensagem", class = "btn-cta", icon = icon("paper-plane"))
+        actionButton("btn_enviar_contato", "Enviar mensagem", class = "btn-cta btn-cta-sm", icon = icon("paper-plane"))
       )
     )
-    ),
-    botao_voltar_topo()
   )
 }
 
@@ -1246,12 +1258,15 @@ ui <- navbarPage(
 # Server----
 server <- function(input, output, session) {
   
-  ## Deep-linking: sincroniza aba ativa com a URL (?aba=id)----
+  ## Deep-linking: sincroniza aba ativa com a URL (?aba=id) - executa so 1x, evita loop ao trocar de aba rapido----
+  url_sync_feito <- reactiveVal(FALSE)
   observe({
+    if (isolate(url_sync_feito())) return()
     query <- parseQueryString(session$clientData$url_search)
     if (!is.null(query$aba)) {
       updateNavbarPage(session, "navbar_principal", selected = query$aba)
     }
+    url_sync_feito(TRUE)
   })
   
   observeEvent(input$navbar_principal, {
