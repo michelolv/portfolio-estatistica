@@ -20,9 +20,9 @@ tema_app <- bs_theme(
   success      = "#16a34a",
   warning      = "#d97706",
   danger       = "#dc2626",
-  base_font    = font_google("Inter"),
-  heading_font = font_google("Sora"),
-  code_font    = font_google("JetBrains Mono")
+  base_font    = font_google("Roboto"),
+  heading_font = font_google("Roboto"),
+  code_font    = font_google("Roboto")
 )
 
 # CSS customizado----
@@ -30,20 +30,15 @@ css_custom <- "
   :root { --nav-accent: #2563eb; --underline-color: #2563eb; --panel-bg: rgba(15,23,42,.82); --panel-border: rgba(255,255,255,.10); }
   body.dark-mode { --nav-accent: #60a5fa; --underline-color: #60a5fa; }
 
-  /* ===== Tipografia ===== */
-  h1, h2, h3, .hero h1, .accent-text {
-    font-family: 'Sora', 'Inter', sans-serif;
-    font-weight: 700;
+  /* ===== Tipografia: Roboto em todo o aplicativo ===== */
+  h1, h2, h3, .hero h1, .accent-text,
+  .navbar .nav-link, .navbar-brand,
+  .dropdown-item, .stat-box .lab, .periodo-tag, .tech-badge,
+  body, p, li, .content-card, input, textarea, select, .btn,
+  .hero p.subtitle, .btn-cta, .btn-outline-cta {
+    font-family: 'Roboto', sans-serif;
   }
-  .navbar .nav-link, .navbar-brand {
-    font-family: 'Space Grotesk', 'Sora', sans-serif !important;
-  }
-  .dropdown-item, .stat-box .lab, .periodo-tag, .tech-badge {
-    font-family: 'Sora', 'Inter', sans-serif !important;
-  }
-  body, p, li, .content-card, input, textarea, select, .btn {
-    font-family: 'Inter', sans-serif;
-  }
+  h1, h2, h3, .accent-text { font-weight: 700; }
 
   /* ===== FUNDO GLOBAL (NAO ALTERAR - versao que funciona) ===== */
   body {
@@ -129,10 +124,11 @@ css_custom <- "
     order: 3 !important;
     border-color: rgba(0,0,0,.15);
   }
+  /* Painel equilibrado: mesma margem do lado esquerdo e do lado direito ---- */
   .navbar-collapse {
     order: 1;
     position: absolute;
-    left: 8%;
+    left: 4%;
   }
   @media (max-width: 991.98px) {
     .navbar-collapse { position: static; transform: none; }
@@ -172,10 +168,11 @@ css_custom <- "
   .navbar .nav-link {
     position: relative;
   }
+  /* Barra de hover subida, mais afastada da borda inferior do painel ---- */
   .navbar .nav-link::after {
     content: '';
     position: absolute;
-    left: 50%; bottom: 4px;
+    left: 50%; bottom: 10px;
     width: 0%; height: 2px;
     background: var(--underline-color);
     transition: width .25s ease, left .25s ease;
@@ -382,6 +379,7 @@ css_custom <- "
     font-size: .8rem;
   }
 
+  /* Unica linha mantida: separa Tecnologias/Skills da descricao acima ---- */
   .skill-label {
     margin-top: 18px;
     margin-bottom: 8px;
@@ -419,7 +417,7 @@ css_custom <- "
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .hero p.subtitle { color: #dbeafe; font-size: 1.2rem; font-weight: 600; font-family: 'Sora', sans-serif; }
+  .hero p.subtitle { color: #dbeafe; font-size: 1.2rem; font-weight: 600; }
   .hero p:not(.subtitle) { color: #94a3b8; }
   .hero-actions { margin-top: 90px; position: relative; z-index: 1; }
 
@@ -427,17 +425,16 @@ css_custom <- "
     background: linear-gradient(90deg, #9ca3af, #4b5563);
     border: none; color: #ffffff; font-weight: 600;
     padding: 10px 26px; border-radius: 30px; margin: 6px;
-    font-family: 'Sora', sans-serif;
     position: relative; z-index: 1;
     display: inline-block;
     text-decoration: none !important;
   }
   .btn-cta:hover { opacity: .88; color: #ffffff; }
 
-  /* Modificador de tamanho reduzido (Repositorio, Ver certificado, Enviar mensagem) ---- */
+  /* Botoes reduzidos, mas um pouco maiores que antes (Repositorio, Ver certificado, Enviar mensagem) ---- */
   .btn-cta-sm {
-    padding: 6px 18px !important;
-    font-size: .85rem !important;
+    padding: 9px 24px !important;
+    font-size: .95rem !important;
     width: auto !important;
     margin: 0 auto !important;
   }
@@ -452,7 +449,6 @@ css_custom <- "
     border-radius: 30px;
     display: inline-block;
     text-decoration: none !important;
-    font-family: 'Sora', sans-serif;
     transition: background-color .2s ease, color .2s ease;
   }
   .btn-outline-cta:hover { background-color: #94a3b8; color: #0b0f1a; }
@@ -461,8 +457,7 @@ css_custom <- "
   .side-media { text-align: center; }
   .side-media img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
+    height: 230px;
     object-fit: cover;
     border-radius: 12px;
     border: 1px solid var(--panel-border);
@@ -482,8 +477,7 @@ css_custom <- "
   .cert-logo-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }
   .cert-logo-box img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
+    height: 230px;
     border-radius: 12px;
     border: 1px solid var(--panel-border);
     object-fit: cover;
@@ -500,7 +494,6 @@ css_custom <- "
 
   /* Paginas de categoria: titulo/paragrafo legiveis sobre o fundo escuro global ---- */
   .hub-page p { color: #cbd5e1; }
-  .hub-page hr { border-color: rgba(255,255,255,.15); }
   .hub-page .accent-text {
     background: linear-gradient(90deg, #60a5fa, #38bdf8);
     -webkit-background-clip: text;
@@ -557,18 +550,20 @@ css_custom <- "
   .modern-form .form-control:focus { border-bottom-color: #60a5fa !important; }
   .modern-form .form-control::placeholder { color: #64748b; }
   .modern-form .btn-cta:not(.btn-cta-sm) { width: 100%; padding: 12px; font-size: 1rem; }
+  .modern-form .btn-cta-sm { width: 100%; }
 
-  /* Modal de busca ---- */
+  /* Modal de busca: contraste melhorado no campo de digitacao ---- */
   .modal-content { background-color: #0f172a; color: #e5e7eb; border: 1px solid rgba(255,255,255,.1); }
   .modal-title { color: #ffffff !important; }
   .modal-header, .modal-footer { border-color: rgba(255,255,255,.1); }
   #busca_txt {
-    background-color: #ffffff !important;
-    color: #374151 !important;
+    background-color: #f3f4f6 !important;
+    color: #111827 !important;
     border: 1px solid rgba(0,0,0,.15) !important;
   }
   #busca_txt::placeholder {
-    color: #6b7280 !important;
+    color: #4b5563 !important;
+    font-style: italic;
     opacity: 1;
   }
 
@@ -741,7 +736,7 @@ js_nav_hide <- "
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-# Traduções (infraestrutura pronta - conteudo livre ainda so em PT)----
+# Traduções (infraestrutura pronta - PT e EN apenas)----
 labels <- list(
   pt = list(nav_inicio = "Início", nav_perfil = "Perfil", nav_experiencia = "Experiência",
             nav_projetos = "Projetos", nav_certificados = "Certificados",
@@ -752,12 +747,7 @@ labels <- list(
             nav_projetos = "Projects", nav_certificados = "Certificates",
             nav_contato = "Contact",
             btn_ver_projetos = "View Projects", btn_ver_cv = "View Resume", btn_fale_comigo = "Contact me",
-            busca_placeholder = "Type to search..."),
-  es = list(nav_inicio = "Inicio", nav_perfil = "Perfil", nav_experiencia = "Experiencia",
-            nav_projetos = "Proyectos", nav_certificados = "Certificados",
-            nav_contato = "Contacto",
-            btn_ver_projetos = "Ver Proyectos", btn_ver_cv = "Ver Currículum", btn_fale_comigo = "Contáctame",
-            busca_placeholder = "Escribe para buscar...")
+            busca_placeholder = "Type to search...")
 )
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -987,7 +977,6 @@ bloco_experiencia <- function(exp) {
         h3(exp$cargo, class = "accent-text"),
         h5(paste0(exp$empresa, " • ", exp$local)),
         div(class = "periodo-tag", exp$periodo),
-        tags$hr(),
         tags$ul(lapply(exp$descricao, tags$li)),
         h5(class = "skill-label", "Tecnologias utilizadas:"),
         badge_tech(exp$tecnologias),
@@ -1012,7 +1001,6 @@ bloco_projeto <- function(proj) {
         width = 7,
         h3(proj$titulo, class = "accent-text"),
         h5(proj$subtitulo),
-        tags$hr(),
         tags$ul(lapply(proj$descricao, tags$li)),
         h5(class = "skill-label", "Tecnologias:"),
         badge_tech(proj$tecnologias),
@@ -1042,7 +1030,6 @@ bloco_certificado <- function(cert) {
         h3(cert$titulo, class = "accent-text"),
         h5(cert$instituicao),
         div(class = "periodo-tag", paste(cert$ano, "•", cert$carga_horaria)),
-        tags$hr(),
         p(cert$descricao),
         h5(class = "skill-label", "Skills:"), badge_tech(cert$skills),
         div(class = "left-actions",
@@ -1079,7 +1066,6 @@ pagina_experiencia_completa <- function() {
     div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
         h2("Experiência Profissional", class = "accent-text"),
         p("Um resumo de toda a minha trajetória profissional."),
-        tags$hr(),
         lapply(experiencias, bloco_experiencia)),
     botao_voltar_topo()
   )
@@ -1090,7 +1076,6 @@ pagina_projetos_completa <- function() {
     div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
         h2("Meus Projetos", class = "accent-text"),
         p("Uma seleção dos projetos que desenvolvi."),
-        tags$hr(),
         lapply(projetos, bloco_projeto)),
     botao_voltar_topo()
   )
@@ -1101,7 +1086,6 @@ pagina_certificados_completa <- function() {
     div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
         h2("Certificados", class = "accent-text"),
         p("Cursos e certificações concluídos."),
-        tags$hr(),
         lapply(certificados, bloco_certificado)),
     botao_voltar_topo()
   )
@@ -1191,15 +1175,14 @@ pagina_contato <- function() {
 seletor_idioma <- pickerInput(
   inputId  = "idioma",
   label    = NULL,
-  choices  = c("pt", "en", "es"),
+  choices  = c("pt", "en"),
   selected = "pt",
   width    = "140px",
   options  = list(width = "140px"),
   choicesOpt = list(
     content = c(
       "<img src='https://flagcdn.com/24x18/br.png' style='width:24px;height:18px;vertical-align:middle;'> PT",
-      "<img src='https://flagcdn.com/24x18/us.png' style='width:24px;height:18px;vertical-align:middle;'> EN",
-      "<img src='https://flagcdn.com/24x18/es.png' style='width:24px;height:18px;vertical-align:middle;'> ES"
+      "<img src='https://flagcdn.com/24x18/us.png' style='width:24px;height:18px;vertical-align:middle;'> EN"
     )
   )
 )
@@ -1231,7 +1214,7 @@ ui <- navbarPage(
     useShinyjs(),
     tags$head(
       tags$link(rel = "stylesheet",
-                href = "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"),
+                href = "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap"),
       tags$style(HTML(css_custom)),
       tags$script(HTML(js_particles)),
       tags$script(HTML(js_scroll_to)),
