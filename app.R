@@ -122,9 +122,7 @@ css_custom <- "
   }
   .navbar-toggler {
     order: 3 !important;
-    border-color: rgba(0,0,0,.15);
   }
-  /* Painel equilibrado: mesma margem do lado esquerdo e do lado direito ---- */
   .navbar-collapse {
     order: 1;
     position: absolute;
@@ -140,7 +138,7 @@ css_custom <- "
     border-top: none !important;
   }
 
-  /* ===== Cor, tamanho e espacamento das abas ===== */
+  /* ===== Cor, tamanho e espacamento das abas (DESKTOP) ===== */
   .navbar-nav {
     gap: 34px !important;
   }
@@ -155,20 +153,13 @@ css_custom <- "
     box-shadow: none !important;
     outline: none !important;
   }
-
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link:not(:hover) {
-    color: #ffffff !important;
-    text-shadow: none;
-  }
   .navbar .nav-link:hover {
     color: var(--nav-accent) !important;
     text-shadow: none;
   }
-
   .navbar .nav-link {
     position: relative;
   }
-  /* Barra de hover subida, mais afastada da borda inferior do painel ---- */
   .navbar .nav-link::after {
     content: '';
     position: absolute;
@@ -185,6 +176,22 @@ css_custom <- "
     font-weight: 700 !important;
     border-bottom: none !important;
     box-shadow: none !important;
+  }
+
+  /* Truque de 'pill acende ao passar o mouse' - exclusivo do DESKTOP ---- */
+  @media (min-width: 992px) {
+    body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link:not(:hover) {
+      color: #ffffff !important;
+      text-shadow: none;
+    }
+    body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .btn-icon-nav:not(:hover) {
+      color: #ffffff !important;
+      border-color: rgba(255,255,255,.2) !important;
+    }
+    body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light:not(:hover) {
+      color: #ffffff !important;
+      border-color: rgba(255,255,255,.2) !important;
+    }
   }
 
   /* Barra de utilidades (modo escuro / idioma / busca) ---- */
@@ -233,10 +240,6 @@ css_custom <- "
   nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
     background: #1e293b !important;
   }
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .btn-icon-nav:not(:hover) {
-    color: #ffffff !important;
-    border-color: rgba(255,255,255,.2) !important;
-  }
   .btn-icon-nav:hover {
     border-color: var(--nav-accent) !important;
   }
@@ -265,10 +268,6 @@ css_custom <- "
   }
   nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
     background: #1e293b !important;
-  }
-  body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light:not(:hover) {
-    color: #ffffff !important;
-    border-color: rgba(255,255,255,.2) !important;
   }
   .navbar-utils .dropdown-toggle.btn-light:hover {
     border-color: var(--nav-accent) !important;
@@ -354,7 +353,7 @@ css_custom <- "
   }
   .dropdown-divider { border-color: rgba(255,255,255,.1); }
 
-  /* ===== Painel/card padrao: fundo escuro solido (sem blur), texto claro ===== */
+  /* ===== Painel/card padrao ===== */
   .content-card {
     background-color: var(--panel-bg);
     color: #e5e7eb;
@@ -379,7 +378,6 @@ css_custom <- "
     font-size: .8rem;
   }
 
-  /* Unica linha mantida: separa Tecnologias/Skills da descricao acima ---- */
   .skill-label {
     margin-top: 18px;
     margin-bottom: 8px;
@@ -391,6 +389,9 @@ css_custom <- "
     border-top: 1px solid var(--panel-border);
     padding-top: 14px;
   }
+
+  /* Espacamento entre titulo/periodo e a descricao de cada painel ---- */
+  .block-description { margin-top: 16px; margin-bottom: 4px; }
 
   .periodo-tag {
     display: inline-block;
@@ -419,7 +420,7 @@ css_custom <- "
   }
   .hero p.subtitle { color: #dbeafe; font-size: 1.2rem; font-weight: 600; }
   .hero p:not(.subtitle) { color: #94a3b8; }
-  .hero-actions { margin-top: 90px; position: relative; z-index: 1; }
+  .hero-actions { margin-top: 50px; position: relative; z-index: 1; }
 
   .btn-cta {
     background: linear-gradient(90deg, #9ca3af, #4b5563);
@@ -431,15 +432,14 @@ css_custom <- "
   }
   .btn-cta:hover { opacity: .88; color: #ffffff; }
 
-  /* Botoes reduzidos, mas um pouco maiores que antes (Repositorio, Ver certificado, Enviar mensagem) ---- */
+  /* Botoes reduzidos (Repositorio, Ver certificado, Leia mais, Enviar mensagem) ---- */
   .btn-cta-sm {
     padding: 9px 24px !important;
     font-size: .95rem !important;
     width: auto !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
   }
 
-  /* Botao secundario (Leia mais): contorno, mesmo tamanho medio ---- */
   .btn-outline-cta {
     background: transparent;
     border: 1.5px solid #94a3b8;
@@ -453,7 +453,17 @@ css_custom <- "
   }
   .btn-outline-cta:hover { background-color: #94a3b8; color: #0b0f1a; }
 
-  /* Coluna direita padronizada: imagem/grafico + botoes empilhados ---- */
+  /* Linha de acoes padronizada: Repositorio/Ver certificado/Leia mais lado a lado ---- */
+  .action-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
   .side-media { text-align: center; }
   .side-media img {
     width: 100%;
@@ -461,20 +471,16 @@ css_custom <- "
     object-fit: cover;
     border-radius: 12px;
     border: 1px solid var(--panel-border);
-    margin-bottom: 14px;
+    margin-bottom: 4px;
     display: block;
   }
-  .side-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 10px; }
-  .side-actions .btn-cta:not(.btn-cta-sm), .side-actions .btn-outline-cta:not(.btn-cta-sm) { width: 100%; text-align: center; margin: 0; }
-
-  .left-actions { margin-top: 16px; }
 
   footer.app-footer {
     text-align: center; padding: 30px; color: #94a3b8;
     border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px;
   }
 
-  .cert-logo-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }
+  .cert-logo-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; }
   .cert-logo-box img {
     width: 100%;
     height: 230px;
@@ -492,7 +498,6 @@ css_custom <- "
   .search-result-item:hover { background-color: rgba(37,99,235,.15); }
   .search-result-item .cat-tag { font-size: .75rem; color: #94a3b8; }
 
-  /* Paginas de categoria: titulo/paragrafo legiveis sobre o fundo escuro global ---- */
   .hub-page p { color: #cbd5e1; }
   .hub-page .accent-text {
     background: linear-gradient(90deg, #60a5fa, #38bdf8);
@@ -500,7 +505,7 @@ css_custom <- "
     -webkit-text-fill-color: transparent;
   }
 
-  /* ===== Botao voltar ao topo ===== */
+  /* ===== Botao 'voltar ao topo' ===== */
   .back-to-top-wrap { text-align: center; margin: 30px 0 10px 0; }
   .btn-back-top {
     background: transparent;
@@ -539,7 +544,7 @@ css_custom <- "
   .profile-social-links a:hover { color: var(--nav-accent); }
   .profile-social-links a::after { content: none !important; }
 
-  /* ===== Formulario de contato modernizado ===== */
+  /* ===== Formulario de contato ===== */
   .modern-form .form-group { margin-bottom: 22px; }
   .modern-form label { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; margin-bottom: 6px; }
   .modern-form .form-control {
@@ -549,10 +554,9 @@ css_custom <- "
   }
   .modern-form .form-control:focus { border-bottom-color: #60a5fa !important; }
   .modern-form .form-control::placeholder { color: #64748b; }
-  .modern-form .btn-cta:not(.btn-cta-sm) { width: 100%; padding: 12px; font-size: 1rem; }
   .modern-form .btn-cta-sm { width: 100%; }
 
-  /* Modal de busca: contraste melhorado no campo de digitacao ---- */
+  /* Modal de busca ---- */
   .modal-content { background-color: #0f172a; color: #e5e7eb; border: 1px solid rgba(255,255,255,.1); }
   .modal-title { color: #ffffff !important; }
   .modal-header, .modal-footer { border-color: rgba(255,255,255,.1); }
@@ -572,7 +576,6 @@ css_custom <- "
     background: radial-gradient(ellipse at top right, #10131c 0%, #06070b 55%, #030405 100%);
     color: #e5e7eb;
   }
-
   body.dark-mode nav.navbar.navbar-fixed-top,
   body.dark-mode nav.navbar.navbar-fixed-top[class*='bg-'] {
     background-color: rgba(20,22,28,.35) !important;
@@ -580,7 +583,6 @@ css_custom <- "
   }
   body.dark-mode nav.navbar.navbar-fixed-top:hover,
   body.dark-mode nav.navbar.navbar-fixed-top[class*='bg-']:hover { background-color: #14161c !important; }
-
   body.dark-mode .navbar .nav-link {
     color: #e5e7eb !important;
     text-shadow: 0 1px 4px rgba(0,0,0,.7);
@@ -588,7 +590,6 @@ css_custom <- "
   body.dark-mode .navbar .nav-link:hover {
     color: var(--nav-accent) !important;
   }
-
   body.dark-mode .navbar-utils .dropdown-menu {
     background-color: rgba(20,22,28,.92) !important;
     border-color: rgba(255,255,255,.15) !important;
@@ -598,7 +599,6 @@ css_custom <- "
     background-color: #14161c !important;
     border-color: rgba(255,255,255,.12) !important;
   }
-
   body.dark-mode .btn-icon-nav,
   body.dark-mode .navbar-utils .dropdown-toggle.btn-light {
     color: #e5e7eb !important; border-color: rgba(255,255,255,.15) !important;
@@ -612,9 +612,68 @@ css_custom <- "
   body.dark-mode .navbar-utils .filter-option-inner-inner {
     color: #e5e7eb !important;
   }
-
   body.dark-mode .content-card { background-color: rgba(20,22,30,.9); color: #e5e7eb; border-color: rgba(255,255,255,.06); }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
+
+  /* ============================================================
+     MOBILE (max-width: 991.98px) - EXCLUSIVO PARA MOBILE
+     Nao afeta o layout desktop (regras acima permanecem intactas
+     para telas >= 992px)
+     ============================================================ */
+  @media (max-width: 991.98px) {
+
+    .navbar-toggler {
+      background: transparent !important;
+      border: 1px solid rgba(255,255,255,.4) !important;
+      border-radius: 8px !important;
+      padding: 6px 10px !important;
+    }
+    .navbar-toggler:focus { box-shadow: none !important; outline: none !important; }
+    .navbar-toggler-icon {
+      background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.95)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\") !important;
+    }
+
+    /* Painel suspenso vertical: fundo solido, cantos arredondados ---- */
+    .navbar-collapse {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      right: 0 !important;
+      margin-top: 12px !important;
+      background-color: #111827 !important;
+      border: 1px solid rgba(255,255,255,.15) !important;
+      border-radius: 18px !important;
+      padding: 10px 16px !important;
+      box-shadow: 0 12px 30px rgba(0,0,0,.5) !important;
+    }
+    .navbar-nav { gap: 0 !important; width: 100%; }
+    .navbar-nav .nav-item { width: 100%; }
+    .navbar .nav-link {
+      display: block;
+      width: 100%;
+      font-size: 1.1rem;
+      padding: 12px 8px !important;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .navbar-nav .nav-item:last-child .nav-link { border-bottom: none; }
+
+    /* Remove sublinhado/efeito de hover do formato web; so a categoria ativa fica azul ---- */
+    .navbar .nav-link::after { display: none !important; }
+    .navbar .nav-link:hover { color: #ffffff !important; }
+    .navbar .nav-link.active { color: var(--nav-accent) !important; font-weight: 700 !important; }
+
+    /* Backdrop: bloqueia interacao/scroll do fundo enquanto o menu esta aberto ---- */
+    .mobile-menu-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      z-index: 1025;
+    }
+    .mobile-menu-backdrop.show { display: block; }
+  }
+  body.mobile-menu-open { overflow: hidden; }
 "
 
 # JavaScript da animacao de particulas (NAO ALTERAR - versao que funciona)----
@@ -721,32 +780,96 @@ Shiny.addCustomMessageHandler('scrollToItem', function(id) {
 });
 "
 
-# JavaScript: esconder o painel de navegacao ao rolar, so mostrar perto do topo----
+# JavaScript: esconder o painel de navegacao (e o menu mobile aberto) ao rolar----
 js_nav_hide <- "
 (function(){
   var nav_scroll_threshold = 80;
   window.addEventListener('scroll', function(){
     var nav = document.querySelector('nav.navbar.navbar-fixed-top');
     if(!nav) return;
-    if (window.scrollY > nav_scroll_threshold) { nav.classList.add('nav-hidden'); }
-    else { nav.classList.remove('nav-hidden'); }
+    if (window.scrollY > nav_scroll_threshold) {
+      nav.classList.add('nav-hidden');
+      var collapseEl = document.querySelector('.navbar-collapse.show');
+      if (collapseEl) {
+        if (window.bootstrap && window.bootstrap.Collapse) {
+          window.bootstrap.Collapse.getOrCreateInstance(collapseEl).hide();
+        } else {
+          var t = document.querySelector('.navbar-toggler');
+          if (t) t.click();
+        }
+      }
+    } else {
+      nav.classList.remove('nav-hidden');
+    }
   });
 })();
 "
 
+# JavaScript: comportamento do menu suspenso mobile (backdrop + fechar ao selecionar aba)----
+js_mobile_menu <- "
+(function(){
+  function ensureBackdrop(){
+    var bd = document.getElementById('mobile-menu-backdrop');
+    if (!bd) {
+      bd = document.createElement('div');
+      bd.id = 'mobile-menu-backdrop';
+      bd.className = 'mobile-menu-backdrop';
+      document.body.appendChild(bd);
+      bd.addEventListener('click', function(){ closeMobileMenu(); });
+    }
+    return bd;
+  }
+  function closeMobileMenu(){
+    var collapseEl = document.querySelector('.navbar-collapse.show');
+    if (!collapseEl) return;
+    if (window.bootstrap && window.bootstrap.Collapse) {
+      window.bootstrap.Collapse.getOrCreateInstance(collapseEl).hide();
+    } else {
+      var t = document.querySelector('.navbar-toggler');
+      if (t) t.click();
+    }
+  }
+
+  $(document).on('shown.bs.collapse', '.navbar-collapse', function(){
+    document.body.classList.add('mobile-menu-open');
+    ensureBackdrop().classList.add('show');
+  });
+  $(document).on('hidden.bs.collapse', '.navbar-collapse', function(){
+    document.body.classList.remove('mobile-menu-open');
+    var bd = document.getElementById('mobile-menu-backdrop');
+    if (bd) bd.classList.remove('show');
+  });
+
+  $(document).on('click', '.navbar-nav .nav-link', function(){
+    if (window.innerWidth < 992) { closeMobileMenu(); }
+  });
+})();
+"
+
+# JavaScript: dissuasor de inspecao (NAO e seguranca real, apenas dificulta acesso casual)----
+js_anti_inspect <- "
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('keydown', function(e){
+  var k = e.key;
+  if (k === 'F12') { e.preventDefault(); }
+  if (e.ctrlKey && e.shiftKey && (k === 'I' || k === 'i' || k === 'J' || k === 'j' || k === 'C' || k === 'c')) { e.preventDefault(); }
+  if (e.ctrlKey && (k === 'U' || k === 'u')) { e.preventDefault(); }
+});
+"
+
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-# Traduções (infraestrutura pronta - PT e EN apenas)----
+# Traduções (PT e EN apenas)----
 labels <- list(
   pt = list(nav_inicio = "Início", nav_perfil = "Perfil", nav_experiencia = "Experiência",
             nav_projetos = "Projetos", nav_certificados = "Certificados",
             nav_contato = "Contato",
-            btn_ver_projetos = "Ver Projetos", btn_ver_cv = "Ver Currículo", btn_fale_comigo = "Fale comigo",
+            btn_ver_projetos = "Ver Projetos", btn_ver_cv = "Ver Currículo", btn_fale_comigo = "Fale Comigo",
             busca_placeholder = "Digite para buscar..."),
   en = list(nav_inicio = "Home", nav_perfil = "Profile", nav_experiencia = "Experience",
             nav_projetos = "Projects", nav_certificados = "Certificates",
             nav_contato = "Contact",
-            btn_ver_projetos = "View Projects", btn_ver_cv = "View Resume", btn_fale_comigo = "Contact me",
+            btn_ver_projetos = "View Projects", btn_ver_cv = "View Resume", btn_fale_comigo = "Contact Me",
             busca_placeholder = "Type to search...")
 )
 
@@ -775,7 +898,7 @@ perfil <- list(
   github      = "https://github.com/michelolv",
   lattes      = "http://lattes.cnpq.br/0000000000000000",
   localizacao = "Ouro Preto, MG - Brasil",
-  cv_path     = "cv/curriculo.pdf"   # caminho relativo a /www (link direto, sem forcar download)
+  cv_path     = "cv/curriculo.pdf"
 )
 
 ## Experiências de trabalho (imagem: img/Experiência_<n>.png)----
@@ -967,7 +1090,7 @@ tag_img_segura <- function(src, alt = "") {
   tags$img(src = src, alt = alt, onerror = "this.style.display='none';")
 }
 
-## Bloco de Experiência (esquerda: texto + Leia mais | direita: imagem)----
+## Bloco de Experiência (esquerda: texto | direita: imagem + Leia mais abaixo)----
 bloco_experiencia <- function(exp) {
   div(
     id = exp$id, class = "content-card",
@@ -977,21 +1100,21 @@ bloco_experiencia <- function(exp) {
         h3(exp$cargo, class = "accent-text"),
         h5(paste0(exp$empresa, " • ", exp$local)),
         div(class = "periodo-tag", exp$periodo),
-        tags$ul(lapply(exp$descricao, tags$li)),
+        div(class = "block-description", tags$ul(lapply(exp$descricao, tags$li))),
         h5(class = "skill-label", "Tecnologias utilizadas:"),
-        badge_tech(exp$tecnologias),
-        div(class = "left-actions",
-            tags$a(class = "btn-outline-cta", href = exp$saiba_mais_url, target = "_blank", "Leia mais \u2192"))
+        badge_tech(exp$tecnologias)
       ),
       column(
         width = 5,
-        div(class = "side-media", tag_img_segura(exp$imagem, exp$empresa))
+        div(class = "side-media", tag_img_segura(exp$imagem, exp$empresa)),
+        div(class = "action-row",
+            tags$a(class = "btn-outline-cta btn-cta-sm", href = exp$saiba_mais_url, target = "_blank", "Leia mais \u2192"))
       )
     )
   )
 }
 
-## Bloco de Projeto (esquerda: texto + Leia mais | direita: grafico + Repositorio/Demo)----
+## Bloco de Projeto (esquerda: texto | direita: grafico + Repositorio/Demo/Leia mais lado a lado)----
 bloco_projeto <- function(proj) {
   grafico_id <- paste0("plot_", proj$id)
   div(
@@ -1001,26 +1124,25 @@ bloco_projeto <- function(proj) {
         width = 7,
         h3(proj$titulo, class = "accent-text"),
         h5(proj$subtitulo),
-        tags$ul(lapply(proj$descricao, tags$li)),
+        div(class = "block-description", tags$ul(lapply(proj$descricao, tags$li))),
         h5(class = "skill-label", "Tecnologias:"),
-        badge_tech(proj$tecnologias),
-        div(class = "left-actions",
-            tags$a(class = "btn-outline-cta", href = proj$saiba_mais_url, target = "_blank", "Leia mais \u2192"))
+        badge_tech(proj$tecnologias)
       ),
       column(
         width = 5,
         plotlyOutput(grafico_id, height = "200px"),
-        div(class = "side-actions",
+        div(class = "action-row",
             tags$a(class = "btn-cta btn-cta-sm", href = proj$link_github, target = "_blank", icon("github"), " Repositório"),
             if (!is.na(proj$link_demo))
-              tags$a(class = "btn-cta btn-cta-sm", href = proj$link_demo, target = "_blank", icon("up-right-from-square"), " Demo")
+              tags$a(class = "btn-cta btn-cta-sm", href = proj$link_demo, target = "_blank", icon("up-right-from-square"), " Demo"),
+            tags$a(class = "btn-outline-cta btn-cta-sm", href = proj$saiba_mais_url, target = "_blank", "Leia mais \u2192")
         )
       )
     )
   )
 }
 
-## Bloco de Certificado (esquerda: texto + Leia mais | direita: logo + Ver certificado)----
+## Bloco de Certificado (esquerda: texto | direita: logo + Ver certificado/Leia mais lado a lado)----
 bloco_certificado <- function(cert) {
   div(
     id = cert$id, class = "content-card",
@@ -1030,16 +1152,15 @@ bloco_certificado <- function(cert) {
         h3(cert$titulo, class = "accent-text"),
         h5(cert$instituicao),
         div(class = "periodo-tag", paste(cert$ano, "•", cert$carga_horaria)),
-        p(cert$descricao),
-        h5(class = "skill-label", "Skills:"), badge_tech(cert$skills),
-        div(class = "left-actions",
-            tags$a(class = "btn-outline-cta", href = cert$saiba_mais_url, target = "_blank", "Leia mais \u2192"))
+        div(class = "block-description", p(cert$descricao)),
+        h5(class = "skill-label", "Skills:"), badge_tech(cert$skills)
       ),
       column(
         width = 5,
         div(class = "cert-logo-box", tag_img_segura(cert$logo_img, cert$instituicao)),
-        div(class = "side-actions",
-            tags$a(class = "btn-cta btn-cta-sm", href = cert$certificado_img, target = "_blank", icon("file-lines"), " Ver certificado"))
+        div(class = "action-row",
+            tags$a(class = "btn-cta btn-cta-sm", href = cert$certificado_img, target = "_blank", icon("file-lines"), " Ver certificado"),
+            tags$a(class = "btn-outline-cta btn-cta-sm", href = cert$saiba_mais_url, target = "_blank", "Leia mais \u2192"))
       )
     )
   )
@@ -1131,9 +1252,7 @@ pagina_perfil <- function() {
     ),
     column(
       width = 8,
-      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
-      div(class = "content-card", h3("Formação Acadêmica", class = "accent-text"),
-          p("Bacharelado: Estatística e Ciência de Dados, Universidade Federal de Ouro Preto (UFOP), 8º período."))
+      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio)))
     )
   )
 }
@@ -1218,7 +1337,9 @@ ui <- navbarPage(
       tags$style(HTML(css_custom)),
       tags$script(HTML(js_particles)),
       tags$script(HTML(js_scroll_to)),
-      tags$script(HTML(js_nav_hide))
+      tags$script(HTML(js_nav_hide)),
+      tags$script(HTML(js_mobile_menu)),
+      tags$script(HTML(js_anti_inspect))
     ),
     tags$canvas(id = "particles-canvas")
   ),
