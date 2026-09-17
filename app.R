@@ -30,7 +30,6 @@ css_custom <- "
   :root { --nav-accent: #2563eb; --underline-color: #2563eb; --panel-bg: rgba(15,23,42,.82); --panel-border: rgba(255,255,255,.10); }
   body.dark-mode { --nav-accent: #60a5fa; --underline-color: #60a5fa; }
 
-  /* ===== Tipografia: Roboto em todo o aplicativo ===== */
   h1, h2, h3, .hero h1, .accent-text,
   .navbar .nav-link, .navbar-brand,
   .dropdown-item, .stat-box .lab, .periodo-tag, .tech-badge,
@@ -40,7 +39,6 @@ css_custom <- "
   }
   h1, h2, h3, .accent-text { font-weight: 700; }
 
-  /* ===== FUNDO GLOBAL (NAO ALTERAR - versao que funciona) ===== */
   body {
     padding-top: 140px;
     min-height: 100vh;
@@ -67,7 +65,6 @@ css_custom <- "
     pointer-events: none;
   }
 
-  /* ===== Navbar flutuante ===== */
   nav.navbar.navbar-fixed-top,
   nav.navbar.navbar-fixed-top[class*='bg-'] {
     top: 20px !important;
@@ -138,7 +135,6 @@ css_custom <- "
     border-top: none !important;
   }
 
-  /* ===== Cor, tamanho e espacamento das abas (DESKTOP) ===== */
   .navbar-nav {
     gap: 34px !important;
   }
@@ -178,7 +174,6 @@ css_custom <- "
     box-shadow: none !important;
   }
 
-  /* Truque de 'pill acende ao passar o mouse' - exclusivo do DESKTOP ---- */
   @media (min-width: 992px) {
     body:not(.dark-mode) nav.navbar.navbar-fixed-top:hover .nav-link:not(:hover) {
       color: #ffffff !important;
@@ -194,7 +189,6 @@ css_custom <- "
     }
   }
 
-  /* Barra de utilidades (modo escuro / idioma / busca) ---- */
   .navbar-utils {
     display: flex;
     align-items: center;
@@ -353,7 +347,6 @@ css_custom <- "
   }
   .dropdown-divider { border-color: rgba(255,255,255,.1); }
 
-  /* ===== Painel/card padrao ===== */
   .content-card {
     background-color: var(--panel-bg);
     color: #e5e7eb;
@@ -390,7 +383,6 @@ css_custom <- "
     padding-top: 14px;
   }
 
-  /* Espacamento entre titulo/periodo e a descricao de cada painel ---- */
   .block-description { margin-top: 16px; margin-bottom: 4px; }
 
   .periodo-tag {
@@ -403,7 +395,6 @@ css_custom <- "
     margin-bottom: 10px;
   }
 
-  /* ===== Hero (capa) ===== */
   .hero { text-align: center; padding: 90px 20px 40px 20px; position: relative; z-index: 1; }
   .hero img {
     width: 190px; height: 190px; object-fit: cover;
@@ -412,7 +403,7 @@ css_custom <- "
     box-shadow: 0 0 40px rgba(96,165,250,.45);
     margin-top: -30px;
   }
-  .hero h1 { font-size: 2.6rem; margin-top: 22px; color: #ffffff; }
+  .hero h1 { font-size: 2.4rem; margin-top: 22px; color: #ffffff; }
   .hero .accent-text {
     background: linear-gradient(90deg, #60a5fa, #38bdf8);
     -webkit-background-clip: text;
@@ -432,7 +423,6 @@ css_custom <- "
   }
   .btn-cta:hover { opacity: .88; color: #ffffff; }
 
-  /* Botoes reduzidos (Repositorio, Ver certificado, Leia mais, Enviar mensagem) ---- */
   .btn-cta-sm {
     padding: 9px 24px !important;
     font-size: .95rem !important;
@@ -453,7 +443,6 @@ css_custom <- "
   }
   .btn-outline-cta:hover { background-color: #94a3b8; color: #0b0f1a; }
 
-  /* Linha de acoes padronizada: Repositorio/Ver certificado/Leia mais lado a lado ---- */
   .action-row {
     display: flex;
     flex-direction: row;
@@ -505,7 +494,6 @@ css_custom <- "
     -webkit-text-fill-color: transparent;
   }
 
-  /* ===== Botao 'voltar ao topo' ===== */
   .back-to-top-wrap { text-align: center; margin: 30px 0 10px 0; }
   .btn-back-top {
     background: transparent;
@@ -524,7 +512,6 @@ css_custom <- "
     color: var(--nav-accent);
   }
 
-  /* ===== Perfil: avatar e links sociais ===== */
   .profile-avatar-card h4 { margin-top: 20px; margin-bottom: 4px; }
   .profile-avatar-card h6 { margin-bottom: 16px; color: #94a3b8; }
   .profile-avatar-card p { margin-bottom: 18px; }
@@ -544,7 +531,10 @@ css_custom <- "
   .profile-social-links a:hover { color: var(--nav-accent); }
   .profile-social-links a::after { content: none !important; }
 
-  /* ===== Formulario de contato ===== */
+  .reference-item { margin-bottom: 16px; }
+  .reference-item:last-child { margin-bottom: 0; }
+  .reference-item .ref-role { color: #94a3b8; font-size: .85rem; margin-bottom: 4px; }
+
   .modern-form .form-group { margin-bottom: 22px; }
   .modern-form label { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; margin-bottom: 6px; }
   .modern-form .form-control {
@@ -556,7 +546,6 @@ css_custom <- "
   .modern-form .form-control::placeholder { color: #64748b; }
   .modern-form .btn-cta-sm { width: 100%; }
 
-  /* Modal de busca ---- */
   .modal-content { background-color: #0f172a; color: #e5e7eb; border: 1px solid rgba(255,255,255,.1); }
   .modal-title { color: #ffffff !important; }
   .modal-header, .modal-footer { border-color: rgba(255,255,255,.1); }
@@ -571,7 +560,6 @@ css_custom <- "
     opacity: 1;
   }
 
-  /* ===== MODO ESCURO ===== */
   body.dark-mode {
     background: radial-gradient(ellipse at top right, #10131c 0%, #06070b 55%, #030405 100%);
     color: #e5e7eb;
@@ -615,13 +603,7 @@ css_custom <- "
   body.dark-mode .content-card { background-color: rgba(20,22,30,.9); color: #e5e7eb; border-color: rgba(255,255,255,.06); }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
 
-  /* ============================================================
-     MOBILE (max-width: 991.98px) - EXCLUSIVO PARA MOBILE
-     Nao afeta o layout desktop (regras acima permanecem intactas
-     para telas >= 992px)
-     ============================================================ */
   @media (max-width: 991.98px) {
-
     .navbar-toggler {
       background: transparent !important;
       border: 1px solid rgba(255,255,255,.4) !important;
@@ -633,7 +615,6 @@ css_custom <- "
       background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.95)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\") !important;
     }
 
-    /* Painel suspenso vertical: fundo solido, cantos arredondados ---- */
     .navbar-collapse {
       position: absolute !important;
       top: 100% !important;
@@ -658,12 +639,10 @@ css_custom <- "
     }
     .navbar-nav .nav-item:last-child .nav-link { border-bottom: none; }
 
-    /* Remove sublinhado/efeito de hover do formato web; so a categoria ativa fica azul ---- */
     .navbar .nav-link::after { display: none !important; }
     .navbar .nav-link:hover { color: #ffffff !important; }
     .navbar .nav-link.active { color: var(--nav-accent) !important; font-weight: 700 !important; }
 
-    /* Backdrop: bloqueia interacao/scroll do fundo enquanto o menu esta aberto ---- */
     .mobile-menu-backdrop {
       display: none;
       position: fixed;
@@ -765,7 +744,7 @@ js_particles <- "
 })();
 "
 
-# JavaScript: rolar ate um item especifico apos trocar de aba (usado pela busca)----
+# JavaScript: rolar ate um item especifico apos trocar de aba----
 js_scroll_to <- "
 Shiny.addCustomMessageHandler('scrollToItem', function(id) {
   setTimeout(function() {
@@ -780,7 +759,7 @@ Shiny.addCustomMessageHandler('scrollToItem', function(id) {
 });
 "
 
-# JavaScript: esconder o painel de navegacao (e o menu mobile aberto) ao rolar----
+# JavaScript: esconder o painel de navegacao ao rolar----
 js_nav_hide <- "
 (function(){
   var nav_scroll_threshold = 80;
@@ -805,7 +784,7 @@ js_nav_hide <- "
 })();
 "
 
-# JavaScript: comportamento do menu suspenso mobile (backdrop + fechar ao selecionar aba)----
+# JavaScript: comportamento do menu suspenso mobile----
 js_mobile_menu <- "
 (function(){
   function ensureBackdrop(){
@@ -846,7 +825,7 @@ js_mobile_menu <- "
 })();
 "
 
-# JavaScript: dissuasor de inspecao (NAO e seguranca real, apenas dificulta acesso casual)----
+# JavaScript: dissuasor de inspecao (NAO e seguranca real)----
 js_anti_inspect <- "
 document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 document.addEventListener('keydown', function(e){
@@ -875,138 +854,164 @@ labels <- list(
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-# Base de Conteúdo (PREENCHER AOS POUCOS)----
+# Base de Conteúdo (dados reais do currículo)----
 
 ## Perfil----
 perfil <- list(
-  nome        = "Michel Lima",
-  cargo       = "Estatístico e Cientista de Dados em Formação",
+  nome        = "Michel Lima de Oliveira",
+  cargo       = "Estatística Aplicada | Ciência de Dados | Análise de Dados",
   tagline     = "APP EM DESENVOLVIMENTO", # Transformando dados em decisões - restaurar no futuro
-  bio         = "Bacharelando em Estatística e Ciência de Dados pela Universidade
-  Federal de Ouro Preto (UFOP), com <em>background</em> em Ciências Econômicas e 
-  experiência aplicada em consultoria estatística, iniciação científica e diagnóstico
-  territorial. Atuo como Consultor Técnico em Estatística em projeto de doutoramento 
-  internacional, analisando bases de dados multidimensionais para subsidiar decisões de
-  pesquisa. Desenvolvo projeções populacionais para pequenas áreas e diagnósticos 
-  sociodemográficos a partir de dados públicos (DATASUS, IBGE, CAGED), traduzindo 
-  indicadores demográficos, epidemiológicos e socioeconômicos em insights acionáveis 
-  para o planejamento público. Domínio de R, com aplicações em SQL e Shiny, além de 
-  conhecimentos em Python e Power BI.",
+  bio         = "Bacharelando em Estatística e Ciência de Dados pela Universidade Federal de Ouro Preto (UFOP),
+  com <em>background</em> em Ciências Econômicas e experiência aplicada em consultoria estatística, iniciação
+  científica e diagnóstico territorial. Atuo como Consultor Técnico em Estatística em projeto de doutoramento
+  internacional, analisando bases de dados multidimensionais para subsidiar decisões de pesquisa. Elaboro
+  projeções populacionais para pequenas áreas e diagnósticos sociodemográficos a partir de dados públicos
+  (DATASUS, IBGE, CAGED), traduzindo indicadores epidemiológicos, demográficos e socioeconômicos em insights
+  estratégicos capazes de orientar o planejamento em qualquer esfera.",
   foto        = "img/perfil.jpg",
   email       = "michelescreva@gmail.com",
+  telefone    = "+55 (31) 98301-4397",
+  telefone_tel = "tel:+5531983014397",
   linkedin    = "https://www.linkedin.com/in/micheldeoliveira/",
   github      = "https://github.com/michelolv",
-  lattes      = "http://lattes.cnpq.br/0000000000000000",
   localizacao = "Ouro Preto, MG - Brasil",
-  cv_path     = "cv/curriculo.pdf"
+  cv_path     = "cv/CV_Michel_Lima_de_Oliveira.pdf"   # salvar em www/cv/ com este nome
 )
 
-## Experiências de trabalho (imagem: img/Experiência_<n>.png)----
+## Habilidades (Hard Skills / Soft Skills)----
+hard_skills <- c("R", "Python", "LaTeX", "SQL", "Shiny", "Power BI", "Excel", "SPSS", "Minitab")
+soft_skills <- "Comunicação • Resolução de problemas • Pensamento analítico • Rigor com qualidade de dados e visualizações • Aprendizado contínuo • Gestão de prazos"
+
+## Referências----
+referencias <- list(
+  list(nome = "Prof. Ph.D. Fernando Luiz Pereira de Oliveira",
+       papel = "Departamento de Estatística | UFOP",
+       email = "fernandoluiz@ufop.edu.br"),
+  list(nome = "Prof. M.Sc. Almir Aparecido Malta Ferreira",
+       papel = "Departamento de Arquitetura e Urbanismo | UFOP",
+       email = "almir.ferreira@ufop.edu.br")
+)
+
+## Experiências profissionais (consultorias técnicas em Estatística)----
 experiencias <- list(
   list(
-    id = "exp1", empresa = "Nome da Empresa 1", cargo = "Estagiário(a) de Dados",
-    periodo = "Mar/2024 - Atual", local = "Remoto",
+    id = "exp1",
+    empresa = "Serviços de Consultoria Particular — Projeto Internacional de Doutoramento",
+    cargo = "Consultor Técnico em Estatística",
+    periodo = "Abr/2025 - Presente", local = "Remoto",
     descricao = c(
-      "Desenvolvimento de dashboards em R Shiny / Power BI para acompanhamento de KPIs.",
-      "Automatização de relatórios em R, reduzindo o tempo de entrega.",
-      "Aplicação de testes estatísticos e modelos exploratórios."
+      "Responsável técnico pela análise de dados de tese internacional em Ecologia e Saúde Ambiental, sobre o impacto da mineração periurbana na qualidade de vida.",
+      "Estruturação do pipeline de data wrangling em R e condução de Análise Exploratória, Descritiva e Fatorial.",
+      "Aplicação de testes de hipóteses (Qui-Quadrado, Fisher, Mann-Whitney, Kruskal-Wallis) com Resíduos Padronizados Ajustados.",
+      "Investigação via Análise de Correspondência (ANACOR) das associações entre distância residencial e percepção de saúde/risco.",
+      "Elaboração de relatórios técnicos com data storytelling para orientar as decisões metodológicas do pesquisador."
     ),
-    tecnologias = c("R", "SQL", "Power BI", "Excel"),
+    tecnologias = c("R", "R Markdown", "ANACOR", "Testes de Hipóteses"),
     imagem = "img/Experiência_1.png",
     saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
   ),
   list(
-    id = "exp2", empresa = "Empresa Fictícia LTDA", cargo = "Analista de Dados Júnior",
-    periodo = "Jan/2023 - Fev/2024", local = "Presencial",
+    id = "exp2",
+    empresa = "Serviços de Consultoria Particular — Diagnóstico Sociodemográfico",
+    cargo = "Consultor Técnico em Estatística",
+    periodo = "Mar/2025 - Mai/2025", local = "Remoto",
     descricao = c(
-      "Construção de pipelines de tratamento e limpeza de dados em R.",
-      "Elaboração de relatórios gerenciais periódicos para diretoria.",
-      "Apoio na modelagem estatística de indicadores de desempenho."
+      "Diagnóstico sociodemográfico de 4 municípios baianos (2010-2022), consolidando mais de 20 indicadores.",
+      "Construção do pipeline de data wrangling em R, integrando dados do DATASUS (SIM, SINASC, SINAN) e IBGE/SIDRA.",
+      "Análise de padrões, tendências e vulnerabilidades territoriais frente à transição demográfica.",
+      "Levantamento epidemiológico complementar sobre arboviroses e doenças endêmicas ocorridas em 2024.",
+      "Elaboração de relatório técnico com gráficos sintetizando indicadores demográficos e socioeconômicos."
     ),
-    tecnologias = c("R", "Excel", "SQL"),
+    tecnologias = c("R", "DATASUS", "IBGE/SIDRA", "Epidemiologia"),
     imagem = "img/Experiência_2.png",
     saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
+  )
+)
+
+## Projetos de pesquisa (iniciações científicas)----
+projetos <- list(
+  list(
+    id = "proj1",
+    titulo = "Projeções Populacionais para Pequenos Domínios (Mariana e Ouro Preto)",
+    subtitulo = "Iniciação Científica PIBIC/UFOP — Mar/2025 a Fev/2026",
+    descricao = c(
+      "Aplicação e comparação de 4 metodologias de projeção populacional (aritmética, geométrica, exponencial e logística).",
+      "Construção de base longitudinal com dados do SINASC, SIM e IBGE/SIDRA (2000-2025) em R.",
+      "Análise da trajetória histórica (2010-2022) da estrutura populacional de Mariana e Ouro Preto.",
+      "Produção de subsídios técnicos para planejamento e formulação de políticas públicas locais."
+    ),
+    tecnologias = c("R", "microdatasus", "sidrar", "Projeção Populacional"),
+    link_github = "https://github.com/michelolv", link_demo = NA,
+    tipo_grafico = "barra",
+    saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
   ),
   list(
-    id = "exp3", empresa = "Instituto de Pesquisa XYZ", cargo = "Bolsista de Iniciação Científica",
-    periodo = "Ago/2022 - Dez/2022", local = "Híbrido",
+    id = "proj2",
+    titulo = "Diagnóstico Demográfico de Ouro Preto (2010-2022)",
+    subtitulo = "Iniciação Científica PIBIC/UFOP — Mar/2024 a Fev/2025",
     descricao = c(
-      "Análise exploratória de dados demográficos e socioeconômicos.",
-      "Suporte na produção de relatórios técnicos para publicação.",
-      "Participação em reuniões de acompanhamento de projeto de pesquisa."
+      "Construção de pirâmides etárias e análise de cerca de 20 indicadores demográficos e econômicos de Ouro Preto.",
+      "Estruturação de bases com 1.542 variáveis e mais de 11 milhões de observações em R.",
+      "Avaliação dos impactos da transição demográfica sobre a economia local.",
+      "Elaboração de apêndice técnico comparativo entre municípios mineiros de estrutura populacional semelhante."
     ),
-    tecnologias = c("R", "Python", "Excel"),
-    imagem = "img/Experiência_3.png",
+    tecnologias = c("R", "DATASUS", "CAGED", "IBGE/SIDRA"),
+    link_github = "https://github.com/michelolv", link_demo = NA,
+    tipo_grafico = "likert",
+    saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
+  ),
+  list(
+    id = "proj3",
+    titulo = "Investimento Estrangeiro Direto no Brasil (2003-2013)",
+    subtitulo = "Iniciação Científica PROBIC/FAPEMIG — PUC Minas, 2015-2016",
+    descricao = c(
+      "Investigação da flutuação do fluxo de IED no Brasil, fundamentada no Paradigma Eclético de Dunning.",
+      "Comparação dos fluxos de IED entre Brasil, América Latina e Caribe e demais regiões macroeconômicas.",
+      "Análise da distribuição setorial do IED, destacando indústria e serviços como setores de maior concentração.",
+      "Identificação do Brasil na 5ª posição no ranking mundial de destino de IED em 2013."
+    ),
+    tecnologias = c("Economia Internacional", "Análise de Dados", "Paradigma Eclético"),
+    link_github = "https://github.com/michelolv", link_demo = NA,
+    tipo_grafico = "rede",
     saiba_mais_url = "https://www.linkedin.com/in/micheldeoliveira/"
   )
 )
 
-## Projetos diversos (tipo_grafico: barra / likert / rede)----
-projetos <- list(
-  list(
-    id = "proj1", titulo = "Nome do Projeto 1", subtitulo = "Curta descrição / objetivo do projeto",
-    descricao = c(
-      "Contexto do problema e motivação.",
-      "Metodologia estatística/ML utilizada.",
-      "Principais resultados e conclusões."
-    ),
-    tecnologias = c("R", "ggplot2", "Shiny"),
-    link_github = "https://github.com/seu-usuario/projeto1", link_demo = NA,
-    tipo_grafico = "barra", saiba_mais_url = "https://github.com/seu-usuario/projeto1"
-  ),
-  list(
-    id = "proj2", titulo = "Dashboard de Indicadores Municipais", subtitulo = "Painel interativo para acompanhamento de dados públicos",
-    descricao = c(
-      "Integração de bases públicas (IBGE, DATASUS) em um único painel.",
-      "Visualizações dinâmicas para comparação entre municípios.",
-      "Publicação e hospedagem gratuita via Posit Connect Cloud."
-    ),
-    tecnologias = c("R", "Shiny", "Plotly"),
-    link_github = "https://github.com/seu-usuario/projeto2", link_demo = NA,
-    tipo_grafico = "likert", saiba_mais_url = "https://github.com/seu-usuario/projeto2"
-  ),
-  list(
-    id = "proj3", titulo = "Modelo Preditivo Fictício", subtitulo = "Estudo de caso de classificação estatística",
-    descricao = c(
-      "Preparação e balanceamento de base de dados de exemplo.",
-      "Comparação entre diferentes modelos estatísticos/ML.",
-      "Avaliação de desempenho com métricas de classificação."
-    ),
-    tecnologias = c("R", "tidymodels"),
-    link_github = "https://github.com/seu-usuario/projeto3", link_demo = NA,
-    tipo_grafico = "rede", saiba_mais_url = "https://github.com/seu-usuario/projeto3"
-  )
-)
-
-## Certificados (logo: img/Empresa_<n>.png | certificado: img/Certificado_<n>.png)----
+## Certificados / Participações em eventos científicos----
 certificados <- list(
   list(
-    id = "cert1", titulo = "Nome do Certificado 1", instituicao = "Instituição / Plataforma",
-    carga_horaria = "40h", ano = "2024",
-    descricao = "Breve descrição do que foi aprendido no curso/certificação.",
-    skills = c("R", "Estatística"),
+    id = "cert1",
+    titulo = "Ouvinte na IV Semana da Demografia",
+    instituicao = "UNICAMP",
+    carga_horaria = "Remoto", ano = "2026",
+    descricao = "Participação no evento \"Demografia dos Invisibilizados: Fortalecendo Presenças que Escapam\".",
+    skills = c("Demografia", "Participação em Eventos"),
     logo_img = "img/Empresa_1.png", certificado_img = "img/Certificado_1.png",
-    saiba_mais_url = "https://www.coursera.org"
+    saiba_mais_url = "https://www.unicamp.br"
   ),
   list(
-    id = "cert2", titulo = "Estatística Aplicada com R", instituicao = "Plataforma de Ensino Fictícia",
-    carga_horaria = "60h", ano = "2023",
-    descricao = "Curso com foco em testes estatísticos, modelagem e visualização de dados em R.",
-    skills = c("R", "Testes Estatísticos", "Visualização"),
+    id = "cert2",
+    titulo = "Palestrante Convidado — Disciplina EST306 (Estatística: Profissão e Mercado)",
+    instituicao = "UFOP",
+    carga_horaria = "Presencial", ano = "2025",
+    descricao = "Apresentação sobre pesquisa científica como instrumento de desenvolvimento acadêmico, em Ouro Preto.",
+    skills = c("Comunicação", "Docência", "Estatística"),
     logo_img = "img/Empresa_2.png", certificado_img = "img/Certificado_2.png",
-    saiba_mais_url = "https://www.alura.com.br"
+    saiba_mais_url = "https://www.ufop.br"
   ),
   list(
-    id = "cert3", titulo = "Fundamentos de Ciência de Dados", instituicao = "Instituição Fictícia de Tecnologia",
-    carga_horaria = "80h", ano = "2023",
-    descricao = "Formação introdutória cobrindo Python, SQL e fundamentos de Machine Learning.",
-    skills = c("Python", "SQL", "Machine Learning"),
+    id = "cert3",
+    titulo = "Apresentador no XXXII Seminário de Iniciação Científica (UFOP)",
+    instituicao = "UFOP",
+    carga_horaria = "Presencial", ano = "2024",
+    descricao = "Exposição de resultados de pesquisa no evento \"Encontro de Saberes\", em Ouro Preto.",
+    skills = c("Apresentação Científica", "Pesquisa"),
     logo_img = "img/Empresa_3.png", certificado_img = "img/Certificado_3.png",
-    saiba_mais_url = "https://www.udemy.com"
+    saiba_mais_url = "https://www.ufop.br"
   )
 )
 
-## Índice combinado para a busca (id -> categoria/aba de destino)----
+## Índice combinado para a busca----
 indice_busca <- c(
   lapply(experiencias, function(x) list(id = x$id, titulo = x$empresa, categoria = "Experiência", tab = "experiencia")),
   lapply(projetos,     function(x) list(id = x$id, titulo = x$titulo,  categoria = "Projeto",     tab = "projetos")),
@@ -1017,12 +1022,10 @@ indice_busca <- c(
 
 # Funções Auxiliares----
 
-## Badges de tecnologia----
 badge_tech <- function(techs) {
   tagList(lapply(techs, function(t) span(class = "tech-badge", t)))
 }
 
-## Gráfico de barras (proj: tipo_grafico == "barra")----
 grafico_barras <- function() {
   df <- data.frame(metrica = c("Acurácia", "Precisão", "Recall", "F1"), valor = c(88, 82, 79, 80))
   p <- ggplot(df, aes(x = reorder(metrica, valor), y = valor, fill = valor)) +
@@ -1043,7 +1046,6 @@ grafico_barras <- function() {
   ggplotly(p) %>% layout(paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)", font = list(color = "#e5e7eb"))
 }
 
-## Gráfico Likert (proj: tipo_grafico == "likert") - barras divergentes----
 grafico_likert <- function() {
   df <- data.frame(
     afirmacao = rep(c("Usabilidade", "Clareza dos dados", "Utilidade prática"), each = 2),
@@ -1065,7 +1067,6 @@ grafico_likert <- function() {
   ggplotly(p) %>% layout(paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)", font = list(color = "#e5e7eb"))
 }
 
-## Gráfico de rede (proj: tipo_grafico == "rede")----
 grafico_rede <- function() {
   nos <- data.frame(id = c("A","B","C","D","E"), x = c(0,1,2,1,0.5), y = c(0,1,0,-1,-1.5))
   arestas <- data.frame(de = c("A","A","B","C","D"), para = c("B","D","C","D","E"))
@@ -1085,12 +1086,10 @@ grafico_rede <- function() {
                xaxis = list(visible = FALSE), yaxis = list(visible = FALSE), font = list(color = "#e5e7eb"))
 }
 
-## Imagem "segura" (esconde se o arquivo nao existir/estiver quebrado)----
 tag_img_segura <- function(src, alt = "") {
   tags$img(src = src, alt = alt, onerror = "this.style.display='none';")
 }
 
-## Bloco de Experiência (esquerda: texto | direita: imagem + Leia mais abaixo)----
 bloco_experiencia <- function(exp) {
   div(
     id = exp$id, class = "content-card",
@@ -1114,7 +1113,6 @@ bloco_experiencia <- function(exp) {
   )
 }
 
-## Bloco de Projeto (esquerda: texto | direita: grafico + Repositorio/Demo/Leia mais lado a lado)----
 bloco_projeto <- function(proj) {
   grafico_id <- paste0("plot_", proj$id)
   div(
@@ -1142,7 +1140,6 @@ bloco_projeto <- function(proj) {
   )
 }
 
-## Bloco de Certificado (esquerda: texto | direita: logo + Ver certificado/Leia mais lado a lado)----
 bloco_certificado <- function(cert) {
   div(
     id = cert$id, class = "content-card",
@@ -1168,7 +1165,6 @@ bloco_certificado <- function(cert) {
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-## Botao "voltar ao topo", inserido ao final das paginas de listagem----
 botao_voltar_topo <- function() {
   div(class = "back-to-top-wrap",
       tags$button(
@@ -1179,8 +1175,6 @@ botao_voltar_topo <- function() {
       )
   )
 }
-
-# Páginas de Categoria (tudo visivel, sem cliques extras)----
 
 pagina_experiencia_completa <- function() {
   tagList(
@@ -1196,7 +1190,7 @@ pagina_projetos_completa <- function() {
   tagList(
     div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
         h2("Meus Projetos", class = "accent-text"),
-        p("Uma seleção dos projetos que desenvolvi."),
+        p("Uma seleção dos projetos de pesquisa que desenvolvi."),
         lapply(projetos, bloco_projeto)),
     botao_voltar_topo()
   )
@@ -1206,15 +1200,13 @@ pagina_certificados_completa <- function() {
   tagList(
     div(class = "hub-page", style = "padding: 10px 30px 30px 30px;",
         h2("Certificados", class = "accent-text"),
-        p("Cursos e certificações concluídos."),
+        p("Participações e apresentações em eventos científicos."),
         lapply(certificados, bloco_certificado)),
     botao_voltar_topo()
   )
 }
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-# Páginas Fixas (Início, Perfil, Contato)----
 
 pagina_inicio <- function() {
   tagList(
@@ -1243,6 +1235,7 @@ pagina_perfil <- function() {
         tags$img(src = perfil$foto, style = "width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #60a5fa;"),
         h4(perfil$nome), h6(perfil$cargo),
         p(icon("location-dot"), perfil$localizacao),
+        p(icon("phone"), " ", tags$a(href = perfil$telefone_tel, perfil$telefone, style = "color:#e5e7eb;")),
         div(class = "profile-social-links",
             tags$a(icon("linkedin"), href = perfil$linkedin, target = "_blank", rel = "noopener noreferrer", title = "LinkedIn"),
             tags$a(icon("github"), href = perfil$github, target = "_blank", rel = "noopener noreferrer", title = "GitHub"),
@@ -1252,7 +1245,20 @@ pagina_perfil <- function() {
     ),
     column(
       width = 8,
-      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio)))
+      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
+      div(class = "content-card", h3("Habilidades", class = "accent-text"),
+          h5(class = "skill-label", "Hard Skills:"),
+          badge_tech(hard_skills),
+          h5(class = "skill-label", "Soft Skills:"),
+          p(soft_skills)),
+      div(class = "content-card", h3("Referências", class = "accent-text"),
+          lapply(referencias, function(ref) {
+            div(class = "reference-item",
+                strong(ref$nome), tags$br(),
+                span(class = "ref-role", ref$papel), tags$br(),
+                tags$a(href = paste0("mailto:", ref$email), ref$email, style = "color:#93c5fd;")
+            )
+          }))
     )
   )
 }
@@ -1266,9 +1272,9 @@ pagina_contato <- function() {
         class = "content-card",
         h3("Vamos conversar", class = "accent-text"),
         p(icon("envelope"), " ", perfil$email),
+        p(icon("phone"), " ", tags$a(href = perfil$telefone_tel, perfil$telefone, style = "color:#93c5fd;")),
         p(icon("linkedin"), " ", tags$a(href = perfil$linkedin, target = "_blank", "LinkedIn", style = "color:#93c5fd;")),
-        p(icon("github"), " ", tags$a(href = perfil$github, target = "_blank", "GitHub", style = "color:#93c5fd;")),
-        p(icon("book"), " ", tags$a(href = perfil$lattes, target = "_blank", "Currículo Lattes", style = "color:#93c5fd;"))
+        p(icon("github"), " ", tags$a(href = perfil$github, target = "_blank", "GitHub", style = "color:#93c5fd;"))
       )
     ),
     column(
@@ -1288,8 +1294,6 @@ pagina_contato <- function() {
 }
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-# Barra de utilidades (canto direito da navbar)----
 
 seletor_idioma <- pickerInput(
   inputId  = "idioma",
@@ -1322,7 +1326,6 @@ barra_utilidades <- tagList(
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-# UI----
 ui <- navbarPage(
   title       = div(class = "navbar-utils", barra_utilidades),
   id          = "navbar_principal",
@@ -1359,10 +1362,8 @@ ui <- navbarPage(
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-# Server----
 server <- function(input, output, session) {
   
-  ## Deep-linking: sincroniza aba ativa com a URL (?aba=id) - executa so 1x, evita loop ao trocar de aba rapido----
   url_sync_feito <- reactiveVal(FALSE)
   observe({
     if (isolate(url_sync_feito())) return()
@@ -1377,7 +1378,6 @@ server <- function(input, output, session) {
     updateQueryString(paste0("?aba=", input$navbar_principal), mode = "push")
   }, ignoreInit = TRUE)
   
-  ## Modo Claro/Escuro----
   modo_escuro <- reactiveVal(FALSE)
   observeEvent(input$toggle_dark, {
     novo_estado <- !modo_escuro()
@@ -1387,7 +1387,6 @@ server <- function(input, output, session) {
     shinyjs::toggle(id = "icon_sun",  condition = novo_estado)
   })
   
-  ## Idioma: atualiza rotulos do menu e botoes da capa----
   observeEvent(input$idioma, {
     lg <- labels[[input$idioma]]
     for (nm in c("inicio", "perfil", "experiencia", "projetos", "certificados", "contato")) {
@@ -1400,7 +1399,6 @@ server <- function(input, output, session) {
     updateActionButton(session, "btn_ir_contato",  label = lg$btn_fale_comigo)
   }, ignoreInit = TRUE)
   
-  ## Busca: leva a categoria certa e rola ate o item----
   observeEvent(input$abrir_busca, {
     showModal(modalDialog(
       title = "Buscar no portfólio",
@@ -1430,7 +1428,6 @@ server <- function(input, output, session) {
     removeModal()
   })
   
-  ## Gráficos de Projetos (dispatch por tipo)----
   lapply(projetos, function(proj) {
     local({
       proj_local <- proj
@@ -1443,7 +1440,6 @@ server <- function(input, output, session) {
     })
   })
   
-  ## Navegação via botões da capa----
   observeEvent(input$btn_ver_projetos, {
     updateNavbarPage(session, "navbar_principal", selected = "projetos")
   })
@@ -1451,7 +1447,6 @@ server <- function(input, output, session) {
     updateNavbarPage(session, "navbar_principal", selected = "contato")
   })
   
-  ## Formulário de contato----
   observeEvent(input$btn_enviar_contato, {
     showNotification("Mensagem registrada! (integrar envio real de e-mail futuramente)", type = "message")
   })
@@ -1459,5 +1454,4 @@ server <- function(input, output, session) {
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-# Executar Aplicação----
 shinyApp(ui, server)
