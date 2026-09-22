@@ -30,6 +30,9 @@ css_custom <- "
   :root { --nav-accent: #2563eb; --underline-color: #2563eb; --panel-bg: rgba(15,23,42,.82); --panel-border: rgba(255,255,255,.10); }
   body.dark-mode { --nav-accent: #60a5fa; --underline-color: #60a5fa; }
 
+  /* Reducao geral de fontes (escala global via rem) ---- */
+  html { font-size: 93%; }
+
   h1, h2, h3, .hero h1, .accent-text,
   .navbar .nav-link, .navbar-brand,
   .dropdown-item, .stat-box .lab, .periodo-tag, .tech-badge,
@@ -141,7 +144,7 @@ css_custom <- "
   .navbar .nav-link {
     color: #ffffff !important;
     font-weight: 600;
-    font-size: 1.3rem;
+    font-size: 1.12rem;
     letter-spacing: .02em;
     text-shadow: 0 1px 5px rgba(0,0,0,.55);
     transition: color .2s ease;
@@ -234,19 +237,22 @@ css_custom <- "
   nav.navbar.navbar-fixed-top:hover .btn-icon-nav {
     background: #1e293b !important;
   }
-  .btn-icon-nav:hover {
-    border-color: var(--nav-accent) !important;
-  }
-  .btn-icon-nav:hover,
-  .btn-icon-nav:hover i,
-  .btn-icon-nav:hover svg,
-  .btn-icon-nav:hover span,
-  .btn-icon-nav:hover #icon_moon,
-  .btn-icon-nav:hover #icon_sun {
-    color: var(--nav-accent) !important;
-  }
-  .btn-icon-nav:hover svg path {
-    fill: var(--nav-accent) !important;
+  /* Efeito de foco/hover-azul restrito a dispositivos com hover real (evita 'preso' no toque mobile) ---- */
+  @media (hover: hover) and (pointer: fine) {
+    .btn-icon-nav:hover {
+      border-color: var(--nav-accent) !important;
+    }
+    .btn-icon-nav:hover,
+    .btn-icon-nav:hover i,
+    .btn-icon-nav:hover svg,
+    .btn-icon-nav:hover span,
+    .btn-icon-nav:hover #icon_moon,
+    .btn-icon-nav:hover #icon_sun {
+      color: var(--nav-accent) !important;
+    }
+    .btn-icon-nav:hover svg path {
+      fill: var(--nav-accent) !important;
+    }
   }
 
   .navbar-utils .dropdown-toggle.btn-light {
@@ -263,15 +269,21 @@ css_custom <- "
   nav.navbar.navbar-fixed-top:hover .navbar-utils .dropdown-toggle.btn-light {
     background: #1e293b !important;
   }
-  .navbar-utils .dropdown-toggle.btn-light:hover {
-    border-color: var(--nav-accent) !important;
-    color: var(--nav-accent) !important;
+  @media (hover: hover) and (pointer: fine) {
+    .navbar-utils .dropdown-toggle.btn-light:hover {
+      border-color: var(--nav-accent) !important;
+      color: var(--nav-accent) !important;
+    }
+    .navbar-utils .dropdown-toggle.btn-light:hover::after {
+      border-top-color: var(--nav-accent) !important;
+    }
+    .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner,
+    .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner * {
+      color: var(--nav-accent) !important;
+    }
   }
   .navbar-utils .dropdown-toggle.btn-light::after {
     border-top-color: currentColor !important;
-  }
-  .navbar-utils .dropdown-toggle.btn-light:hover::after {
-    border-top-color: var(--nav-accent) !important;
   }
   .navbar-utils .dropdown-toggle.btn-light:focus,
   .navbar-utils .dropdown-toggle.btn-light:active,
@@ -281,10 +293,6 @@ css_custom <- "
     border-color: rgba(255,255,255,.4) !important;
   }
   .navbar-utils .filter-option-inner-inner { color: inherit !important; }
-  .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner,
-  .navbar-utils .dropdown-toggle.btn-light:hover .filter-option-inner-inner * {
-    color: var(--nav-accent) !important;
-  }
 
   .bootstrap-select .filter-option{
     display:flex !important;
@@ -338,7 +346,7 @@ css_custom <- "
   }
   .dropdown-item {
     color: #e5e7eb !important;
-    font-size: .92rem !important;
+    font-size: .9rem !important;
     font-weight: 500 !important;
   }
   .dropdown-item:hover {
@@ -368,7 +376,7 @@ css_custom <- "
     padding: 4px 12px;
     border-radius: 20px;
     margin: 3px;
-    font-size: .8rem;
+    font-size: .78rem;
   }
 
   .skill-label {
@@ -376,7 +384,7 @@ css_custom <- "
     margin-bottom: 8px;
     font-weight: 700;
     color: var(--nav-accent);
-    font-size: .82rem;
+    font-size: .8rem;
     text-transform: uppercase;
     letter-spacing: .04em;
     border-top: 1px solid var(--panel-border);
@@ -391,7 +399,7 @@ css_custom <- "
     color: #cbd5e1;
     padding: 3px 12px;
     border-radius: 6px;
-    font-size: .85rem;
+    font-size: .82rem;
     margin-bottom: 10px;
   }
 
@@ -403,13 +411,13 @@ css_custom <- "
     box-shadow: 0 0 40px rgba(96,165,250,.45);
     margin-top: -30px;
   }
-  .hero h1 { font-size: 2.4rem; margin-top: 22px; color: #ffffff; }
+  .hero h1 { font-size: 2.2rem; margin-top: 22px; color: #ffffff; }
   .hero .accent-text {
     background: linear-gradient(90deg, #60a5fa, #38bdf8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .hero p.subtitle { color: #dbeafe; font-size: 1.2rem; font-weight: 600; }
+  .hero p.subtitle { color: #dbeafe; font-size: 1.1rem; font-weight: 600; }
   .hero p:not(.subtitle) { color: #94a3b8; }
   .hero-actions { margin-top: 50px; position: relative; z-index: 1; }
 
@@ -425,7 +433,7 @@ css_custom <- "
 
   .btn-cta-sm {
     padding: 9px 24px !important;
-    font-size: .95rem !important;
+    font-size: .92rem !important;
     width: auto !important;
     margin: 0 !important;
   }
@@ -468,6 +476,7 @@ css_custom <- "
     text-align: center; padding: 30px; color: #94a3b8;
     border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px;
   }
+  footer.app-footer .authorship { font-size: .78rem; color: #6b7280; margin-top: 4px; }
 
   .cert-logo-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; }
   .cert-logo-box img {
@@ -485,7 +494,7 @@ css_custom <- "
     color: #e5e7eb;
   }
   .search-result-item:hover { background-color: rgba(37,99,235,.15); }
-  .search-result-item .cat-tag { font-size: .75rem; color: #94a3b8; }
+  .search-result-item .cat-tag { font-size: .72rem; color: #94a3b8; }
 
   .hub-page p { color: #cbd5e1; }
   .hub-page .accent-text {
@@ -506,10 +515,12 @@ css_custom <- "
     cursor: pointer;
     transition: background-color .2s ease, border-color .2s ease, color .2s ease;
   }
-  .btn-back-top:hover {
-    background-color: #1e293b;
-    border-color: var(--nav-accent);
-    color: var(--nav-accent);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-back-top:hover {
+      background-color: #1e293b;
+      border-color: var(--nav-accent);
+      color: var(--nav-accent);
+    }
   }
 
   .profile-avatar-card h4 { margin-top: 20px; margin-bottom: 4px; }
@@ -525,18 +536,27 @@ css_custom <- "
   }
   .profile-social-links a {
     color: #e5e7eb;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     transition: color .2s ease;
   }
-  .profile-social-links a:hover { color: var(--nav-accent); }
+  @media (hover: hover) and (pointer: fine) {
+    .profile-social-links a:hover { color: var(--nav-accent); }
+  }
   .profile-social-links a::after { content: none !important; }
 
   .reference-item { margin-bottom: 16px; }
   .reference-item:last-child { margin-bottom: 0; }
-  .reference-item .ref-role { color: #94a3b8; font-size: .85rem; margin-bottom: 4px; }
+  .reference-item .ref-role { color: #94a3b8; font-size: .82rem; margin-bottom: 4px; }
+
+  .contact-lead {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 26px;
+    padding: 0 20px;
+  }
 
   .modern-form .form-group { margin-bottom: 22px; }
-  .modern-form label { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; margin-bottom: 6px; }
+  .modern-form label { display: block; font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; margin-bottom: 6px; }
   .modern-form .form-control {
     background: transparent !important; border: none !important; border-bottom: 1.5px solid rgba(255,255,255,.25) !important;
     border-radius: 0 !important; color: #f1f5f9 !important; padding: 8px 2px !important; box-shadow: none !important;
@@ -559,6 +579,31 @@ css_custom <- "
     font-style: italic;
     opacity: 1;
   }
+
+  /* ===== Tela de reconexao customizada (substitui a padrao do Shiny) ===== */
+  #shiny-disconnected-overlay { display: none !important; }
+  #custom-reconnect-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    z-index: 99999;
+    background: rgba(6,8,16,.94);
+    backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+    flex-direction: column;
+    color: #e5e7eb;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+  }
+  #custom-reconnect-overlay.show { display: flex; }
+  #custom-reconnect-overlay .spinner {
+    width: 46px; height: 46px;
+    border: 4px solid rgba(255,255,255,.15);
+    border-top-color: #60a5fa;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    margin-bottom: 18px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   body.dark-mode {
     background: radial-gradient(ellipse at top right, #10131c 0%, #06070b 55%, #030405 100%);
@@ -603,25 +648,41 @@ css_custom <- "
   body.dark-mode .content-card { background-color: rgba(20,22,30,.9); color: #e5e7eb; border-color: rgba(255,255,255,.06); }
   body.dark-mode footer.app-footer { color: #9ca3af; border-color: rgba(255,255,255,.06); }
 
+  /* ============================================================
+     MOBILE (max-width: 991.98px) - EXCLUSIVO PARA MOBILE
+     ============================================================ */
   @media (max-width: 991.98px) {
+
     .navbar-toggler {
       background: transparent !important;
       border: 1px solid rgba(255,255,255,.4) !important;
       border-radius: 8px !important;
       padding: 6px 10px !important;
+      transition: border-color .2s ease;
     }
     .navbar-toggler:focus { box-shadow: none !important; outline: none !important; }
     .navbar-toggler-icon {
       background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.95)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\") !important;
     }
+    /* Botao das 3 barrinhas: fica azul quando o painel esta aberto ---- */
+    .navbar-toggler[aria-expanded='true'] {
+      border-color: var(--nav-accent) !important;
+    }
+    .navbar-toggler[aria-expanded='true'] .navbar-toggler-icon {
+      background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%232563eb' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\") !important;
+    }
+    body.dark-mode .navbar-toggler[aria-expanded='true'] .navbar-toggler-icon {
+      background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%2360a5fa' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\") !important;
+    }
 
+    /* Painel expandido: mais afastado do painel principal, cor combinando (mesmo tom do hover do navbar) ---- */
     .navbar-collapse {
       position: absolute !important;
       top: 100% !important;
       left: 0 !important;
       right: 0 !important;
-      margin-top: 12px !important;
-      background-color: #111827 !important;
+      margin-top: 22px !important;
+      background-color: #1e293b !important;
       border: 1px solid rgba(255,255,255,.15) !important;
       border-radius: 18px !important;
       padding: 10px 16px !important;
@@ -632,7 +693,7 @@ css_custom <- "
     .navbar .nav-link {
       display: block;
       width: 100%;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       padding: 12px 8px !important;
       text-align: left;
       border-bottom: 1px solid rgba(255,255,255,.08);
@@ -821,6 +882,7 @@ js_mobile_menu <- "
 
   $(document).on('click', '.navbar-nav .nav-link', function(){
     if (window.innerWidth < 992) { closeMobileMenu(); }
+    this.blur();
   });
 })();
 "
@@ -833,6 +895,38 @@ document.addEventListener('keydown', function(e){
   if (k === 'F12') { e.preventDefault(); }
   if (e.ctrlKey && e.shiftKey && (k === 'I' || k === 'i' || k === 'J' || k === 'j' || k === 'C' || k === 'c')) { e.preventDefault(); }
   if (e.ctrlKey && (k === 'U' || k === 'u')) { e.preventDefault(); }
+});
+"
+
+# JavaScript: tela de reconexao customizada + recarregamento automatico----
+js_reconnect <- "
+(function(){
+  var overlay, hideTimer, reloadTimer;
+  function ensureOverlay(){
+    if (overlay) return overlay;
+    overlay = document.createElement('div');
+    overlay.id = 'custom-reconnect-overlay';
+    overlay.innerHTML = '<div class=\"spinner\"></div><div>Reconectando...</div>' +
+      '<div style=\"font-size:.85rem;color:#94a3b8;margin-top:6px;\">Isso pode levar alguns segundos.</div>';
+    document.body.appendChild(overlay);
+    return overlay;
+  }
+  $(document).on('shiny:disconnected', function(){
+    clearTimeout(hideTimer);
+    ensureOverlay().classList.add('show');
+    reloadTimer = setTimeout(function(){ window.location.reload(); }, 15000);
+  });
+  $(document).on('shiny:connected', function(){
+    clearTimeout(reloadTimer);
+    if (overlay) overlay.classList.remove('show');
+  });
+})();
+"
+
+# JavaScript: abrir o cliente de e-mail do visitante (mailto) com a mensagem preenchida----
+js_mailto <- "
+Shiny.addCustomMessageHandler('openMailto', function(url) {
+  window.location.href = url;
 });
 "
 
@@ -875,7 +969,7 @@ perfil <- list(
   linkedin    = "https://www.linkedin.com/in/micheldeoliveira/",
   github      = "https://github.com/michelolv",
   localizacao = "Ouro Preto, MG - Brasil",
-  cv_path     = "cv/CV_Michel_Lima_de_Oliveira.pdf"   # salvar em www/cv/ com este nome
+  cv_path     = "cv/CV_Michel_Lima_de_Oliveira.pdf"
 )
 
 ## Habilidades (Hard Skills / Soft Skills)----
@@ -892,7 +986,7 @@ referencias <- list(
        email = "almir.ferreira@ufop.edu.br")
 )
 
-## Experiências profissionais (consultorias técnicas em Estatística)----
+## Experiências profissionais----
 experiencias <- list(
   list(
     id = "exp1",
@@ -1226,68 +1320,78 @@ pagina_inicio <- function() {
 }
 
 pagina_perfil <- function() {
-  fluidRow(
-    style = "padding: 10px 30px 30px 30px;",
-    column(
-      width = 4,
-      div(
-        class = "content-card profile-avatar-card", style = "text-align:center;",
-        tags$img(src = perfil$foto, style = "width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #60a5fa;"),
-        h4(perfil$nome), h6(perfil$cargo),
-        p(icon("location-dot"), perfil$localizacao),
-        p(icon("phone"), " ", tags$a(href = perfil$telefone_tel, perfil$telefone, style = "color:#e5e7eb;")),
-        div(class = "profile-social-links",
-            tags$a(icon("linkedin"), href = perfil$linkedin, target = "_blank", rel = "noopener noreferrer", title = "LinkedIn"),
-            tags$a(icon("github"), href = perfil$github, target = "_blank", rel = "noopener noreferrer", title = "GitHub"),
-            tags$a(icon("envelope"), href = paste0("mailto:", perfil$email), title = "E-mail")
+  tagList(
+    fluidRow(
+      style = "padding: 10px 30px 30px 30px;",
+      column(
+        width = 4,
+        div(
+          class = "content-card profile-avatar-card", style = "text-align:center;",
+          tags$img(src = perfil$foto, style = "width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #60a5fa;"),
+          h4(perfil$nome), h6(perfil$cargo),
+          p(icon("location-dot"), perfil$localizacao),
+          p(icon("phone"), " ", tags$a(href = perfil$telefone_tel, perfil$telefone, style = "color:#e5e7eb;")),
+          div(class = "profile-social-links",
+              tags$a(icon("linkedin"), href = perfil$linkedin, target = "_blank", rel = "noopener noreferrer", title = "LinkedIn"),
+              tags$a(icon("github"), href = perfil$github, target = "_blank", rel = "noopener noreferrer", title = "GitHub"),
+              tags$a(icon("envelope"), href = paste0("mailto:", perfil$email), title = "E-mail")
+          )
         )
+      ),
+      column(
+        width = 8,
+        div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
+        div(class = "content-card", h3("Habilidades", class = "accent-text"),
+            h5(class = "skill-label", "Hard Skills:"),
+            badge_tech(hard_skills),
+            h5(class = "skill-label", "Soft Skills:"),
+            p(soft_skills)),
+        div(class = "content-card", h3("Referências", class = "accent-text"),
+            lapply(referencias, function(ref) {
+              div(class = "reference-item",
+                  strong(ref$nome), tags$br(),
+                  span(class = "ref-role", ref$papel), tags$br(),
+                  tags$a(href = paste0("mailto:", ref$email), ref$email, style = "color:#93c5fd;")
+              )
+            }))
       )
     ),
-    column(
-      width = 8,
-      div(class = "content-card", h3("Sobre mim", class = "accent-text"), p(HTML(perfil$bio))),
-      div(class = "content-card", h3("Habilidades", class = "accent-text"),
-          h5(class = "skill-label", "Hard Skills:"),
-          badge_tech(hard_skills),
-          h5(class = "skill-label", "Soft Skills:"),
-          p(soft_skills)),
-      div(class = "content-card", h3("Referências", class = "accent-text"),
-          lapply(referencias, function(ref) {
-            div(class = "reference-item",
-                strong(ref$nome), tags$br(),
-                span(class = "ref-role", ref$papel), tags$br(),
-                tags$a(href = paste0("mailto:", ref$email), ref$email, style = "color:#93c5fd;")
-            )
-          }))
-    )
+    botao_voltar_topo()
   )
 }
 
 pagina_contato <- function() {
-  fluidRow(
-    style = "padding: 10px 30px 30px 30px;",
-    column(
-      width = 6,
-      div(
-        class = "content-card",
-        h3("Vamos conversar", class = "accent-text"),
-        p(icon("envelope"), " ", perfil$email),
-        p(icon("phone"), " ", tags$a(href = perfil$telefone_tel, perfil$telefone, style = "color:#93c5fd;")),
-        p(icon("linkedin"), " ", tags$a(href = perfil$linkedin, target = "_blank", "LinkedIn", style = "color:#93c5fd;")),
-        p(icon("github"), " ", tags$a(href = perfil$github, target = "_blank", "GitHub", style = "color:#93c5fd;"))
-      )
+  tagList(
+    div(class = "hub-page", style = "padding: 10px 30px 0 30px;",
+        h2(class = "accent-text contact-lead", "Obrigado pelo seu interesse. Como posso ajudá-lo?")
     ),
-    column(
-      width = 6,
-      div(
-        class = "content-card modern-form",
-        h3("Envie uma mensagem", class = "accent-text"),
-        fluidRow(
-          column(6, div(class = "form-group", tags$label("Nome"), textInput("contato_nome", NULL, placeholder = "Seu nome"))),
-          column(6, div(class = "form-group", tags$label("E-mail"), textInput("contato_email", NULL, placeholder = "seu@email.com")))
-        ),
-        div(class = "form-group", tags$label("Mensagem"), textAreaInput("contato_msg", NULL, rows = 4, placeholder = "Escreva sua mensagem...")),
-        actionButton("btn_enviar_contato", "Enviar mensagem", class = "btn-cta btn-cta-sm", icon = icon("paper-plane"))
+    fluidRow(
+      style = "padding: 0 30px 30px 30px;",
+      column(
+        width = 6,
+        div(
+          class = "content-card",
+          h3("Vamos conversar", class = "accent-text"),
+          p(icon("envelope"), " ", perfil$email),
+          p(icon("phone"), " ", tags$a(href = perfil$telefone_tel, perfil$telefone, style = "color:#93c5fd;")),
+          p(icon("linkedin"), " ", tags$a(href = perfil$linkedin, target = "_blank", "LinkedIn", style = "color:#93c5fd;")),
+          p(icon("github"), " ", tags$a(href = perfil$github, target = "_blank", "GitHub", style = "color:#93c5fd;"))
+        )
+      ),
+      column(
+        width = 6,
+        div(
+          class = "content-card modern-form",
+          h3("Envie uma mensagem", class = "accent-text"),
+          p(style = "font-size:.85rem;color:#94a3b8;margin-bottom:16px;",
+            "Ao clicar em enviar, seu aplicativo de e-mail abrirá com a mensagem pronta para envio."),
+          fluidRow(
+            column(6, div(class = "form-group", tags$label("Nome"), textInput("contato_nome", NULL, placeholder = "Seu nome"))),
+            column(6, div(class = "form-group", tags$label("E-mail"), textInput("contato_email", NULL, placeholder = "seu@email.com")))
+          ),
+          div(class = "form-group", tags$label("Mensagem"), textAreaInput("contato_msg", NULL, rows = 4, placeholder = "Escreva sua mensagem...")),
+          actionButton("btn_enviar_contato", "Enviar mensagem", class = "btn-cta btn-cta-sm", icon = icon("paper-plane"))
+        )
       )
     )
   )
@@ -1342,7 +1446,9 @@ ui <- navbarPage(
       tags$script(HTML(js_scroll_to)),
       tags$script(HTML(js_nav_hide)),
       tags$script(HTML(js_mobile_menu)),
-      tags$script(HTML(js_anti_inspect))
+      tags$script(HTML(js_anti_inspect)),
+      tags$script(HTML(js_reconnect)),
+      tags$script(HTML(js_mailto))
     ),
     tags$canvas(id = "particles-canvas")
   ),
@@ -1356,13 +1462,17 @@ ui <- navbarPage(
   
   footer = tags$footer(
     class = "app-footer",
-    p(paste0("© ", format(Sys.Date(), "%Y"), " ", perfil$nome, " — Portfólio em Estatística & Ciência de Dados"))
+    p(paste0("© ", format(Sys.Date(), "%Y"), " ", perfil$nome, " — Portfólio em Estatística & Ciência de Dados")),
+    p(class = "authorship", "Site desenvolvido integralmente em R Shiny, por Michel Lima de Oliveira.")
   )
 )
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 server <- function(input, output, session) {
+  
+  ## Permite reconexao a mesma sessao (mitiga hibernacao do plano gratuito)----
+  session$allowReconnect("force")
   
   url_sync_feito <- reactiveVal(FALSE)
   observe({
@@ -1447,8 +1557,32 @@ server <- function(input, output, session) {
     updateNavbarPage(session, "navbar_principal", selected = "contato")
   })
   
+  ## Formulario de contato: abre o cliente de e-mail do visitante com a mensagem pronta----
   observeEvent(input$btn_enviar_contato, {
-    showNotification("Mensagem registrada! (integrar envio real de e-mail futuramente)", type = "message")
+    nome            <- input$contato_nome %||% ""
+    email_remetente <- input$contato_email %||% ""
+    mensagem        <- input$contato_msg %||% ""
+    
+    if (nchar(trimws(mensagem)) == 0) {
+      showNotification("Escreva uma mensagem antes de enviar.", type = "warning")
+      return()
+    }
+    
+    assunto <- paste0("Contato via Portfolio - ", ifelse(nchar(nome) > 0, nome, "Visitante"))
+    corpo <- paste0(
+      "Nome: ", nome, "\n",
+      "E-mail para contato: ", email_remetente, "\n\n",
+      "Mensagem:\n", mensagem
+    )
+    
+    mailto_url <- paste0(
+      "mailto:", perfil$email,
+      "?subject=", utils::URLencode(assunto, reserved = TRUE),
+      "&body=", utils::URLencode(corpo, reserved = TRUE)
+    )
+    
+    session$sendCustomMessage("openMailto", mailto_url)
+    showNotification("Abrindo seu aplicativo de e-mail para concluir o envio...", type = "message")
   })
 }
 
